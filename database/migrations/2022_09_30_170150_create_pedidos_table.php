@@ -15,8 +15,14 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id('id_pedido');
+            $table->foreignId('id_tipo_pedido')->index();
             $table->foreignId('id_user')->index();
+            $table->foreignId('id_comprobante')->index();
+            $table->foreignId('id_empleado')->index()->nullable();
+            $table->foreignId('id_direccion')->index()->nullable();
             $table->double('pdd_total', 8, 2);
+            $table->date('pdd_fecha_entrega')->nullable();
+            $table->date('pdd_fecha_recepcion')->nullable();
             $table->text('pdd_descripcion')->nullable();
             $table->timestamps();
         });

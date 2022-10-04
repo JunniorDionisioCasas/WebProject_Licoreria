@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('detalle_pedidos', function (Blueprint $table) {
-            $table->id('id_detalle_pedido');
-            $table->foreignId('id_pedido')->index();
-            $table->foreignId('id_producto')->index();
-            $table->double('dtl_precio', 8, 2);
-            $table->integer('dtl_cantidad');
+        Schema::create('distritos', function (Blueprint $table) {
+            $table->id('id_distrito');
+            $table->foreignId('id_provincia')->index();
+            $table->string('dst_nombre', 30);
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detalle_pedidos');
+        Schema::dropIfExists('distritos');
     }
 };

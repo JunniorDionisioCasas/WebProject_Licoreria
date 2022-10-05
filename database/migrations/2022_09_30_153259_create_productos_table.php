@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->id('id_producto');
             $table->foreignId('id_categoria')->index();
-            $table->string('prd_nombre', 30);
+            $table->foreignId('id_marca')->index();
+            $table->string('prd_nombre', 100);
             $table->integer('prd_stock')->default(0);
             $table->double('prd_precio', 6, 2);
             $table->date('prd_fecha_vencimiento')->nullable();

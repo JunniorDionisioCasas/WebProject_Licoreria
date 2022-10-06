@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tipos_empleados', function (Blueprint $table) {
-            $table->id('id_tipo_empleado');
-            $table->string('tem_nombre',20);
-            $table->string('tem_descripcion', 50)->nullable();
+        Schema::create('cargos', function (Blueprint $table) {
+            $table->id('id_cargo');
+            $table->string('crg_nombre', 20);
+            $table->boolean('crg_acceso_admin');
+            $table->string('crg_descripcion', 50)->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_empleados');
+        Schema::dropIfExists('cargos');
     }
 };

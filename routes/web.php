@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/productos', function () {
+    return view('vistas/productos/productos', ['name' => 'productos']);
+});
+
+Route::get('/detalle-producto', function () {
+    return view('vistas/productos/detalle-producto');
+});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

@@ -25,6 +25,10 @@ Route::get('/detalle-producto', function () {
     return view('vistas/productos/detalle-producto');
 });
 
+Route::get('/carrito_compras', function () {
+    return view('vistas/carrito_compras');
+});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

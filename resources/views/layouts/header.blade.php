@@ -170,12 +170,8 @@
                                                 <span class="price">$ 0.00</span>
                                             </p>
                                             <div class="actions">
-                                                <a class="button">
-                                                    <span>
-                                                        <span>Continuar</span>
-                                                    </span>
-                                                </a>
-                                                <a class="button gfont go-to-cart" href="#">Ver carrito</a>
+                                                <a class="button" href="/carrito_compras">Continuar</a>
+                                                <a class="button gfont go-to-cart" href="/carrito_compras">Ver carrito</a>
                                             </div>
                                         </div>
                                     </div>

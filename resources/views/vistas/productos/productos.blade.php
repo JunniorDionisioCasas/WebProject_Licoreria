@@ -2,6 +2,10 @@
 
 @section('title', 'Productos')
 
+@section('css')
+    <link rel="stylesheet" href="/css/productos.css">
+@stop
+
 @section('contenido_principal')
 
     <!-- BREADCRUMBS -->
@@ -49,37 +53,42 @@
                                 <dl id="narrow-by-list">
                                     <dt class="odd">Categorias</dt>
                                     <dd class="odd">
-                                        <ol>
-                                            <li>
-                                                <a href="#">
-                                                    Licores
-                                                    <span class="count">(12)</span>
-                                                </a>
-                                            </li>
+                                        <ol id="listaCategorias">
+
+                                            <!-- Aquí se insertan las categorias y sus cantidades de productos mediante api -->
+
                                         </ol>
                                     </dd>
 
                                     <dt class="odd">Precio</dt>
                                     <dd class="odd">
-                                        <ol class="js-price">
-                                            <li><input type="text" id="amount-1" style="border:0; color:#666;" value="1"></li>
-                                            <li><input type="text" id="amount-2" style="border:0; color:#666;" value="9999"></li>
-                                            <li class="style3">FILTRAR</li>
-                                        </ol>
-                                        <div id="slider-range"></div>
+                                        <div class="price-input">
+                                            <div class="field">
+                                                <input type="number" class="input-min" value="0">
+                                            </div>
+                                            <div class="field">
+                                                <input type="number" class="input-max" value="10000">
+                                            </div>
+                                        </div>
+                                        <div class="slider">
+                                            <div class="progress"></div>
+                                        </div>
+                                        <div class="range-input">
+                                            <input type="range" class="range-min" min="0" max="10000" value="0" step="100">
+                                            <input type="range" class="range-max" min="0" max="10000" value="10000" step="100">
+                                        </div>
                                     </dd>
+
                                     <dt class="even">Marcas</dt>
                                     <dd class="even">
-                                        <ol class="configurable-swatch-list last-child">
-                                            <li>
-                                                <a class="swatch-link" href="#">
-                                                    <span class="swatch-label"> Burgos </span>
-                                                    <span class="count">(12)</span>
-                                                </a>
-                                            </li>
+                                        <ol id="listaMarcas" class="configurable-swatch-list last-child">
+
+                                            <!-- Aquí se insertan las marcas y sus cantidades de productos mediante api -->
+
                                         </ol>
                                     </dd>
                                 </dl>
+                                <button type="button" class="style3 btnFiltrar">FILTRAR</button>
                             </div>
                         </div>
 
@@ -165,9 +174,9 @@
                                         <!--  <a class="set-desc" title="Set Descending Direction" href="http://demo.snstheme.com/sns-simen/index.php/women.html?dir=desc&order=position"></a> -->
                                     </div>
                                     <div class="pager">
-                                        <p class="amount">
+                                        <p class="amount cantProd">
                                             <span>1 a 20 </span>
-                                            # producto (s)
+
                                         </p>
                                         <div class="pages">
                                             <strong>Páginas:</strong>
@@ -200,9 +209,9 @@
                             <div class="toolbar clearfix">
                                 <div class="toolbar-inner">
                                     <div class="pager">
-                                        <p class="amount">
+                                        <p class="amount cantProd">
                                             <span>1 a 20 </span>
-                                            # producto (s)
+
                                         </p>
                                         <div class="pages">
                                             <strong>Páginas:</strong>
@@ -233,7 +242,10 @@
     <script>
         const urlDominio = 'http://127.0.0.1:8080/';
         const contenedor_prod = document.getElementById('contenedor_productos_grid');
-        window.addEventListener('load', function () {
+        const listaCategorias = document.getElementById('listaCategorias');
+        const listaMarcas = document.getElementById('listaMarcas');
+        const numProd = document.getElementsByClassName('amount cantProd');
+        // window.addEventListener('load', function () {
             //api productos, get
             let url = urlDominio + 'api/productos';
             fetch(url, {
@@ -242,6 +254,11 @@
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
+
+                    for(var i=0; i<numProd.length; i++){
+                        numProd.item(i).insertAdjacentHTML("beforeend", data.length + " productos (s)");
+                    }
+
                     data.forEach( producto => {
                         contenedor_prod.insertAdjacentHTML("beforeend", `
                             <div class="item col-lg-3 col-md-4 col-sm-4 col-xs-6 col-phone-12">
@@ -259,7 +276,10 @@
                                         <div class="item-info">
                                             <div class="info-inner">
                                                 <div class="item-title">
-                                                    <a>${producto.prd_nombre}</a>
+                                                    <a class="nombre2lineas"
+                                                       title="${producto.prd_nombre}">
+                                                           ${producto.prd_nombre}
+                                                    </a>
                                                 </div>
                                                 <div class="item-price">
                                                     <div class="price-box">
@@ -272,7 +292,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="action-bot action123">
+                                        <div class="action-bot action123 btnAnadirCarrito">
                                             <div class="wrap-addtocart">
                                                 <button class="btn-cart"
                                                         title="Añadir al carrito">
@@ -288,6 +308,77 @@
                     })
                 })
                 .catch(error => console.log(error));
+        // });
+
+        //api count_productos, get
+        let urlFiltro = urlDominio + 'api/count_productos';
+        fetch(urlFiltro, {
+            method: 'GET'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                data.categorias.forEach( categoria => {
+                    listaCategorias.insertAdjacentHTML("beforeend", `
+                        <li>
+                            <a href="#">
+                                ${categoria.ctg_nombre}
+                                <span class="count">(${categoria.cantidad_productos})</span>
+                            </a>
+                        </li>
+                    `)
+                });
+                data.marcas.forEach( marca => {
+                    listaMarcas.insertAdjacentHTML("beforeend", `
+                        <li>
+                            <a class="swatch-link" href="#">
+                                <span class="swatch-label"> ${marca.mrc_nombre} </span>
+                                <span class="count">(${marca.cantidad_productos})</span>
+                            </a>
+                        </li>
+                    `)
+                });
+            })
+            .catch(error => console.log(error));
+
+        //filtro por precio
+        const rangeInput = document.querySelectorAll(".range-input input"),
+            priceInput = document.querySelectorAll(".price-input input"),
+            range = document.querySelector(".slider .progress");
+        let priceGap = 1000;
+        priceInput.forEach(input =>{
+            input.addEventListener("input", e =>{
+                let minPrice = parseInt(priceInput[0].value),
+                    maxPrice = parseInt(priceInput[1].value);
+
+                if((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max){
+                    if(e.target.className === "input-min"){
+                        rangeInput[0].value = minPrice;
+                        range.style.left = ((minPrice / rangeInput[0].max) * 100) + "%";
+                    }else{
+                        rangeInput[1].value = maxPrice;
+                        range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+                    }
+                }
+            });
+        });
+        rangeInput.forEach(input =>{
+            input.addEventListener("input", e =>{
+                let minVal = parseInt(rangeInput[0].value),
+                    maxVal = parseInt(rangeInput[1].value);
+                if((maxVal - minVal) < priceGap){
+                    if(e.target.className === "range-min"){
+                        rangeInput[0].value = maxVal - priceGap
+                    }else{
+                        rangeInput[1].value = minVal + priceGap;
+                    }
+                }else{
+                    priceInput[0].value = minVal;
+                    priceInput[1].value = maxVal;
+                    range.style.left = ((minVal / rangeInput[0].max) * 100) + "%";
+                    range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+                }
+            });
         });
     </script>
 @stop

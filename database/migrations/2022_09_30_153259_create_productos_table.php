@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('prd_stock')->default(0);
             $table->double('prd_precio', 6, 2);
             $table->date('prd_fecha_vencimiento')->nullable();
+            $table->string('prd_presentacion', 50);
             $table->text('prd_descripcion')->nullable();
             $table->string('prd_imagen_path')->nullable();
             $table->timestamps();

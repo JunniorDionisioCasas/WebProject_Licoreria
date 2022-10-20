@@ -5496,7 +5496,7 @@ span:hover {
 #sns_header {
     position: relative;
     z-index: 2;
-    margin-bottom: 27px;
+    margin-bottom: 7px;
     font-size: 12px
 }
 #sns_header.transparent #sns_menu {
@@ -7426,7 +7426,7 @@ span:hover {
     width: 90px
 }
 .mycart .content #cart-sidebar li .product-details {
-    display: inline-block;
+    display: inline;
     line-height: 20px
 }
 .mycart .content #cart-sidebar li .product-details>span,
@@ -11369,7 +11369,7 @@ body.eimg-translatey .products-list>li.item .col-left .item-img.have-additional:
 }
 @media (min-width: 768px) and (max-width: 991px) {
     .sns-shopping-cart #sns_content .shoppingcart .sptitle h4 {
-        margin-top: 20px;
+        /* margin-top: 20px; */
         position: relative;
         margin-bottom: 0
     }
@@ -11504,7 +11504,7 @@ body.eimg-translatey .products-list>li.item .col-left .item-img.have-additional:
 }
 @media (min-width: 320px) and (max-width: 767px) {
     .sns-shopping-cart #sns_content .shoppingcart .sptitle h4 {
-        margin-top: 20px;
+        /* margin-top: 20px; */
         position: relative;
         margin-bottom: 0
     }

@@ -1,4 +1,6 @@
-
+/**
+* Cambiando estilos para corrección de la plantilla original
+**/
 .btnFiltrar {
     display: block;
     margin: 10px auto;
@@ -25,10 +27,10 @@
 .nombre2lineas:focus {
     -webkit-line-clamp: unset;
 }*/
-#sns_header {
-    margin-bottom: 7px !important;
-}
 
+/**
+* Estilos para el filtro por precio
+**/
 .price-input{
     width: 100%;
     display: flex;

@@ -1,0 +1,51 @@
+/**
+* Cambiando estilos para corrección de la plantilla original
+**/
+.title_carr {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+#title_carr {
+    display: inline-block;
+}
+.btnProcPagar {
+    position: inherit !important;
+    float: right;
+}
+
+@media (min-width: 320px) and (max-width: 430px) {
+    #title_carr {
+        display: block;
+    }
+    .btnProcPagar {
+        float: inherit;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .sns-shopping-cart #sns_content .shoppingcart ul.nav-mid li {
+        margin-right: 20px;
+    }
+}
+@media (min-width: 1199px) and (max-width: 1399px) {
+    .shoppingcart ul.nav-mid li:last-child {
+        margin-right: -5px;
+        margin-left: -5px;
+    }
+}
+
+.img_sml_crrt {
+    max-width: 100px;
+    max-height: 100px;
+}
+.item-title.nombre1linea {
+    padding: 0px !important;
+}
+.nombre1linea a {
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    max-width: 170px;
+}

@@ -12,7 +12,7 @@
                     <div class="myaccount">
                         <div class="tongle">
                             <i class="fa fa-user"></i>
-                            <span>My account</span>
+                            <span>Mi cuenta</span>
                             <i class="fa fa-angle-down"></i>
                         </div>
                         <div class="customer-ct content">
@@ -153,8 +153,8 @@
                                         <i class="fa fa-shopping-cart"></i>
                                         <div class="summary">
                                             <span class="amount">
-                                                <a href="#">
-                                                    <span>0</span>
+                                                <a href="/carrito-compras">
+                                                    <span id="carrito_cntd_prod">0</span>
                                                     ( productos )
                                                 </a>
                                             </span>
@@ -164,10 +164,12 @@
                                         <div class="block-inner">
                                             <ol id="cart-sidebar" class="mini-products-list">
 
+                                                <!-- lista de productos en el carrito -->
+
                                             </ol>
                                             <p class="cart-subtotal">
                                                 <span class="label">Total:</span>
-                                                <span class="price">$ 0.00</span>
+                                                <span id="carrito_precio_total" class="price">S/ 0.00</span>
                                             </p>
                                             <div class="actions">
                                                 <a class="button" href="/carrito_compras">Continuar</a>
@@ -198,3 +200,32 @@
         </div>
     </div>
 </div>
+
+
+<!-- BREADCRUMBS -->
+<div id="sns_breadcrumbs" class="wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="sns_titlepage"></div>
+                <div id="sns_pathway" class="clearfix">
+                    <div class="pathway-inner">
+                        <span class="icon-pointer "></span>
+                        <ul class="breadcrumbs">
+                            <li class="home">
+                                <a title="Ir a la página de inicio" href="/">
+                                    <i class="fa fa-home"></i>
+                                    <span>Inicio</span>
+                                </a>
+                            </li>
+                            <li class="category3 last">
+                                <span id="breadcrumb_1"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- AND BREADCRUMBS -->

@@ -24,15 +24,21 @@
     </head>
     <body id="bd" class=" cms-index-index cms-simen-home-page-v2 default cmspage">
         <div id="sns_wrapper">
+
             <!-- HEADER -->
             @include('layouts/header')
             <!-- END HEADER -->
 
+            @yield('slideshow')
+
+            
             @yield('contenido_principal')
+
 
             <!-- FOOTER -->
             @include('layouts/footer')
             <!-- END FOOTER -->
+
         </div>
         <!-- Scripts -->
         <script src="template/js/jquery-1.9.1.min.js"></script>
@@ -43,6 +49,9 @@
         <script src="template/js/custom.js"></script>
         <!-- <script src="owl-carousel/jquery.min.js"></script> -->
         <script src="template/js/owl-carousel/owl.carousel.min.js"></script>
+
+        <!-- custom js's -->
+        <script src="js/carrito.js"></script>
 
         @yield('js')
 

@@ -153,9 +153,9 @@
                                         <strong>Páginas:</strong>
                                         <ol>
                                             <li class="current">1</li>
-                                            <li>
+                                            <!-- <li>
                                                 <a href="#">2</a>
-                                            </li>
+                                            </li> -->
                                             <li>
                                                 <a class="next i-next" title="Siguiente" href="#"> Siguiente </a>
                                             </li>
@@ -188,9 +188,9 @@
                                         <strong>Páginas:</strong>
                                         <ol>
                                             <li class="current">1</li>
-                                            <li>
+                                            <!-- <li>
                                                 <a href="#">2</a>
-                                            </li>
+                                            </li> -->
                                             <li>
                                                 <a class="next i-next" title="Siguiente" href="#"> Siguiente </a>
                                             </li>

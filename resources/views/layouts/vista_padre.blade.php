@@ -49,6 +49,7 @@
         <script src="template/js/custom.js"></script>
         <!-- <script src="owl-carousel/jquery.min.js"></script> -->
         <script src="template/js/owl-carousel/owl.carousel.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <!-- custom js's -->
         <script src="js/carrito.js"></script>

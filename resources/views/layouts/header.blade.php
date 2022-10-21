@@ -153,14 +153,14 @@
                                         <i class="fa fa-shopping-cart"></i>
                                         <div class="summary">
                                             <span class="amount">
-                                                <a href="/carrito-compras">
+                                                <a href="/carrito_compras">
                                                     <span id="carrito_cntd_prod">0</span>
                                                     ( productos )
                                                 </a>
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="block-content content">
+                                    <div id="carrito_dropdown_div" class="block-content content">
                                         <div class="block-inner">
                                             <ol id="cart-sidebar" class="mini-products-list">
 
@@ -172,7 +172,7 @@
                                                 <span id="carrito_precio_total" class="price">S/ 0.00</span>
                                             </p>
                                             <div class="actions">
-                                                <a class="button" href="/carrito_compras">Continuar</a>
+                                                <a class="button" href="/pago">Continuar</a>
                                                 <a class="button gfont go-to-cart" href="/carrito_compras">Ver carrito</a>
                                             </div>
                                         </div>

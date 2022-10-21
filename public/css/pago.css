@@ -1,0 +1,18 @@
+/**
+* Estilos para la vista pago
+**/
+.contenedorGen {
+    padding-right: 0px;
+    padding-left: 0px;
+    border-right-width: 0px;
+}
+.card-title {
+    font-size: xx-large;
+}
+.card-text {
+    font-size: large;
+}
+#psrl_total_pagar {
+    font-weight: bold;
+    font-size: initial;
+}

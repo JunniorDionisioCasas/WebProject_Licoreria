@@ -3240,5 +3240,18 @@
 @endsection
 
 @section('js')
-    <script></script>
+    <script>
+        let queryString = location.search.substring(1);
+        let array = queryString.split("&");
+        const collection_status = array[1],
+            status = array[3];
+
+        if ( array.includes("collection_status=approved") && array.includes("status=approved") ) {
+            Swal.fire('Compra exitosa', '', 'success');
+
+            /* registro_venta();
+
+            limp_carrito(); */
+        }
+    </script>
 @stop

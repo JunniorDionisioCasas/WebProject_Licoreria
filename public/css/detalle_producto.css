@@ -1,0 +1,9 @@
+/**
+* Modificando estilos de detalle producto
+**/
+.fa.fa-plus.fa-sm {
+    vertical-align: super;
+}
+.fa.fa-minus.fa-sm {
+    vertical-align: super;
+}

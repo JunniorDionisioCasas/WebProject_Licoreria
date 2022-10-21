@@ -1,9 +1,9 @@
-// let id = document.getElementById("");
+
 const lista_carrito = document.getElementById("cart-sidebar");
 let carrito = JSON.parse(localStorage.getItem("data_carrito")) || [];
+let prc_total;
 
 let addProduct = (id, prd_nombre, prd_precio, prd_imagen_path) => {
-    console.log(id+prd_nombre+prd_precio+prd_imagen_path);
     let search = carrito.find( (x) => x.id === id );
     let cantidad_prod;
     if(search === undefined){
@@ -44,15 +44,22 @@ let decrement = (id) => {
 
 let remove = (id) => {
     console.log(id);
-    // carrito = carrito.filter( (x) => x.id !== id);
+    carrito = carrito.filter( (x) => x.id !== id);
     
+    localStorage.setItem("data_carrito", JSON.stringify(carrito));
+
+    calculation();
 };
 
 let calculation = () => {
     let elmt_cart_cntd = document.getElementById("carrito_cntd_prod"),
         elmt_cart_precio = document.getElementById("carrito_precio_total");
-    let prc_total = 0;
+    prc_total = 0;
     cartCant = carrito.map( (x) => x.cntd).reduce( (x, y) => x + y, 0);
+
+    if ( localStorage.getItem("data_carrito") !== null ) {
+        document.cookie = "data_carrito=" + localStorage.getItem("data_carrito");
+    }
     
     lista_carrito.innerHTML = carrito.map( (p) => {
         return `
@@ -61,7 +68,7 @@ let calculation = () => {
                     <img alt="" src="${p.img}">
                 </a>
                 <div class="product-details">
-                    <a class="btn-remove" onclick="return confirm('Are you sure you would like to remove this item from the shopping cart?');" title="Quitar producto" href="#">Quitar producto</a>
+                    <a class="btn-remove" onclick="remove(${p.id})" title="Quitar producto" href="#">Quitar producto</a>
                     <p class="product-name">
                         <a href="detalle-producto?${p.id}">${p.nmbr}</a>
                     </p>

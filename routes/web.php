@@ -29,6 +29,10 @@ Route::get('/carrito_compras', function () {
     return view('vistas/carrito_compras');
 });
 
+Route::get('/pago', function () {
+    return view('vistas/pasarela_pago');
+});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

@@ -5007,24 +5007,24 @@ ul.mainnav li ul.menu li:last-child a {
     border: 1px solid #eaeaea
 }
 .sns-product-detail .product-essential .product-shop .item-inner.product_list_style .item-info .qty-container button.qty-decrease {
-    background: url(../images/qty-.png);
+    /* background: url(../images/qty-.png); */
     background-position: center;
     background-repeat: no-repeat
 }
 .sns-product-detail .product-essential .product-shop .item-inner.product_list_style .item-info .qty-container button.qty-decrease:hover {
-    background: url(../images/qty--.png);
+    /* background: url(../images/qty--.png); */
     background-position: center;
     background-repeat: no-repeat;
     background-color: #e34444;
     border-color: #e34444
 }
 .sns-product-detail .product-essential .product-shop .item-inner.product_list_style .item-info .qty-container button.qty-increase {
-    background: url(../images/qty+.png);
+    /* background: url(../images/qty+.png); */
     background-position: center;
     background-repeat: no-repeat
 }
 .sns-product-detail .product-essential .product-shop .item-inner.product_list_style .item-info .qty-container button.qty-increase:hover {
-    background: url(../images/qty++.png);
+    /* background: url(../images/qty++.png); */
     background-position: center;
     background-repeat: no-repeat;
     background-color: #e34444;
@@ -5052,24 +5052,24 @@ ul.mainnav li ul.menu li:last-child a {
     border: 1px solid #eaeaea
 }
 .sns-product-detail .product-essential .product-shop .item-inner.product_list_style .item-info .qty-container .qty-container button.qty-decrease {
-    background: url(../images/qty-.png);
+    /* background: url(../images/qty-.png); */
     background-position: center;
     background-repeat: no-repeat
 }
 .sns-product-detail .product-essential .product-shop .item-inner.product_list_style .item-info .qty-container .qty-container button.qty-decrease:hover {
-    background: url(../images/qty--.png);
+    /* background: url(../images/qty--.png); */
     background-position: center;
     background-repeat: no-repeat;
     background-color: #e34444;
     border-color: #e34444
 }
 .sns-product-detail .product-essential .product-shop .item-inner.product_list_style .item-info .qty-container .qty-container button.qty-increase {
-    background: url(../images/qty+.png);
+    /* background: url(../images/qty+.png); */
     background-position: center;
     background-repeat: no-repeat
 }
 .sns-product-detail .product-essential .product-shop .item-inner.product_list_style .item-info .qty-container .qty-container button.qty-increase:hover {
-    background: url(../images/qty++.png);
+    /* background: url(../images/qty++.png); */
     background-position: center;
     background-repeat: no-repeat;
     background-color: #e34444;
@@ -11386,7 +11386,7 @@ body.eimg-translatey .products-list>li.item .col-left .item-img.have-additional:
         line-height: 90px;
         margin-right: 25px;
         text-align: center;
-        width: auto!important
+        width: auto
     }
     .sns-shopping-cart #sns_content .shoppingcart ul.nav-mid li.image {
         float: left
@@ -11583,7 +11583,7 @@ body.eimg-translatey .products-list>li.item .col-left .item-img.have-additional:
         height: auto!important;
         line-height: 120px;
         text-align: center;
-        width: auto!important;
+        width: auto;
         padding: 0 36.9px
     }
     .sns-shopping-cart #sns_content .shoppingcart ul.nav-mid li.image {
@@ -12924,7 +12924,7 @@ body.eimg-translatey .products-list>li.item .col-left .item-img.have-additional:
 .shoppingcart .form-right h3 {
     padding-bottom: 27px;
     border-bottom: 1px solid #eaeaea;
-    margin-bottom: 44px!important
+    margin-bottom: 30px!important
 }
 .shoppingcart .form-right h3 .text3 {
     font-size: 20px;

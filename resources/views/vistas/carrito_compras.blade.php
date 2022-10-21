@@ -1,6 +1,6 @@
 @extends('layouts/vista_padre')
 
-@section('title', 'Productos')
+@section('title', 'Carrito de compra')
 
 @section('css')
     <link rel="stylesheet" href="/css/carrito.css">
@@ -10,10 +10,12 @@
 <div id="sns_content" class="wrap layout-m">
     <div class="container">
         <div class="row">
+
+            @if( isset($_COOKIE['data_carrito']) !== false && $_COOKIE['data_carrito'] !== '[]' )
             <div class="shoppingcart">
                 <div class="sptitle title_carr col-md-12">
                     <h3 id="title_carr">CARRITO DE COMPRAS</h3>
-                    <h4 class="style btnProcPagar">PROCEDER A PAGAR</h4>
+                    <h4  id="btnSupPago" class="style btnProcPagar" onclick="redirect_pago()">PROCEDER A PAGAR</h4>
                 </div>
                 <div class="content col-md-12">
                     <ul class="title clearfix">
@@ -23,11 +25,11 @@
                         <li class="text2"><a href="#">SUB TOTAL</a></li>
                     </ul>
 
-                    <div id="lista_prod_carrito">
-
+                    <div id="tabla_prod_carrito">
+                        <!-- Aquí se insertan los productos del carrito mediante javascript -->
                     </div>
 
-                    <ul class="nav-mid clearfix">
+                    <!-- <ul class="nav-mid clearfix">
                         <li class="image"><a href="#"><img src="images/placehoder.jpg" alt=""></a></li>
                         <li class="item-title"><a href="#">Modular Modern</a></li>
                         <li class="icon1"><i class="btn-edit fa fa-edit"></i></li>
@@ -35,10 +37,10 @@
                         <li class="number"><a href="#">1</a></li>
                         <li class="price2">$659.00</li>
                         <li class="icon2"><i class="btn-remove fa fa-xmark"></i></li>
-                    </ul>
+                    </ul> -->
                     <ul class="nav-bot clearfix">
                         <li class="continue"><a href="/productos">Seguir comprando</a></li>
-                        <li class="clear"><a href="#">Limpiar carrito</a></li>
+                        <li class="clear"><a href="#" onclick="confirm_vac_carrt();">Limpiar carrito</a></li>
                         <!-- <li class="update"><a href="#">update shopping cart</a></li> -->
                     </ul>
                     <div class="row">
@@ -88,22 +90,33 @@
                             </div>
                         </form>
                         <form class="form-right col-md-4">
-                            <div class="form-bd">
+                            <div class="form-bd cuadro_totales">
                                 <p class="subtotal">
                                     <span class="text1">SUBTOTAL:</span>
-                                    <span class="text2">$1,794.00</span>
+                                    <span id="txt_prc_subtotal" class="text2">S/ 0.00</span>
                                 </p>
                                 <h3>
-                                    <span class="text3">GRAND TOTAL:</span>
-                                    <span class="text4">$1,794.00</span>
+                                    <span class="text3">TOTAL:</span>
+                                    <span id="txt_prc_total" class="text4">S/ 0.00</span>
                                 </h3>
-                                <span class="style-bd">Proceed to checkout</span>
-                                <p class="checkout">Checkout with Multiple Addresses</p>
+                                <span id="btnInfPago" class="style-bd" onclick="redirect_pago()">Proceder a pagar</span>
+                                <!-- <p class="checkout">Checkout with Multiple Addresses</p> -->
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+            @else
+            <div class="shoppingcart">
+                <div class="sptitle title_carr col-md-12">
+                    <h3 id="title_carr">CARRITO DE COMPRAS</h3>
+                    <span class="message_empty">Su carrito está vacio</span>
+                </div>
+                <ul class="nav-bot clearfix">
+                    <li class="continue"><a href="/productos">Ir a comprar</a></li>
+                </ul>
+            </div>
+            @endif
         </div>
     </div>
 </div>
@@ -116,23 +129,75 @@
         const breadcrumb = document.getElementById('breadcrumb_1');
         breadcrumb.innerHTML = "Carrito de compras";
 
-        console.log('cargado script dentor de blade');
-        console.log(carrito);
-        let lst_crrt = document.getElementById('lista_prod_carrito');
-        console.log(lst_crrt);
-        lst_crrt.insertAdjacentHTML('beforeend', carrito.map( (p) => {
-            return `
-                <ul class="nav-mid clearfix">
-                    <li class="image"><a href="/detalle-producto?${p.id}"><img class="img_sml_crrt" src="${p.img}" alt="${p.nmbr}"></a></li>
-                    <li class="item-title nombre1linea"><a href="/detalle-producto?${p.id}">${p.nmbr}</a></li>
-                    <li class="icon1"><i class="btn-edit fa fa-square-plus"></i></li>
-                    <li class="price1">S/ ${p.precio.toFixed(2)}</li>
-                    <li class="number"><a href="">${p.cntd}</a></li>
-                    <li class="price2">S/ ${(p.precio*p.cntd).toFixed(2)}</li>
-                    <li class="icon2"><i class="btn-remove fa fa-xmark"></i></li>
-                </ul>
-            `;
-        }).join(""));
+        let lst_crrt = document.getElementById('tabla_prod_carrito');
+        let btnRmv = document.getElementsByClassName("btn-remove");
+        
+        let cargar_tbl_prod = () => {
+            lst_crrt.innerHTML = carrito.map( (p) => {
+                return `
+                    <ul class="nav-mid clearfix">
+                        <li class="image"><a href="/detalle-producto?${p.id}"><img class="img_sml_crrt" src="${p.img}" alt="${p.nmbr}"></a></li>
+                        <li class="item-title nombre1linea"><a href="/detalle-producto?${p.id}">${p.nmbr}</a></li>
+                        <li class="icon1"><i class="btn-edit fa fa-square-plus"></i></li>
+                        <li class="price1">S/ ${p.precio.toFixed(2)}</li>
+                        <li class="number"><a>${p.cntd}</a></li>
+                        <li class="price2">S/ ${(p.precio*p.cntd).toFixed(2)}</li>
+                        <li class="icon2"><i class="btn-remove fa fa-xmark" onclick="quitarProd(${p.id})"></i></li>
+                    </ul>
+                `;
+            }).join("");
+
+            let txt_prc_subtotal = document.getElementById('txt_prc_subtotal');
+            txt_prc_subtotal.innerHTML = "S/ " + prc_total.toFixed(2);
+            let txt_prc_total = document.getElementById('txt_prc_total');
+            txt_prc_total.innerHTML = "S/ " + (prc_total).toFixed(2);
+        }
+
+        if ( carrito.length !== 0 ) {
+            cargar_tbl_prod();
+        }
+
+        const redirect_pago = () => {
+            window.location.href = "/pago";
+        };
+
+        let confirm_vac_carrt = () => {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Do you want to continue',
+                icon: 'error',
+                confirmButtonText: 'Cool'
+            })
+            Swal.fire({
+                title: 'Confirma vaciar todo el carrito?',
+                showCancelButton: true,
+                showConfirmButton: true,
+                icon: 'warning',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Confirmar',
+            }).then( (result) => {
+                if (result.value == true) {
+                    localStorage.removeItem("data_carrito");
+                    document.cookie = "data_carrito=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+                    window.location.href = "/productos";
+                }else{
+                    console.log('cancelado');
+                }
+            })
+        };
+        
+        let quitarProd = (id) => {
+            remove(id);
+
+            cargar_tbl_prod();
+
+            if( lst_crrt.innerHTML === ''){
+                window.location.href = "/productos";
+            }
+        }
+
+        document.getElementById("carrito_dropdown_div").style.display = "none";
+        document.getElementById("psrl_total_pagar").innerHTML = "S/ " + (prc_total).toFixed(2);
 
     </script>
 @stop

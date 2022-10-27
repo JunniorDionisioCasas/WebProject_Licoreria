@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comprobantes', function (Blueprint $table) {
-            $table->id('id_comprobante');
-            $table->string('cmp_serie', 4);
-            $table->string('cmp_tipo', 20);
-            $table->integer('cmp_numero');
-            $table->text('cmp_descripcion')->nullable();
+        Schema::create('descuentos', function (Blueprint $table) {
+            $table->id('id_descuento');
+            $table->foreignId('id_tipo_descuento')->index();
+            $table->string('dsc_nombre', 100);
+            $table->integer('dsc_cantidad');
+            $table->boolean('dsc_estado');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comprobantes');
+        Schema::dropIfExists('descuentos');
     }
 };

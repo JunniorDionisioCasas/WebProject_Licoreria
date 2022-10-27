@@ -3236,6 +3236,14 @@
     </div>
 </div>
 <!-- AND PARTNERS -->
+@php
+use Illuminate\Support\Facades\Auth;
+$user = Auth::user();
+echo $user;
+
+$current_time = Carbon\Carbon::now('-05:00');
+echo $current_time;
+@endphp
 
 @endsection
 
@@ -3246,12 +3254,53 @@
         const collection_status = array[1],
             status = array[3];
 
+        let registro_venta = () => {
+            let pedido = JSON.parse(localStorage.getItem("data_carrito"));
+            console.log("pedido");
+            console.log(pedido);
+            console.log("productos");
+            console.log(carrito);
+            console.log("descuentos");
+            console.log(descuentos);
+
+            const pedido_data = {
+                id_tipo_pedido: 1,  //1 = Online
+                tipo_comp: "Boleto",
+                id_user: {{isset($user) ? $user->id : '``'}},
+                direccion: detalle_pedido.pdd_direccion,
+                total: detalle_pedido.pdd_total,
+                pdd_fecha_entrega: "{{$current_time}}",
+                pdd_descripcion: detalle_pedido.pdd_descripcion,
+                productos: carrito,
+                descuentos: descuentos
+            };
+            
+            //api pedido, store
+            let url = urlDominio+'api/pedido';
+
+            fetch( url, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(pedido_data)
+            } )
+            .then( response => response.json() )
+            .then( success => {
+                console.log(success);
+            } )
+            .catch( error => {
+                localStorage.setItem( "data_reg_db_retry", localStorage.getItem("data_carrito") );
+                console.log(error);
+            } );
+        }
+
         if ( array.includes("collection_status=approved") && array.includes("status=approved") ) {
             Swal.fire('Compra exitosa', '', 'success');
 
-            /* registro_venta();
+            registro_venta();
 
-            limp_carrito(); */
+            limp_carrito();
         }
     </script>
 @stop

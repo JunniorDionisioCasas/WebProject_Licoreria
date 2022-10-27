@@ -80,3 +80,23 @@ li.image {
     margin-top: 20px;
     margin-left: 20px;
 }
+
+.subtotal.prc-descuentos {
+    font-weight: bold;
+}
+.subtotal.prc-descuentos span.text1 {
+    color: #0dcaf0d9 !important;
+}
+.subtotal.prc-descuentos span.text2 {
+    color: #0dcaf0d9 !important;
+}
+.subtotal .badge.rounded-pill.text-bg-info {
+    color: white !important;
+    margin-left: 10px;
+}
+
+#txt_igv {
+    font-size: x-small;
+    font-weight: 500;
+    margin-right: 5px;
+}

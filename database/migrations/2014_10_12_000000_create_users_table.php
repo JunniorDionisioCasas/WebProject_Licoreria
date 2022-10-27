@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->string('usr_apellidos', 50)->nullable();
-            $table->foreignId('id_direccion')->nullable();
+            $table->foreignId('id_direccion')->index()->nullable();
             $table->date('usr_fecha_nacimiento')->nullable();
             $table->timestamps();
         });

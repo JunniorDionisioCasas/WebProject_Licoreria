@@ -44,7 +44,7 @@
                         <!-- <li class="update"><a href="#">update shopping cart</a></li> -->
                     </ul>
                     <div class="row">
-                        <form class="col-md-4">
+                        <form class="col-md-4" style="visibility: hidden;">
                             <div class="form-bd">
                                 <h3>ESTIMACIÓN DE ENVÍO E IMPUESTO</h3>
                                 <p class="text1">Enter your destination to get a shipping estimate.</p>
@@ -54,11 +54,6 @@
                                 <select id="country" class="validate-select" title="Country" name="country_id">
                                     <option value="AF">Afghanistan</option>
                                     <option value="AL">Albania</option>
-                                    <option value="DZ">Algeria</option>
-                                    <option value="AS">American Samoa</option>
-                                    <option value="AD">Andorra</option>
-                                    <option value="AO">Angola</option>
-                                    <option value="AI">Anguilla</option>
                                 </select>
 
                                 <p>State/Province</p>
@@ -67,14 +62,6 @@
                                     <option value="">Please select region, state or province</option>
                                     <option value="1">Alabama</option>
                                     <option value="2">Alaska</option>
-                                    <option value="3">American Samoa</option>
-                                    <option value="4">Arizona</option>
-                                    <option value="5">Arkansas</option>
-                                    <option value="6">Armed Forces Africa</option>
-                                    <option value="7">Armed Forces Americas</option>
-                                    <option value="8">Armed Forces Canada</option>
-                                    <option value="9">Armed Forces Europe</option>
-                                    <option value="10">Armed Forces Middle East</option>
                                 </select>
                                 <p class="zip">Zip/Postal Code</p>
                                 <input class="style23" type="text" value="" size="30" />
@@ -83,19 +70,20 @@
                         </form>
                         <form class="col-md-4">
                             <div class="form-bd">
-                                <h3>DISCOUNT CODES</h3>
-                                <p class="formbd2">Enter your coupon code if you have one.</p>
+                                <h3>CÓDIGOS DE DESCUENTO</h3>
+                                <p class="formbd2">Ingrese su código de cupón si tiene uno.</p>
                                 <input class="styleip" type="text" value="" size="30" />
-                                <span class="style-bd">Apply coupon</span>
+                                <span class="style-bd">Aplicar cupón</span>
                             </div>
                         </form>
                         <form class="form-right col-md-4">
                             <div class="form-bd cuadro_totales">
                                 <p class="subtotal">
-                                    <span class="text1">SUBTOTAL:</span>
-                                    <span id="txt_prc_subtotal" class="text2">S/ 0.00</span>
+                                    <span class="text1">Precio regular:</span>
+                                    <span id="txt_prc_regular" class="text2">S/ 0.00</span>
                                 </p>
-                                <h3>
+                                <h3 id="h3_prc_total">
+                                    <span id="txt_igv">(incluye impuestos)</span>
                                     <span class="text3">TOTAL:</span>
                                     <span id="txt_prc_total" class="text4">S/ 0.00</span>
                                 </h3>
@@ -124,10 +112,9 @@
 
 @section('js')
     <script>
-        const bd = document.getElementById('bd');
-        bd.classList.add('sns-shopping-cart');
-        const breadcrumb = document.getElementById('breadcrumb_1');
-        breadcrumb.innerHTML = "Carrito de compras";
+        document.getElementById('bd').classList.add('sns-shopping-cart');
+        document.getElementById('breadcrumb_1').innerHTML = "Carrito de compras";
+        document.getElementById("carrito_dropdown_div").style.display = "none";
 
         let lst_crrt = document.getElementById('tabla_prod_carrito');
         let btnRmv = document.getElementsByClassName("btn-remove");
@@ -147,10 +134,8 @@
                 `;
             }).join("");
 
-            let txt_prc_subtotal = document.getElementById('txt_prc_subtotal');
-            txt_prc_subtotal.innerHTML = "S/ " + prc_total.toFixed(2);
-            let txt_prc_total = document.getElementById('txt_prc_total');
-            txt_prc_total.innerHTML = "S/ " + (prc_total).toFixed(2);
+            document.getElementById('txt_prc_regular').innerHTML = "S/ " + prc_regular;
+            document.getElementById('txt_prc_total').innerHTML = "S/ " + prc_total;
         }
 
         if ( carrito.length !== 0 ) {
@@ -163,12 +148,6 @@
 
         let confirm_vac_carrt = () => {
             Swal.fire({
-                title: 'Error!',
-                text: 'Do you want to continue',
-                icon: 'error',
-                confirmButtonText: 'Cool'
-            })
-            Swal.fire({
                 title: 'Confirma vaciar todo el carrito?',
                 showCancelButton: true,
                 showConfirmButton: true,
@@ -177,8 +156,7 @@
                 confirmButtonText: 'Confirmar',
             }).then( (result) => {
                 if (result.value == true) {
-                    localStorage.removeItem("data_carrito");
-                    document.cookie = "data_carrito=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+                    limp_carrito();
                     window.location.href = "/productos";
                 }else{
                     console.log('cancelado');
@@ -196,8 +174,27 @@
             }
         }
 
-        document.getElementById("carrito_dropdown_div").style.display = "none";
-        document.getElementById("psrl_total_pagar").innerHTML = "S/ " + (prc_total).toFixed(2);
+        //descuentos
+        if( prc_desc1 ){
+            document.getElementById("h3_prc_total").insertAdjacentHTML('beforebegin', 
+            `<p class="subtotal prc-descuentos">
+                <span class="text1">Precio online:</span>
+                <span id="txt_prc_desc1" class="text2">S/ ${prc_desc1}</span>
+                <span class="badge rounded-pill text-bg-info">-${(descuentos.find( d => d.id === 1 )).cantidad}%</span>
+            </p>`);
+
+            document.getElementById("txt_prc_regular").style.textDecorationLine  = "line-through";
+        }
+        if( prc_desc2 ){
+            document.getElementById("h3_prc_total").insertAdjacentHTML('beforebegin', 
+            `<p class="subtotal prc-descuentos">
+                <span class="text1">Precio por tarjeta:</span>
+                <span id="txt_prc_desc2" class="text2">S/ ${prc_desc2}</span>
+                <span class="badge rounded-pill text-bg-info">-${(descuentos.find( d => d.id === 2 )).cantidad}%</span>
+            </p>`);
+            
+            document.getElementById("txt_prc_regular").style.textDecorationLine  = "line-through";
+        }
 
     </script>
 @stop

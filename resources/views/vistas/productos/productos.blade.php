@@ -211,7 +211,6 @@
 
 @section('js')
     <script>
-        const urlDominio = 'http://127.0.0.1:8080/';
         const contenedor_prod = document.getElementById('contenedor_productos_grid');
         const listaCategorias = document.getElementById('listaCategorias');
         const listaMarcas = document.getElementById('listaMarcas');

@@ -25,6 +25,7 @@
         $preference->auto_return = "approved";
 
         $ck_data_crrt = json_decode( $_COOKIE['data_carrito'] );
+        $ck_total_dsc = $_COOKIE['total_descuento'];
 
         // Crea un ítem en la preferencia
         $productos = [];
@@ -33,7 +34,7 @@
             $item = new MercadoPago\Item();
             $item->title = $p->nmbr;
             $item->quantity = $p->cntd;
-            $item->unit_price = $p->precio;
+            $item->unit_price = round( ($p->precio)*(1-($ck_total_dsc/100)) , 1);
             array_push($productos, $item);
         }
 
@@ -104,8 +105,8 @@
             }
         });
 
-        document.getElementById("carrito_dropdown_div").style.display = "none";
-        document.getElementById("psrl_total_pagar").innerHTML = "Total: S/ " + (prc_total).toFixed(2);
+        // document.getElementById("carrito_dropdown_div").style.display = "none";
+        document.getElementById("psrl_total_pagar").innerHTML = "Total: S/ " + prc_total;
     </script>
 
 @stop

@@ -83,7 +83,6 @@
         let array = queryString.split("|");
         const idProd = array[0];
         let cant = document.getElementById("qty");
-        const urlDominio = 'http://127.0.0.1:8080/';
 
         const breadcrumb = document.getElementById('breadcrumb_1');
         breadcrumb.innerHTML = "Detalle producto";

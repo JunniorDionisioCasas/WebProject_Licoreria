@@ -109,3 +109,30 @@ input[type="range"]::-moz-range-thumb{
     -moz-appearance: none;
     box-shadow: 0 0 6px rgba(0,0,0,0.05);
 }
+
+#btn_filtrar {
+    background: #e34444;
+    border: 1px solid #e34444;
+    margin-bottom: 20px;
+}
+
+.filter_selected {
+    color: #e34444;
+}
+#sns_content .block.block-layered-nav dl#narrow-by-list dd ol li.filter_selected:before {
+    border: 1px solid #e34444!important;
+    content: '\f00c';
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    line-height: 10px;
+    color: #e34444;
+    font-size: 11px
+}
+#sns_content .block.block-layered-nav dl#narrow-by-list dd ol li .filter_selected_text {
+    color: #e34444 !important;
+}

@@ -35,18 +35,18 @@
                                 <dd class="odd">
                                     <div class="price-input">
                                         <div class="field">
-                                            <input type="number" class="input-min" value="0">
+                                            <input id="min_price" type="number" class="input-min" value="0">
                                         </div>
                                         <div class="field">
-                                            <input type="number" class="input-max" value="10000">
+                                            <input id="max_price" type="number" class="input-max" value="1000">
                                         </div>
                                     </div>
                                     <div class="slider">
-                                        <div class="progress"></div>
+                                        <div id="price_progress" class="progress"></div>
                                     </div>
                                     <div class="range-input">
-                                        <input type="range" class="range-min" min="0" max="10000" value="0" step="100">
-                                        <input type="range" class="range-max" min="0" max="10000" value="10000" step="100">
+                                        <input id="icon_min_range" type="range" class="range-min" min="0" max="1000" value="0" step="10">
+                                        <input id="icon_max_range" type="range" class="range-max" min="0" max="1000" value="1000" step="10">
                                     </div>
                                 </dd>
 
@@ -59,7 +59,8 @@
                                     </ol>
                                 </dd>
                             </dl>
-                            <button type="button" class="style3 btnFiltrar">FILTRAR</button>
+                            <button id="btn_filtrar" type="button" class="style3 btnFiltrar" onclick="filtrar_productos()">FILTRAR</button>
+                            <button type="button" class="style3 btnFiltrar" onclick="location.href = '/productos'">BORRAR FILTROS</button>
                         </div>
                     </div>
 
@@ -215,74 +216,137 @@
         const listaCategorias = document.getElementById('listaCategorias');
         const listaMarcas = document.getElementById('listaMarcas');
         const numProd = document.getElementsByClassName('amount cantProd');
+        let search_params = (new URL(window.location.href)).search;
+        let params_object = new URLSearchParams(search_params);
+        let url = urlDominio + 'api/';
+
+        const elmt_min_price = document.getElementById('min_price');
+        elmt_min_price.value = params_object.get("min_price");
+        const elmt_max_price = document.getElementById('max_price');
+        elmt_max_price.value = params_object.get("max_price");
+        const price_progress = document.getElementById('price_progress');
+
+        /* let icon_percentage_max = parseInt(elmt_max_price.value);
+        if(icon_percentage_max > 100 && icon_percentage_max < 900) {
+            icon_percentage_max = icon_percentage_max + 50;
+            icon_percentage_max = icon_percentage_max/10;
+        }
+        console.log("icon_percentage_max: "+icon_percentage_max);
+        document.getElementById("icon_max_range").style.width = icon_percentage_max+"%";
+
+        let icon_percentage_min = parseInt(elmt_min_price.value);
+        if(icon_percentage_min > 100 && icon_percentage_min < 900) {
+            icon_percentage_min = icon_percentage_min + 50;
+            icon_percentage_min = icon_percentage_min/10;
+        }
+        console.log("icon_percentage_min: "+icon_percentage_min);
+        document.getElementById("icon_min_range").style.width = (100-icon_percentage_min)+"%";
+
+        price_progress.style.right = (100-icon_percentage_max)+"%"; */
         
-        const breadcrumb = document.getElementById('breadcrumb_1');
-        breadcrumb.innerHTML = "Productos";
+        document.getElementById('breadcrumb_1').innerHTML = "Productos";
         
-        //api productos, get
-        let url = urlDominio + 'api/productos';
-        fetch(url, {
-            method: 'GET'
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
+        if(search_params){
+            url = url + "producto/buscar/" + search_params.replace('?', '');
+            console.log("ejecutar api search: "+url);
+        }else{
+            url = url + "productos";
+        }
 
-                for(let i=0; i<numProd.length; i++){
-                    numProd.item(i).insertAdjacentHTML("beforeend", data.length + " productos (s)");
-                }
+        let mostrar_productos = (data) => {
+            data.forEach( producto => {
+                let {id_producto, prd_nombre, prd_precio, prd_imagen_path} = producto;
 
-                data.forEach( producto => {
-                    let {id_producto, prd_nombre, prd_precio, prd_imagen_path} = producto;
-
-                    contenedor_prod.insertAdjacentHTML("beforeend", `
-                        <div class="item col-lg-3 col-md-4 col-sm-4 col-xs-6 col-phone-12">
-                            <div class="item-inner">
-                                <div class="prd">
-                                    <div class="item-img clearfix">
-                                        <a class="product-image have-additional"
-                                            title="${prd_nombre}"
-                                            href="/detalle-producto?${id_producto}">
-                                                <span class="img-main">
-                                                    <img src="${prd_imagen_path}" alt="">
-                                                </span>
-                                        </a>
-                                    </div>
-                                    <div class="item-info">
-                                        <div class="info-inner">
-                                            <div class="item-title">
-                                                <a class="nombre2lineas"
-                                                    title="${prd_nombre}">
-                                                        ${prd_nombre}
-                                                </a>
-                                            </div>
-                                            <div class="item-price">
-                                                <div class="price-box">
-                                                    <span class="regular-price">
-                                                        <span class="price">
-                                                            <span class="price1">S/ ${prd_precio.toFixed(2)}</span>
-                                                        </span>
+                contenedor_prod.insertAdjacentHTML("beforeend", `
+                    <div class="item col-lg-3 col-md-4 col-sm-4 col-xs-6 col-phone-12">
+                        <div class="item-inner">
+                            <div class="prd">
+                                <div class="item-img clearfix">
+                                    <a class="product-image have-additional"
+                                        title="${prd_nombre}"
+                                        href="/detalle-producto?${id_producto}">
+                                            <span class="img-main">
+                                                <img src="${prd_imagen_path}" alt="">
+                                            </span>
+                                    </a>
+                                </div>
+                                <div class="item-info">
+                                    <div class="info-inner">
+                                        <div class="item-title">
+                                            <a class="nombre2lineas"
+                                                title="${prd_nombre}">
+                                                    ${prd_nombre}
+                                            </a>
+                                        </div>
+                                        <div class="item-price">
+                                            <div class="price-box">
+                                                <span class="regular-price">
+                                                    <span class="price">
+                                                        <span class="price1">S/ ${prd_precio.toFixed(2)}</span>
                                                     </span>
-                                                </div>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="action-bot action123 btnAnadirCarrito">
-                                        <div class="wrap-addtocart">
-                                            <button class="btn-cart" onclick="addProduct(${id_producto}, '${prd_nombre}', ${prd_precio}, '${prd_imagen_path}')"
-                                                    title="Añadir al carrito">
-                                                <i class="fa fa-shopping-cart"></i>
-                                                <span>Añadir al carrito</span>
-                                            </button>
-                                        </div>
+                                </div>
+                                <div class="action-bot action123 btnAnadirCarrito">
+                                    <div class="wrap-addtocart">
+                                        <button class="btn-cart" onclick="addProduct(${id_producto}, '${prd_nombre}', ${prd_precio}, '${prd_imagen_path}')"
+                                                title="Añadir al carrito">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span>Añadir al carrito</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    `)
-                })
+                    </div>
+                `)
             })
-            .catch(error => console.log(error));
+        }
+
+        let cargar_api = () => {
+            //api productos, get
+            console.log("URL: "+url);
+            fetch(url, {
+                method: 'GET'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+
+                    for(let i=0; i<numProd.length; i++){
+                        numProd.item(i).insertAdjacentHTML("beforeend", data.length + " productos (s)");
+                    }
+
+                    mostrar_productos(data);
+                })
+                .catch(error => console.log(error));
+        }
+
+        cargar_api();
+
+        //updating styles for selected filters
+        let update_filter_style = () => {
+            console.log("hay parametros de busqueda: "+search_params);
+            console.log(params_object.toString());
+            slctd_categorias = params_object.getAll('c');
+            slctd_marcas = params_object.getAll('m');
+            console.log(slctd_categorias);
+            console.log(slctd_marcas);
+            slctd_categorias.forEach(c => {
+                console.log("c: "+c);
+                let elmt_c = document.getElementById("c"+c);
+                elmt_c.parentElement.classList.add("filter_selected");
+                elmt_c.classList.add("filter_selected_text");
+            });
+            slctd_marcas.forEach(m => {
+                console.log("m: "+m);
+                let elmt_m = document.getElementById("m"+m);
+                elmt_m.parentElement.classList.add("filter_selected");
+                elmt_m.classList.add("filter_selected_text");
+            });
+        }
 
         //api count_productos, get
         let urlFiltro = urlDominio + 'api/count_productos';
@@ -295,7 +359,7 @@
                 data.categorias.forEach( categoria => {
                     listaCategorias.insertAdjacentHTML("beforeend", `
                         <li>
-                            <a href="#">
+                            <a id="c${categoria.id_categoria}" href="#" onclick="search_products(event, 'c', ${categoria.id_categoria}); return false">
                                 ${categoria.ctg_nombre}
                                 <span class="count">(${categoria.cantidad_productos})</span>
                             </a>
@@ -305,13 +369,17 @@
                 data.marcas.forEach( marca => {
                     listaMarcas.insertAdjacentHTML("beforeend", `
                         <li>
-                            <a class="swatch-link" href="#">
-                                <span class="swatch-label"> ${marca.mrc_nombre} </span>
+                            <a id="m${marca.id_marca}" class="swatch-link" href="#" onclick="search_products(event, 'm', ${marca.id_marca}); return false">
+                                ${marca.mrc_nombre}
                                 <span class="count">(${marca.cantidad_productos})</span>
                             </a>
                         </li>
                     `)
                 });
+
+                if(search_params){
+                    update_filter_style();
+                }
             })
             .catch(error => console.log(error));
 
@@ -319,7 +387,7 @@
         const rangeInput = document.querySelectorAll(".range-input input"),
             priceInput = document.querySelectorAll(".price-input input"),
             range = document.querySelector(".slider .progress");
-        let priceGap = 1000;
+        let priceGap = 100;
         priceInput.forEach(input =>{
             input.addEventListener("input", e =>{
                 let minPrice = parseInt(priceInput[0].value),
@@ -354,5 +422,37 @@
                 }
             });
         });
+
+        // products filter
+        let search_products = (e, tipo, valor) => {
+            e = e || window.event;
+            let target = e.target || e.srcElement;
+            console.log("current search text: "+search_params);
+            if(target.classList.contains("filter_selected_text")){
+                console.log(tipo+'='+valor+'&');
+                search_params = search_params.replace((tipo+'='+valor+'&'),'');
+                target.parentElement.classList.remove("filter_selected");
+                target.classList.remove("filter_selected_text");
+            }else{
+                console.log("tipo: "+tipo);
+                console.log("valor: "+valor);
+                search_params = search_params + tipo + "=" + valor + "&";
+                target.parentElement.classList.add("filter_selected");
+                target.classList.add("filter_selected_text");
+            }
+            console.log("string obtained: "+ search_params);
+        }
+
+        let filtrar_productos = () => {
+            console.log("funcion filtrar");
+            console.log("search_params antes: "+search_params);
+            let min_price = elmt_min_price.value;
+            let max_price = elmt_max_price.value;
+            const params_obj = new URLSearchParams(search_params);
+            params_obj.set('min_price', min_price);
+            params_obj.set('max_price', max_price);
+            console.log("final string: "+ params_obj);
+            window.location.href = "/productos?" + params_obj.toString() + "&";
+        }
     </script>
 @stop

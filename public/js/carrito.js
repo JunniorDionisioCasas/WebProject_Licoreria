@@ -54,7 +54,6 @@ let remove = (id) => {
 };
 
 let limp_carrito = () => {
-    console.log('limp carrt');
     localStorage.removeItem("detalle_pedido");
     localStorage.removeItem("data_carrito");
     document.cookie = "data_carrito=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
@@ -118,15 +117,9 @@ let calculation = () => {
             prc_total = prc_desc2;
         }
     });
-    
-    console.log(prc_total);
 
     detalle_pedido.pdd_total = prc_total;
     localStorage.setItem("detalle_pedido", JSON.stringify(detalle_pedido));
-    
-    console.log(detalle_pedido);
-    console.log("prc desc1: "+prc_desc1);
-    console.log("prc desc2: "+prc_desc2);
 
     elmt_cart_cntd.innerHTML = cartCant;
     elmt_cart_precio.innerHTML = "S/ " + prc_total;
@@ -136,7 +129,6 @@ let set_descuentos = (response) => {
     descuentos = [];
 
     response.forEach(d => {
-        console.log(d);
         if( d.id_tipo_descuento === 2 ) {
             descuentos.push({
                 "id": d.id_descuento,
@@ -161,8 +153,6 @@ let cargar_descuentos = () => {
     } )
     .then( response => response.json() )
     .then( response => {
-        console.log(response);
-        
         if( response.length !== 0 )
             set_descuentos(response);
     } )

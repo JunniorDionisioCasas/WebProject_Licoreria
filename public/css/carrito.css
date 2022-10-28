@@ -84,9 +84,7 @@ li.image {
 .subtotal.prc-descuentos {
     font-weight: bold;
 }
-.subtotal.prc-descuentos span.text1 {
-    color: #0dcaf0d9 !important;
-}
+.subtotal.prc-descuentos span.text1,
 .subtotal.prc-descuentos span.text2 {
     color: #0dcaf0d9 !important;
 }

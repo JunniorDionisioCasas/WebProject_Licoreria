@@ -3239,10 +3239,10 @@
 @php
 use Illuminate\Support\Facades\Auth;
 $user = Auth::user();
-echo $user;
+// echo $user;
 
 $current_time = Carbon\Carbon::now('-05:00');
-echo $current_time;
+// echo $current_time;
 @endphp
 
 @endsection

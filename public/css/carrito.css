@@ -98,3 +98,21 @@ li.image {
     font-weight: 500;
     margin-right: 5px;
 }
+
+li.number a {
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+    margin-right: -7px;
+}
+li.number button {
+    line-height: normal;
+    border: unset;
+    background: unset;
+    margin-left: 4px;
+}
+li.number button i {
+    vertical-align: top;
+}
+.shoppingcart ul.title .text1 {
+    width: 57%;
+}

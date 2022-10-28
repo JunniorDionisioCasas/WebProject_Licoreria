@@ -82,7 +82,7 @@
                     <div class="category-products">
 
                         <!-- toolbar clearfix -->
-                        <div class="toolbar clearfix">
+                        <!-- <div class="toolbar clearfix">
                             <div class="toolbar-inner">
                                 <p class="view-mode">
                                     <label>Ver como</label>
@@ -143,7 +143,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!--  <a class="set-desc" title="Set Descending Direction" href="http://demo.snstheme.com/sns-simen/index.php/women.html?dir=desc&order=position"></a> -->
+                                     <a class="set-desc" title="Set Descending Direction" href="http://demo.snstheme.com/sns-simen/index.php/women.html?dir=desc&order=position"></a>
                                 </div>
                                 <div class="pager">
                                     <p class="amount cantProd">
@@ -154,9 +154,9 @@
                                         <strong>Páginas:</strong>
                                         <ol>
                                             <li class="current">1</li>
-                                            <!-- <li>
+                                            <li>
                                                 <a href="#">2</a>
-                                            </li> -->
+                                            </li>
                                             <li>
                                                 <a class="next i-next" title="Siguiente" href="#"> Siguiente </a>
                                             </li>
@@ -164,7 +164,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- toolbar clearfix -->
 
                         <!-- sns-products-container -->
@@ -221,9 +221,7 @@
         let url = urlDominio + 'api/';
 
         const elmt_min_price = document.getElementById('min_price');
-        elmt_min_price.value = params_object.get("min_price");
         const elmt_max_price = document.getElementById('max_price');
-        elmt_max_price.value = params_object.get("max_price");
         const price_progress = document.getElementById('price_progress');
 
         /* let icon_percentage_max = parseInt(elmt_max_price.value);
@@ -248,7 +246,9 @@
         
         if(search_params){
             url = url + "producto/buscar/" + search_params.replace('?', '');
-            console.log("ejecutar api search: "+url);
+            
+            elmt_min_price.value = params_object.get("min_price");
+            elmt_max_price.value = params_object.get("max_price");
         }else{
             url = url + "productos";
         }
@@ -291,7 +291,7 @@
                                 </div>
                                 <div class="action-bot action123 btnAnadirCarrito">
                                     <div class="wrap-addtocart">
-                                        <button class="btn-cart" onclick="addProduct(${id_producto}, '${prd_nombre}', ${prd_precio}, '${prd_imagen_path}')"
+                                        <button class="btn-cart" onclick="addProduct(${id_producto}, '${prd_nombre}', ${prd_precio}, '${prd_imagen_path}', 1)"
                                                 title="Añadir al carrito">
                                             <i class="fa fa-shopping-cart"></i>
                                             <span>Añadir al carrito</span>
@@ -328,12 +328,8 @@
 
         //updating styles for selected filters
         let update_filter_style = () => {
-            console.log("hay parametros de busqueda: "+search_params);
-            console.log(params_object.toString());
             slctd_categorias = params_object.getAll('c');
             slctd_marcas = params_object.getAll('m');
-            console.log(slctd_categorias);
-            console.log(slctd_marcas);
             slctd_categorias.forEach(c => {
                 console.log("c: "+c);
                 let elmt_c = document.getElementById("c"+c);
@@ -427,15 +423,11 @@
         let search_products = (e, tipo, valor) => {
             e = e || window.event;
             let target = e.target || e.srcElement;
-            console.log("current search text: "+search_params);
             if(target.classList.contains("filter_selected_text")){
-                console.log(tipo+'='+valor+'&');
                 search_params = search_params.replace((tipo+'='+valor+'&'),'');
                 target.parentElement.classList.remove("filter_selected");
                 target.classList.remove("filter_selected_text");
             }else{
-                console.log("tipo: "+tipo);
-                console.log("valor: "+valor);
                 search_params = search_params + tipo + "=" + valor + "&";
                 target.parentElement.classList.add("filter_selected");
                 target.classList.add("filter_selected_text");
@@ -444,8 +436,6 @@
         }
 
         let filtrar_productos = () => {
-            console.log("funcion filtrar");
-            console.log("search_params antes: "+search_params);
             let min_price = elmt_min_price.value;
             let max_price = elmt_max_price.value;
             const params_obj = new URLSearchParams(search_params);

@@ -125,10 +125,17 @@
                     <ul class="nav-mid clearfix">
                         <li class="image"><a href="/detalle-producto?${p.id}"><img class="img_sml_crrt" src="${p.img}" alt="${p.nmbr}"></a></li>
                         <li class="item-title nombre1linea"><a href="/detalle-producto?${p.id}">${p.nmbr}</a></li>
-                        <li class="icon1"><i class="btn-edit fa fa-square-plus"></i></li>
-                        <li class="price1">S/ ${p.precio.toFixed(2)}</li>
-                        <li class="number"><a>${p.cntd}</a></li>
-                        <li class="price2">S/ ${(p.precio*p.cntd).toFixed(2)}</li>
+                        <li id="unt_prc_${p.id}" class="price1">S/ ${p.precio.toFixed(2)}</li>
+                        <li class="number">
+                            <button id="btn_decrs_${p.id}" type="button" onclick="decr_cant(event, ${p.id}, ${p.precio.toFixed(2)})">
+                                <i class="fa fa-minus fa-sm"></i>
+                            </button>
+                            <a id="txt_cntd_${p.id}">${p.cntd}</a>
+                            <button id="btn_incrs_${p.id}" type="button" onclick="incr_cant(event, ${p.id}, ${p.precio.toFixed(2)})">
+                                <i class="fa fa-plus fa-sm"></i>
+                            </button>
+                        </li>
+                        <li id="multiplied_prc_${p.id}" class="price2">S/ ${(p.precio*p.cntd).toFixed(2)}</li>
                         <li class="icon2"><i class="btn-remove fa fa-xmark" onclick="quitarProd(${p.id})"></i></li>
                     </ul>
                 `;
@@ -174,7 +181,7 @@
             }
         }
 
-        //descuentos
+        // disscounts
         if( prc_desc1 ){
             document.getElementById("h3_prc_total").insertAdjacentHTML('beforebegin', 
             `<p class="subtotal prc-descuentos">
@@ -194,6 +201,61 @@
             </p>`);
             
             document.getElementById("txt_prc_regular").style.textDecorationLine  = "line-through";
+        }
+
+        let update_total_price = () => {
+            document.getElementById('txt_prc_regular').innerHTML = "S/ " + prc_regular;
+            if( prc_desc1 ){
+                document.getElementById('txt_prc_desc1').innerHTML = "S/ " + prc_desc1;
+            }
+            if( prc_desc2 ){
+                document.getElementById('txt_prc_desc2').innerHTML = "S/ " + prc_desc2;
+            }
+            document.getElementById('txt_prc_total').innerHTML = "S/ " + prc_total;
+        }
+
+        // increase decrease product amount
+        let calcular_precio_x_prd = (id, prc, cntd) => {
+            // let unt_prc = document.getElementById("unt_prc_"+id).
+            document.getElementById("multiplied_prc_"+id).innerHTML = "S/ " + (prc * cntd).toFixed(2);
+        }
+
+        let incr_cant = (e, id, prc) => {
+            e = e || window.event;
+            let target = e.target || e.srcElement;
+            let elmt_cntd = document.getElementById("txt_cntd_"+id);
+            let cntd = parseInt(elmt_cntd.innerHTML);
+            
+            if(cntd == 1){
+                document.getElementById("btn_decrs_"+id).disabled = false;
+            }
+
+            cntd = cntd + 1;
+            elmt_cntd.innerHTML = cntd;
+
+            calcular_precio_x_prd(id, prc, cntd);
+            increment(id);
+            update_total_price();
+        }
+
+        let decr_cant = (e, id, prc) => {
+            e = e || window.event;
+            let target = e.target || e.srcElement;
+            let elmt_cntd = document.getElementById("txt_cntd_"+id);
+            let cntd = parseInt(elmt_cntd.innerHTML);
+            
+            if(cntd >= 2){
+                cntd = cntd - 1;
+                elmt_cntd.innerHTML = cntd;
+            }
+
+            if(cntd <= 1){
+                document.getElementById("btn_decrs_"+id).disabled = true;
+            }
+
+            calcular_precio_x_prd(id, prc, cntd);
+            decrement(id);
+            update_total_price();
         }
 
     </script>

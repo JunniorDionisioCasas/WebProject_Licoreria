@@ -5,7 +5,7 @@ let descuentos = JSON.parse(localStorage.getItem("data_descuentos")) || [];
 let detalle_pedido = JSON.parse(localStorage.getItem("detalle_pedido")) || {};
 let prc_regular, prc_total, prc_desc1, prc_desc2;
 
-let addProduct = (id, prd_nombre, prd_precio, prd_imagen_path) => {
+let addProduct = (id, prd_nombre, prd_precio, prd_imagen_path, cntd) => {
     let search = carrito.find( (x) => x.id === id );
     let cantidad_prod;
     if(search === undefined){
@@ -18,7 +18,7 @@ let addProduct = (id, prd_nombre, prd_precio, prd_imagen_path) => {
         })
         cantidad_prod = 1;
     }else{
-        search.cntd += 1;
+        search.cntd += parseInt(cntd);
         cantidad_prod = search.cntd;
     }
     console.log(carrito);
@@ -32,6 +32,8 @@ let increment = (id) => {
     let search = carrito.find( (x) => x.id === id );
     search.cntd += 1;
     console.log(carrito);
+    localStorage.setItem("data_carrito", JSON.stringify(carrito));
+    calculation();
 };
 
 let decrement = (id) => {
@@ -42,6 +44,8 @@ let decrement = (id) => {
         search.cntd -= 1;
     
     console.log(carrito);
+    localStorage.setItem("data_carrito", JSON.stringify(carrito));
+    calculation();
 };
 
 let remove = (id) => {
@@ -101,6 +105,7 @@ let calculation = () => {
     });
 
     prc_regular = prc_total;
+    prc_regular = prc_regular.toFixed(2);
 
     //aplicando descuentos
     cargar_descuentos();

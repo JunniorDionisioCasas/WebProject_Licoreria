@@ -16,3 +16,14 @@
     font-weight: bold;
     font-size: initial;
 }
+
+p.mb-1 {
+    margin-top: 10px;
+}
+#btn_pagar_culqi {
+    border-radius: 3px;
+    border-color: purple;
+    background: purple;
+    color: white;
+    width: 63px;
+}

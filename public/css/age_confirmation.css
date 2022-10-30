@@ -1,0 +1,78 @@
+
+body {
+    background-image: url('/images/backgrounds/background_liquor_croped.png');
+}
+
+div.container-fluid {
+    color: white;
+    height: 100vh;
+    min-height: 500px;
+    position: relative;
+    text-transform: uppercase;
+}
+
+div.col.main {
+    width: 95%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.row {
+    padding: 10px;
+}
+
+.first_row_element {
+    width: auto !important;
+    margin: auto;
+}
+.first_row_element.grid_text {
+    display: inline-grid;
+    text-align: left;
+}
+
+.nombre_empresa {
+    line-height: normal;
+    font-size: 100px;
+    font-weight: bolder;
+    font-family: serif;
+}
+.tipo_empresa {
+    line-height: normal;
+    font-size: 50px;
+    font-weight: bolder;
+    font-family: serif;
+    font-style: oblique;
+    text-align: end;
+    display: block;
+    text-transform: none;
+    color: darkgrey;
+}
+
+span.confirmation_text1 {
+    font-weight: bold;
+    font-size: xxx-large;
+}
+span.confirmation_text2 {
+    font-size: xx-large;
+    font-weight: 600;
+    max-width: 400px;
+}
+
+button {
+    width: 125px !important;
+    background-color: white;
+    border: none;
+    margin: auto !important;
+    border-radius: 3px !important;
+    font-weight: bold;
+}
+
+.row.middle_element {
+    font-size: larger;
+}
+.row.last_element {
+    background: gray;
+    font-size: x-large;
+}

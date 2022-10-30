@@ -51,7 +51,7 @@
             <div class="container_in">
                 <div class="row">
                     <h1 id="logo" class="responsv col-md-3">
-                        <a href="/" title="San Sebastián">
+                        <a href="/home" title="San Sebastián">
                             <img alt="" src="images/logo/logo_black_and_white.PNG" height="100px">
                         </a>
                     </h1>
@@ -98,7 +98,7 @@
                     <div id="sns_custommenu" class="visible-md visible-lg">
                         <ul class="mainnav">
                             <li class="level0 custom-item active">
-                                <a class="menu-title-lv0 pd-menu116" href="/" target="_self">
+                                <a class="menu-title-lv0 pd-menu116" href="/home" target="_self">
                                     <span class="title">Inicio</span>
                                 </a>
                             </li>
@@ -213,7 +213,7 @@
                         <span class="icon-pointer "></span>
                         <ul class="breadcrumbs">
                             <li class="home">
-                                <a title="Ir a la página de inicio" href="/">
+                                <a title="Ir a la página de inicio" href="/home">
                                     <i class="fa fa-home"></i>
                                     <span>Inicio</span>
                                 </a>

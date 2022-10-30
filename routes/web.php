@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return view('vistas/age_confirmation');
+});
+
+Route::get('/home', function () {
     return view('index');
 });
 
@@ -31,7 +35,7 @@ Route::get('/carrito_compras', function () {
 
 Route::get('/pago', function () {
     return view('vistas/pasarela_pago');
-});
+})->middleware('auth');
 
 Route::middleware([
     'auth:sanctum',

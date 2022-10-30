@@ -67,15 +67,16 @@
                                     <h5 class="mb-1">MercadoPago</h5>
                                     <div class="cho-container"></div>
                                 </div>
-                                <p class="mb-1">Acepta todas las tarjetas</p>
+                                <p class="mb-1">Acepta todas las tarjetas, efectivo en agentes y banca por internet</p>
                                 <!-- <small>And some small print.</small> -->
                             </a>
-                            <!-- <a href="#" class="list-group-item list-group-item-action">
+                            <a href="#" class="list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Pronto más opciones de pago...</h5>
+                                    <h5 class="mb-1">Culqi</h5>
+                                    <button id="btn_pagar_culqi">Pagar</button>
                                 </div>
-                                <p class="mb-1"></p>
-                            </a> -->
+                                <p class="mb-1">Acepta Tarjetas, Billeteras móviles(Yape, Plin, etc), PagoEfectivo y Cuotealo</p>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -88,9 +89,11 @@
 
 @section('js')
     // SDK MercadoPago.js V2
-    <script src="https://sdk.mercadopago.com/js/v2"></script>    
-    
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    // Culqi Checkout V4
+    <script src="https://checkout.culqi.com/js/v4"></script>
     <script>
+        // Mercado Pago------------------------------------------------
         const mp = new MercadoPago('TEST-8c007fa6-6e21-4330-aaca-9d9ad4a23c9e', {
             locale: 'es-PE'
         });
@@ -104,6 +107,84 @@
                 label: 'Pagar',
             }
         });
+
+        // Culqi------------------------------------------------
+        Culqi.publicKey = 'pk_test_mMuDt93W693kopfG';//'pk_test_4e2acd3f3f0f8ab2';
+        let order_id;
+        let prc_pagar = (Math.round(prc_total * 10))*10;
+        console.log("prc_pagar: "+prc_pagar);
+        let generate_order_number = "{{Auth::user()->id}}" + "-" +Math.floor(Math.random() * 10) + "-" + Math.floor(Math.random() * 100);
+        let create_order_data = {
+            "amount": prc_pagar,
+            "currency_code": "PEN",
+            "description": "Venta de licores, y objetos asociados",
+            "order_number": generate_order_number,
+            "expiration_date": "{{Carbon\Carbon::now('-05:00')->addWeek()->timestamp}}",
+            "client_details": {
+                "first_name": "{{Auth::user()->name}}",
+                "last_name": "{{Auth::user()->usr_apellidos}}",
+                "email": "{{Auth::user()->email}}",
+                "phone_number": "{{Auth::user()->usr_phone}}"
+            }
+        }
+
+        function setting_culqi(){
+            Culqi.settings({
+                title: 'San Sebastian',
+                currency: 'PEN',
+                amount: prc_pagar,
+                order: order_id // Este parámetro es requerido para realizar pagos con pagoEfectivo, billeteras y Cuotéalo
+            });
+            Culqi.options({
+                lang: "auto",
+                installments: true, // Habilitar o deshabilitar el campo de cuotas
+                paymentMethods: {
+                    tarjeta: true,
+                    yape: true, 
+                    bancaMovil: true,
+                    agente: true,
+                    billetera: true,
+                    cuotealo: true,
+                },
+                style: {
+                    logo: 'http://127.0.0.1:8000/images/logo/logo-512x512.png',
+                    bannerColor: '#000000', // hexadecimal
+                    buttonBackground: '#FFFFFF', // hexadecimal
+                    menuColor: '#5EC8FF', // hexadecimal
+                    linksColor: '#000000', // hexadecimal
+                    buttonText: 'Pagar', // texto que tomará el botón
+                    buttonTextColor: '#000000', // hexadecimal
+                    priceColor: '#5EC8FF' // hexadecimal
+                }
+            });
+        }
+        console.log("order number generated: "+generate_order_number);
+        console.log(JSON.stringify(create_order_data));
+        
+        //api crear orden, para habilitar pago con efectivo (Yape, etc), post
+        fetch('https://api.culqi.com/v2/orders', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer sk_test_m769JguJzbnw0WTA", //llave privada culqi, test: sk_test_355c52048ca73d96
+            },
+            body: JSON.stringify(create_order_data),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                order_id = data.id;
+                setting_culqi();
+            })
+            .catch(error => console.log(error));
+            
+        const btn_pagar_culqi = document.getElementById('btn_pagar_culqi');
+
+        btn_pagar_culqi.addEventListener('click', function (e) {
+            // Abre el formulario con la configuración en Culqi.settings y CulqiOptions
+            Culqi.open();
+            e.preventDefault();
+        })
 
         // document.getElementById("carrito_dropdown_div").style.display = "none";
         document.getElementById("psrl_total_pagar").innerHTML = "Total: S/ " + prc_total;

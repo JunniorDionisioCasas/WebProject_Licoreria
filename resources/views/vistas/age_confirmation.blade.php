@@ -42,13 +42,22 @@
     <script>
         const btnConf = document.getElementById("btn_confirmar");
         const btnDeng = document.getElementById("btn_denegar");
+        
+        if( localStorage.getItem("ageCheckConfirmed") ){
+            access();
+        }
 
-        function goBack () {
+        function goBack() {
             history.go(-1);
         }
 
-        function proceed () {
-            window.location.href = "/home"
+        function proceed() {
+            localStorage.setItem("ageCheckConfirmed", true);
+            access();
+        }
+
+        function access() {
+            window.location.href = "/home";
         }
     </script>
 </body>

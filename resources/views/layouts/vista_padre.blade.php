@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="template/js/owl-carousel/owl.carousel.css">
         <link rel="stylesheet" href="template/js/owl-carousel/owl.theme.css">
         <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="stylesheet" href="/css/header.css">
 
         @yield('css')
 
@@ -57,4 +58,11 @@
         @yield('js')
 
     </body>
+    <script>
+        if( localStorage.getItem("ageCheckConfirmed") ){
+            console.log("age alredy checked");
+        }else{
+            window.location.href = "/";
+        };
+    </script>
 </html>

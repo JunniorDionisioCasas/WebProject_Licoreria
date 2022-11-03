@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('id_tipo_descuento')->index();
             $table->string('dsc_nombre', 100);
             $table->integer('dsc_cantidad');
+            $table->string('dsc_codigo', 10)->nullable();
             $table->boolean('dsc_estado');
             $table->timestamps();
         });

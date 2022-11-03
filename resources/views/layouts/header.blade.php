@@ -17,27 +17,29 @@
                         </div>
                         <div class="customer-ct content">
                             <ul class="links">
+                                @if( Auth::check() )
                                 <li class="first">
                                     <!-- <a class="top-link" title="Salir" href="/logout">Salir</a> -->
                                     <!-- Authentication -->
                                     <form method="POST" action="{{ route('logout') }}" x-data>
                                         @csrf
-
-                                        <button class="top-link" type="submit"
+                                        <button class="top-link logout" type="submit"
                                                 style="border: none; background: none;color: #888;">
                                             {{ __('Salir') }}
                                         </button>
                                     </form>
                                 </li>
                                 <li>
-                                    <a class="top-link" title="Registrarse" href="/register">Registrarse</a>
-                                </li>
-                                <li>
                                     <a class="top-link-myaccount" title="Mi perfil" href="/user/profile">Mi perfil</a>
+                                </li>
+                                @else
+                                <li>
+                                    <a class="top-link register" title="Registrarse" href="/register">Registrarse</a>
                                 </li>
                                 <li class=" last">
                                     <a class="top-link-login" title="Log In" href="/login">Login</a>
                                 </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -172,7 +174,9 @@
                                                 <span id="carrito_precio_total" class="price">S/ 0.00</span>
                                             </p>
                                             <div class="actions">
+                                                @if(isset($_COOKIE['data_carrito']))
                                                 <a class="button" href="/pago">Continuar</a>
+                                                @endif
                                                 <a class="button gfont go-to-cart" href="/carrito_compras">Ver carrito</a>
                                             </div>
                                         </div>
@@ -229,3 +233,9 @@
     </div>
 </div>
 <!-- AND BREADCRUMBS -->
+
+@php
+                    use Illuminate\Support\Facades\Auth;
+                    $user = Auth::check();
+                    echo $user;
+                @endphp

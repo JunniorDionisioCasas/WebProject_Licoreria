@@ -65,6 +65,11 @@ let limp_carrito = () => {
     document.cookie = "total_descuento=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 }
 
+let set_total_order = (pedidoTotal) => {
+    detalle_pedido.pdd_total = pedidoTotal;
+    localStorage.setItem("detalle_pedido", JSON.stringify(detalle_pedido));
+}
+
 let calculation = () => {
     let elmt_cart_cntd = document.getElementById("carrito_cntd_prod"),
         elmt_cart_precio = document.getElementById("carrito_precio_total");
@@ -123,8 +128,7 @@ let calculation = () => {
         }
     });
 
-    detalle_pedido.pdd_total = prc_total;
-    localStorage.setItem("detalle_pedido", JSON.stringify(detalle_pedido));
+    set_total_order(prc_total);
 
     elmt_cart_cntd.innerHTML = cartCant;
     elmt_cart_precio.innerHTML = "S/ " + prc_total;
@@ -165,3 +169,44 @@ let cargar_descuentos = () => {
 }
 
 calculation();
+
+let registro_venta = (idUser, currentTime) => {
+    let pedido = JSON.parse(localStorage.getItem("data_carrito"));
+    console.log("pedido");
+    console.log(pedido);
+    console.log("productos");
+    console.log(carrito);
+    console.log("descuentos");
+    console.log(descuentos);
+
+    const pedido_data = {
+        id_tipo_pedido: 1,  //1 = Online
+        tipo_comp: "Boleto",
+        id_user: idUser,
+        direccion: detalle_pedido.pdd_direccion,
+        total: detalle_pedido.pdd_total,
+        pdd_fecha_entrega: currentTime,
+        pdd_descripcion: detalle_pedido.pdd_descripcion,
+        productos: carrito,
+        descuentos: descuentos
+    };
+    
+    //api pedido, store
+    let url = urlDominio+'api/pedido';
+
+    fetch( url, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pedido_data)
+    } )
+    .then( response => response.json() )
+    .then( success => {
+        console.log(success);
+    } )
+    .catch( error => {
+        localStorage.setItem( "data_reg_db_retry", localStorage.getItem("data_carrito") );
+        console.log(error);
+    } );
+};

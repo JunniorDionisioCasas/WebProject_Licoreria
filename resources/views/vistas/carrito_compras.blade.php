@@ -68,12 +68,12 @@
                                 <span class="style-bd">Get a quote</span>
                             </div>
                         </form>
-                        <form class="col-md-4">
+                        <form id="formApplyCoupon" class="col-md-4">
                             <div class="form-bd">
                                 <h3>CÓDIGOS DE DESCUENTO</h3>
                                 <p class="formbd2">Ingrese su código de cupón si tiene uno.</p>
-                                <input class="styleip" type="text" value="" size="30" />
-                                <span class="style-bd">Aplicar cupón</span>
+                                <input id="codigoCupon" class="styleip" type="text" value="" size="10"/>
+                                <span id="btnAplicarCupon" class="style-bd">Aplicar cupón</span>
                             </div>
                         </form>
                         <form class="form-right col-md-4">
@@ -257,6 +257,34 @@
             decrement(id);
             update_total_price();
         }
+
+        let aplicarDescuentoCupon = (data) => {
+            prc_total = (prc_total - data.dsc_cantidad).toFixed(2);
+            console.log("precio con cupon: "+prc_total);
+            document.getElementById('txt_prc_total').innerHTML = "S/ " + prc_total;
+        };
+
+        let consultCoupon = () => {
+            const codigoCupon = document.getElementById("codigoCupon").value;
+            console.log(codigoCupon);
+
+            //api descuento, get by codigo
+            let url = urlDominio + 'api/descuento/buscar/' + codigoCupon;
+            fetch(url, {
+                method: 'GET'
+            })
+                .then(res => res.json())
+                .then(success => {
+                    console.log(success);
+                    aplicarDescuentoCupon(success.data);
+                })
+                .catch(error => console.log(error));
+        }
+        document.getElementById('formApplyCoupon').addEventListener("submit", (event) => {
+            event.preventDefault();
+            consultCoupon();
+        });
+        document.getElementById('btnAplicarCupon').addEventListener("click", consultCoupon);
 
     </script>
 @stop

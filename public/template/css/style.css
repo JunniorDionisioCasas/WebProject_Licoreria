@@ -9845,7 +9845,7 @@ body.eimg-translatey .products-grid .item .item-inner .item-img.have-additional:
     background: #e14141;
     -webkit-transition: all .5s linear;
     transition: all .5s linear;
-    right: -15px;
+    right: -13px;
     overflow: hidden;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
@@ -10330,7 +10330,7 @@ body.eimg-translatey .products-list>li.item .col-left .item-img.have-additional:
 }
 .ico-label span {
     position: absolute;
-    top: 7px;
+    top: 9px;
     height: 15px;
     width: 60px;
     color: #fff;

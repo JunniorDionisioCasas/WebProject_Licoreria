@@ -85,6 +85,12 @@
             </div>
         </div>
     </div>
+    @php
+        use Illuminate\Support\Facades\Auth;
+        $user = Auth::user();
+
+        $current_time = Carbon\Carbon::now('-05:00');
+    @endphp
 @stop
 
 @section('js')
@@ -119,7 +125,7 @@
             "currency_code": "PEN",
             "description": "Venta de licores, y objetos asociados",
             "order_number": generate_order_number,
-            "expiration_date": "{{Carbon\Carbon::now('-05:00')->addWeek()->timestamp}}",
+            "expiration_date": "{{Carbon\Carbon::now('-05:00')->addDay()->timestamp}}",
             "client_details": {
                 "first_name": "{{Auth::user()->name}}",
                 "last_name": "{{Auth::user()->usr_apellidos}}",
@@ -137,7 +143,7 @@
             });
             Culqi.options({
                 lang: "auto",
-                installments: true, // Habilitar o deshabilitar el campo de cuotas
+                // installments: true, // Habilitar o deshabilitar el campo de cuotas
                 paymentMethods: {
                     tarjeta: true,
                     yape: true, 
@@ -149,11 +155,11 @@
                 style: {
                     logo: 'http://127.0.0.1:8000/images/logo/logo-512x512.png',
                     bannerColor: '#000000', // hexadecimal
-                    buttonBackground: '#FFFFFF', // hexadecimal
+                    buttonBackground: '#000000', // hexadecimal
                     menuColor: '#5EC8FF', // hexadecimal
                     linksColor: '#000000', // hexadecimal
                     buttonText: 'Pagar', // texto que tomará el botón
-                    buttonTextColor: '#000000', // hexadecimal
+                    buttonTextColor: '#FFFFFF', // hexadecimal
                     priceColor: '#5EC8FF' // hexadecimal
                 }
             });
@@ -186,7 +192,63 @@
             e.preventDefault();
         })
 
-        // document.getElementById("carrito_dropdown_div").style.display = "none";
+        function culqi() {
+            if (Culqi.token) {  // ¡Objeto Token creado exitosamente!
+                const token = Culqi.token;
+                console.log('Se ha creado un Token: ', token);
+                //En esta linea de codigo debemos enviar el "Culqi.token.id"
+                //hacia tu servidor con Ajax
+
+                const url = 'https://api.culqi.com/v2/charges';
+                const dataCargo = {
+                                    "amount": prc_pagar,
+                                    "currency_code": "PEN",
+                                    "email": Culqi.token.email,
+                                    "source_id": Culqi.token.id
+                                };
+                console.log('body:'+JSON.stringify(dataCargo));
+
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer sk_test_m769JguJzbnw0WTA", //llave privada culqi
+                    },
+                    body: JSON.stringify(dataCargo),
+                })
+                    .then(success => {
+                        success.json();
+                    })
+                    .then(response => {
+                        console.log(response);
+                        // pago exitoso
+                        
+                        registro_venta({{isset($user) ? $user->id : '``'}}, "{{$current_time}}");
+
+                        limp_carrito();
+                        
+                        Culqi.close();
+
+                        Swal.fire(
+                            'Compra exitosa',
+                            '',
+                            'success'
+                        ).then( (result) => {
+                                window.location.href = "/home";
+                        });
+                    })
+                    .catch(error => console.log(error));
+            } else if (Culqi.order) {  // ¡Objeto Order creado exitosamente!
+                const order = Culqi.order;
+                console.log('Se ha creado el objeto Order: ', order);
+            
+            } else {
+                // Mostramos JSON de objeto error en consola
+                console.log('Error : ',Culqi.error);
+            }
+        };
+        
+        document.getElementById("carrito_dropdown_div").style.pointerEvents = "none";
         document.getElementById("psrl_total_pagar").innerHTML = "Total: S/ " + prc_total;
     </script>
 

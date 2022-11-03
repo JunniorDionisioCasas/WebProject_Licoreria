@@ -1,0 +1,35 @@
+/**
+* Modificando los estilos del header
+**/
+
+.policy_custom {
+    cursor: default !important;
+}
+
+#sns_header .sns_header_top .myaccount .content ul.links li a.top-link.register:before {
+    content: '\f2bb';
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: auto;
+    height: auto;
+    text-align: center;
+    line-height: auto
+}
+
+#sns_header .sns_header_top .myaccount .content ul.links li button.top-link.logout:before {
+    content: '\f2f5';
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: auto;
+    height: auto;
+    text-align: center;
+    line-height: auto
+}

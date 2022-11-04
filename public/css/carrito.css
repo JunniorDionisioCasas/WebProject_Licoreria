@@ -121,3 +121,8 @@ li.number button i {
     border-width: thin;
     border-color: black;
 }
+
+#multiplied_prc_2 {
+    padding: 0 20px !important;
+    text-align: center;
+}

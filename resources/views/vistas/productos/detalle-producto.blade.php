@@ -42,7 +42,7 @@
                                                 <h5>DESCRIPCIÓN</h5>
                                                 <p id="desc_producto"></p>
                                             </div>
-                                            <div class="availability">
+                                            <div id="div_fech_venc" class="availability">
                                                 <p id="fecha_venc" class="style1"></p>
                                             </div>
                                             <div class="actions">
@@ -103,7 +103,11 @@
                 $("#imagen_principal").attr('src', data.prd_imagen_path);
                 $("#nombre_producto").text(data.prd_nombre);
                 $("#precio_producto").text('S/ '+data.prd_precio);
-                $("#fecha_venc").text('Fecha de vencimiento: '+data.prd_fecha_vencimiento);
+                if(data.prd_fecha_vencimiento){
+                    $("#fecha_venc").text('Fecha de vencimiento: '+data.prd_fecha_vencimiento);
+                }else{
+                    document.getElementById('div_fech_venc').style.display = "none";
+                }
                 $("#desc_producto").text(data.prd_descripcion);
             })
             .catch(error => console.log(error));

@@ -111,7 +111,7 @@
         const btnAdd = document.getElementById('btnAddProd');
         btnAdd.onclick = () => {
             console.log(cant.value);
-            addProduct(data_prod.id_producto, data_prod.prd_nombre, data_prod.prd_precio, data_prod.prd_imagen_path, cant.value);
+            addProduct(data_prod.id_producto, data_prod.prd_nombre, data_prod.prd_precio, data_prod.prd_imagen_path, parseInt(cant.value));
         };
 
         //api count_vistas, put

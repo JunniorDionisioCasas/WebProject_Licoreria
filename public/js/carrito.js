@@ -28,7 +28,7 @@ let addProduct = (id, prd_nombre, prd_precio, prd_imagen_path, cntd) => {
     if(search === undefined){
         carrito.push({
             id: id,
-            cntd: 1,
+            cntd: cntd,
             nmbr: prd_nombre,
             precio: prd_precio,
             img: prd_imagen_path

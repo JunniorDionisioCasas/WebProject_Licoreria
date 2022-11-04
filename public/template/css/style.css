@@ -6425,7 +6425,8 @@ span:hover {
     color: #666;
     left: 51.2%;
     position: absolute;
-    top: 44%;
+    /* top: 44%; */
+    top: 60%;
     width: 36.2%
 }
 #sns_content .sns_banner .style-button {
@@ -11455,7 +11456,8 @@ body.eimg-translatey .products-list>li.item .col-left .item-img.have-additional:
     #sns_content .sns_banner .style-text2 {
         left: 41.2%;
         position: absolute;
-        top: 44%;
+        /* top: 44%; */
+        top: 60%;
         width: 57%
     }
     #sns_content .sns_banner .style-button {
@@ -11661,7 +11663,8 @@ body.eimg-translatey .products-list>li.item .col-left .item-img.have-additional:
     #sns_content .sns_banner .style-text2 {
         left: 41.2%;
         position: absolute;
-        top: 44%;
+        /* top: 44%; */
+        top: 60%;
         width: 57%
     }
     #sns_content .sns_banner .style-button {

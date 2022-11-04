@@ -27,7 +27,7 @@
         margin-left: -5px;
     }
 }
-@media (min-width: 320px) and (max-width: 767px) {    
+@media (min-width: 320px) and (max-width: 767px) {
     .nombre1linea a {
         display: -webkit-box !important;
         -webkit-box-orient: vertical;

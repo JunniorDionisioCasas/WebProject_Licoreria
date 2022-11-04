@@ -291,7 +291,9 @@
             });
         }
         const displaying_prd_mas_nuevo = (data) => {
-            document.getElementById("txt_newest_prd_title").innerHTML = data.prd_nombre;
+            let nombre_prd = document.getElementById("txt_newest_prd_title");
+            nombre_prd.innerHTML = data.prd_nombre;
+            nombre_prd.title = data.prd_nombre;
             document.getElementById("txt_newest_prd_desc").innerHTML = data.prd_descripcion;
             document.getElementById("linkNewestPrd").setAttribute("href", "/detalle-producto?"+data.id_producto);
             document.getElementById("btnNewestPrd").addEventListener("click", () => {addProduct(data.id_producto, data.prd_nombre, data.prd_precio, data.prd_imagen_path, 1)});

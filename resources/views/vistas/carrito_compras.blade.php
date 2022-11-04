@@ -68,7 +68,7 @@
                                 <span class="style-bd">Get a quote</span>
                             </div>
                         </form>
-                        <form id="formApplyCoupon" class="col-md-4">
+                        <form id="formApplyCoupon" class="col-md-4" style="visibility: hidden;">
                             <div class="form-bd">
                                 <h3>CÓDIGOS DE DESCUENTO</h3>
                                 <p class="formbd2">Ingrese su código de cupón si tiene uno.</p>
@@ -195,7 +195,7 @@
         if( prc_desc2 ){
             document.getElementById("h3_prc_total").insertAdjacentHTML('beforebegin', 
             `<p class="subtotal prc-descuentos">
-                <span class="text1">Precio por tarjeta:</span>
+                <span class="text1">Primera compra:</span>
                 <span id="txt_prc_desc2" class="text2">S/ ${prc_desc2}</span>
                 <span class="badge rounded-pill text-bg-info">-${(descuentos.find( d => d.id === 2 )).cantidad}%</span>
             </p>`);

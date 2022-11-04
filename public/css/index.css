@@ -23,12 +23,40 @@ div.item-inner div.prd div.action-bot {
     top: 0px;
     object-fit: cover;
 }
+
+#txt_newest_prd_title {
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    #txt_newest_prd_title {
+        display: -webkit-box !important;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+    #txt_newest_prd_title {
+        display: none !important;
+    }
+}
+
 #products_small{
     display: flex !important;
 }
 #products_small div.item-row {
     margin: auto;
 }
+
 #partners_slider1 {
     display: flex !important;
 }

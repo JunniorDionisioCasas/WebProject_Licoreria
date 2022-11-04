@@ -33,3 +33,15 @@
     text-align: center;
     line-height: auto
 }
+
+#btnContinuarAPago {
+    background: #e34444;
+    border: 1px solid #e34444;
+    color: #fff;
+}
+
+.button.gfont.go-to-cart {
+    background: #e34444 !important;
+    border: 1px solid #e34444 !important;
+    color: #fff;
+}

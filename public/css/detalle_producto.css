@@ -18,3 +18,9 @@
     top: -5px;
     margin-bottom: 3px;
 }
+
+#btnAddProd {
+    background: #e34444;
+    border: 1px solid #e34444;
+    color: #fff;
+}

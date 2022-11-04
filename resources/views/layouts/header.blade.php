@@ -175,7 +175,7 @@
                                             </p>
                                             <div class="actions">
                                                 @if(isset($_COOKIE['data_carrito']))
-                                                <a class="button" href="/pago">Continuar</a>
+                                                <a id="btnContinuarAPago" class="button" href="/pago">Continuar</a>
                                                 @endif
                                                 <a class="button gfont go-to-cart" href="/carrito_compras">Ver carrito</a>
                                             </div>

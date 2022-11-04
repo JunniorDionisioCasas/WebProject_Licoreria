@@ -19,14 +19,14 @@
 
                                 <div class="product-img-box col-md-4 col-sm-5">
                                     <div class="detail-img">
-                                        <img id="imagen_principal" src="images/products/13.jpg" alt="">
+                                        <img id="imagen_principal" src="" alt="">
                                     </div>
                                 </div>
                                 <div id="product_shop" class="product-shop col-md-8 col-sm-7">
                                     <div class="item-inner product_list_style">
                                         <div class="item-info">
                                             <div class="item-title">
-                                                <a id="nombre_producto" title="" href="#"></a>
+                                                <span id="nombre_producto" title=""></span>
                                             </div>
                                             <div class="item-price">
                                                 <div class="price-box">
@@ -75,6 +75,10 @@
     </div>
 </div>
 
+<div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3">
+    <!-- Se insertan alertas de productos agregados mediante la funcion alerta_producto_agregado() -->
+</div>
+
 @stop
 
 @section('js')
@@ -88,8 +92,8 @@
         breadcrumb.innerHTML = "Detalle producto";
 
         //api producto, get
-        let url = urlDominio + 'api/producto/' + idProd;
-        fetch(url, {
+        let urlDetail = urlDominio + 'api/producto/' + idProd;
+        fetch(urlDetail, {
             method: 'GET'
         })
             .then(res => res.json())
@@ -109,5 +113,14 @@
             console.log(cant.value);
             addProduct(data_prod.id_producto, data_prod.prd_nombre, data_prod.prd_precio, data_prod.prd_imagen_path, cant.value);
         };
+
+        //api count_vistas, put
+        let urlCount = urlDominio + 'api/producto_cont/' + idProd;
+        fetch(urlCount, {
+            method: 'PUT'
+        })
+            .then(res => res.json())
+            .then(data => { console.log(data); })
+            .catch(error => console.log(error));
     </script>
 @stop

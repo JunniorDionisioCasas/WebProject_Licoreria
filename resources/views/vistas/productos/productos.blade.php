@@ -208,6 +208,10 @@
     </div>
 </div>
 
+<div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3">
+    <!-- Se insertan alertas de productos agregados mediante la funcion alerta_producto_agregado() -->
+</div>
+
 @stop
 
 @section('js')
@@ -262,19 +266,16 @@
                         <div class="item-inner">
                             <div class="prd">
                                 <div class="item-img clearfix">
-                                    <a class="product-image have-additional"
-                                        title="${prd_nombre}"
-                                        href="/detalle-producto?${id_producto}">
-                                            <span class="img-main">
-                                                <img src="${prd_imagen_path}" alt="">
-                                            </span>
+                                    <a class="product-image have-additional" title="${prd_nombre}" href="/detalle-producto?${id_producto}">
+                                        <span class="img-main">
+                                            <img src="${prd_imagen_path}" alt="">
+                                        </span>
                                     </a>
                                 </div>
                                 <div class="item-info">
                                     <div class="info-inner">
                                         <div class="item-title">
-                                            <a class="nombre2lineas"
-                                                title="${prd_nombre}">
+                                            <a class="nombre2lineas" href="/detalle-producto?${id_producto}" title="${prd_nombre}">
                                                     ${prd_nombre}
                                             </a>
                                         </div>

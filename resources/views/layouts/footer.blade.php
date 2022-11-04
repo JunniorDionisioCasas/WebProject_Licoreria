@@ -5,21 +5,23 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-12 col-xs-12 column0">
                         <div class="contact_us">
-                            <h6>Cantactanos</h6>
+                            <h6>Contactanos</h6>
                             <ul class="fa-ul">
                                 <li class="pd-right">
                                     <i class="fa-li fa fw fa-home"> </i>
-                                    1234 Jr. Real Huancayo, Junín
+                                    Jr. lima N 136 San Jerónimo de Tunan - Huancayo, Junín
                                 </li>
                                 <li>
                                     <i class="fa-li fa fw fa-phone"> </i>
-                                    <p>(21) 283426</p>
-                                    <p>(21) 940421573</p>
+                                    <p>(21) 975 877 000</p>
                                 </li>
                                 <li>
-                                    <i class="fa-li fa fw fa-envelope"> </i>
+                                    <i class="fa-li fa fw fa-brands fa-facebook-f"> </i>
                                     <p>
-                                        <a href="mailto:sansebastian@gmail.com">sansebastian@gmail.com</a>
+                                        <a href="https://web.facebook.com/Licoreria-y-bazar-San-Sebastian-105198031412310">
+                                            Siguenos en Facebook
+                                        </a>
+                                        <!-- <a href="mailto:sansebastian@gmail.com">sansebastian@gmail.com</a> -->
                                     </p>
                                 </li>
                             </ul>
@@ -35,22 +37,22 @@
                             <li>
                                 <a href="#">Preguntas frecuentes</a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="#">Cambios y devoluciones</a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                     <div class="col-phone-12 col-xs-6 col-sm-3 col-md-2 column column2">
                         <h6>Cuenta</h6>
                         <ul>
                             <li>
-                                <a href="#">Mi cuenta</a>
+                                <a href="/user/profile">Mi cuenta</a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="#">Historial de compras</a>
-                            </li>
+                            </li> -->
                             <li>
-                                <a href="#">Mi carrito</a>
+                                <a href="/carrito_compras">Mi carrito</a>
                             </li>
                         </ul>
                     </div>
@@ -68,7 +70,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-phone-12 col-xs-6 col-sm-3 col-md-3 column column4">
+                    <div class="col-phone-12 col-xs-6 col-sm-3 col-md-3 column column4" style="visibility: hidden;">
                         <div class="subcribe-footer">
                             <div class="block_border block-subscribe">
                                 <div class="block_head">
@@ -110,7 +112,7 @@
                 <div class="bottom-pd2 col-sm-6">
                     <div class="payment">
                         <span>Tipos de pago aceptados </span>
-                        <img src="images/sns_paymal.png" alt="">
+                        <img src="images/staticas/metodos_pago.png" alt="" width="230" height="30">
                     </div>
                 </div>
             </div>

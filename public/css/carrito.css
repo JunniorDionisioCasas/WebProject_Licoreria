@@ -116,3 +116,8 @@ li.number button i {
 .shoppingcart ul.title .text1 {
     width: 57%;
 }
+
+#codigoCupon {
+    border-width: thin;
+    border-color: black;
+}

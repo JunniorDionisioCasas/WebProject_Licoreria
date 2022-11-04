@@ -5,6 +5,23 @@ let descuentos = JSON.parse(localStorage.getItem("data_descuentos")) || [];
 let detalle_pedido = JSON.parse(localStorage.getItem("detalle_pedido")) || {};
 let prc_regular, prc_total, prc_desc1, prc_desc2;
 
+let alerta_producto_agregado = (idProd, nombreProd, cantidad) => {
+    const toastContainer = document.getElementById('toastContainer');
+    toastContainer.insertAdjacentHTML('beforeend', `
+        <div id="liveToast_${idProd}" class="toast align-items-center text-bg-success border-0 bg-opacity-75" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Se agregó: ${nombreProd}, x${cantidad} al carrito
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    `);
+    let toastLiveExample = document.getElementById('liveToast_'+idProd);
+    let toast = new bootstrap.Toast(toastLiveExample);
+    toast.show();
+}
+
 let addProduct = (id, prd_nombre, prd_precio, prd_imagen_path, cntd) => {
     let search = carrito.find( (x) => x.id === id );
     let cantidad_prod;
@@ -21,11 +38,12 @@ let addProduct = (id, prd_nombre, prd_precio, prd_imagen_path, cntd) => {
         search.cntd += parseInt(cntd);
         cantidad_prod = search.cntd;
     }
-    console.log(carrito);
 
     localStorage.setItem("data_carrito", JSON.stringify(carrito));
 
     calculation();
+
+    alerta_producto_agregado(id, prd_nombre, cntd);
 };
 
 let increment = (id) => {

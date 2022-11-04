@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id('id_marca');
             $table->string('mrc_nombre', 20);
             $table->text('mrc_descripcion')->nullable();
+            $table->string('mrc_image_path')->nullable();
             $table->timestamps();
         });
     }

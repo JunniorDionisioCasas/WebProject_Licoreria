@@ -262,6 +262,7 @@
             prc_total = (prc_total - data.dsc_cantidad).toFixed(2);
             console.log("precio con cupon: "+prc_total);
             document.getElementById('txt_prc_total').innerHTML = "S/ " + prc_total;
+            set_total_order(prc_total);
         };
 
         let consultCoupon = () => {

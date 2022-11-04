@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('prd_presentacion', 50);
             $table->text('prd_descripcion')->nullable();
             $table->string('prd_imagen_path')->nullable();
+            $table->integer('prd_contador_vistas')->default(0);
             $table->timestamps();
         });
     }

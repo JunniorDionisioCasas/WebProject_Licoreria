@@ -184,7 +184,7 @@
                                 </div>
                             </div>
                         </div>
-                        <span class="icon-search"></span>
+                        <!-- <span class="icon-search"></span>
                         <div class="top-search">
                             <div id="sns_serachbox_pro11739847651442478087" class="sns-serachbox-pro">
                                 <div class="sns-searbox-content">
@@ -197,7 +197,7 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

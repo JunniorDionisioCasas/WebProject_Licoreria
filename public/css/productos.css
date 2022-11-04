@@ -31,24 +31,24 @@
 /**
 * Estilos para el filtro por precio
 **/
-.price-input{
+.price-input {
     width: 100%;
     display: flex;
     margin: 0 0 15px;
 }
-.price-input .field{
+.price-input .field {
     display: flex;
     width: 100%;
     height: 45px;
     align-items: center;
 }
-.field input{
+.field input {
     width: 90%;
     height: 60%;
     outline: none;
     font-size: 12px;
     text-align: center;
-    border: 1px solid #eaeaea;
+    border: 1px solid #000000;
     color: #666;
     -moz-appearance: textfield;
 }

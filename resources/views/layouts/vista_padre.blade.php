@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>Pagina de inicio</title>
+        <title>Bazar Licorería San Sebastián | @yield('title')</title>
         <link href='https://fonts.googleapis.com/css?family=Poppins:300,700' rel='stylesheet' type='text/css'>
         <!-- Style Sheet-->
 

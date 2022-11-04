@@ -6,7 +6,7 @@
 
 $(document).ready(function(e) {
     // Slideshow
-    $("#slishow_wrap12").owlCarousel({
+    /* $("#slishow_wrap12").owlCarousel({
         responsive:{
             0:{
                 items:1
@@ -18,7 +18,7 @@ $(document).ready(function(e) {
         paginationSpeed: 400,
         singleItem: true,
         loop: true
-    });
+    }); */
     // ----------AND----------------
 
     // pproducts_deals_ lefft

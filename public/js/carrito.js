@@ -97,9 +97,9 @@ let calculation = () => {
     if ( localStorage.getItem("data_carrito") !== null ) {
         document.cookie = "data_carrito=" + localStorage.getItem("data_carrito");
         if ( JSON.parse(localStorage.getItem("data_carrito")).length === 0 ){
-            document.getElementById("btnContinuarAPago").style.display = "none";
+            document.getElementById("btnContinuarAPago").style.visibility = "hidden";
         }else{
-            document.getElementById("btnContinuarAPago").style.display = "inline-block";
+            document.getElementById("btnContinuarAPago").style.visibility = "inherit";
         }
     }
     if ( localStorage.getItem("data_descuentos") ) {

@@ -174,9 +174,11 @@
                                                 <span id="carrito_precio_total" class="price">S/ 0.00</span>
                                             </p>
                                             <div class="actions">
-                                                @if(isset($_COOKIE['data_carrito']))
-                                                <a id="btnContinuarAPago" class="button" href="/pago">Continuar</a>
+                                                <a id="btnContinuarAPago" class="button" href="/pago" 
+                                                @if(!isset($_COOKIE['data_carrito']))
+                                                style="visibility: hidden;"
                                                 @endif
+                                                >Continuar</a>
                                                 <a class="button gfont go-to-cart" href="/carrito_compras">Ver carrito</a>
                                             </div>
                                         </div>

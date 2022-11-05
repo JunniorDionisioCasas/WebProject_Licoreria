@@ -12,7 +12,7 @@
         // SDK de Mercado Pago
         require base_path().'/vendor/autoload.php';
         // Agrega credenciales
-        MercadoPago\SDK::setAccessToken('TEST-6077501917481013-102014-e38984d2c5984d03445699b72c99bc50-1221729949');
+        MercadoPago\SDK::setAccessToken('TEST-1891283957667067-110420-29e7e88c9d0819f2008bf2f0631b5ac4-1187880485');
 
         // Crea un objeto de preferencia
         $preference = new MercadoPago\Preference();
@@ -100,7 +100,7 @@
     <script src="https://checkout.culqi.com/js/v4"></script>
     <script>
         // Mercado Pago------------------------------------------------
-        const mp = new MercadoPago('TEST-8c007fa6-6e21-4330-aaca-9d9ad4a23c9e', {
+        const mp = new MercadoPago('TEST-b68ea8a8-5330-4715-8b14-8985c38d3089', {
             locale: 'es-PE'
         });
 

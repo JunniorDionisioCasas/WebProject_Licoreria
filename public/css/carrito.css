@@ -126,3 +126,21 @@ li.number button i {
     padding: 0 20px !important;
     text-align: center;
 }
+
+/* buttons */
+#btnSupPago {
+    color: #fff;
+    background: #e34444;
+}
+.btnLimpCarrito {
+    color: #fff !important;
+    background: #e34444;
+}
+.btnSeguirComprando {
+    color: #fff !important;
+    background: #e34444;
+}
+#btnInfPago {
+    color: #fff;
+    background: #e34444;
+}

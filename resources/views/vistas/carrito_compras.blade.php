@@ -39,8 +39,8 @@
                         <li class="icon2"><i class="btn-remove fa fa-xmark"></i></li>
                     </ul> -->
                     <ul class="nav-bot clearfix">
-                        <li class="continue"><a href="/productos">Seguir comprando</a></li>
-                        <li class="clear"><a href="#" onclick="confirm_vac_carrt();">Limpiar carrito</a></li>
+                        <li class="continue"><a href="/productos" class="btnSeguirComprando">Seguir comprando</a></li>
+                        <li class="clear"><a href="#" onclick="confirm_vac_carrt();" class="btnLimpCarrito">Limpiar carrito</a></li>
                         <!-- <li class="update"><a href="#">update shopping cart</a></li> -->
                     </ul>
                     <div class="row">

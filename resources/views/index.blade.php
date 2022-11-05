@@ -130,11 +130,16 @@
             status = array[3];
 
         if ( array.includes("collection_status=approved") && array.includes("status=approved") ) {
-            Swal.fire('Compra exitosa', '', 'success');
-
             registro_venta({{isset($user) ? $user->id : '``'}}, "{{$current_time}}");
 
             limp_carrito();
+
+            Swal.fire({
+                title: 'Compra exitosa',
+                icon: 'success',
+            }).then( (result) => {
+                window.location.href = "/home";
+            })
         }
 
         // Slideshow Tiny-slider

@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/licoreri/public_html/client_public/public
+    - export DEPLOYPATH=/home/licoreri/public_html/
     - /bin/rsync -a --exclude 'index.php' public/ $DEPLOYPATH

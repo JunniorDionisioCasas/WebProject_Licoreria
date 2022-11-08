@@ -18,9 +18,9 @@
         $preference = new MercadoPago\Preference();
 
         $preference->back_urls = array(
-            "success" => "http://127.0.0.1:8000/home",
-            "failure" => "http://127.0.0.1:8000/home",
-            "pending" => "http://127.0.0.1:8000/home"
+            "success" => "https://licoreriasansebastian.com/home", //url cliente
+            "failure" => "https://licoreriasansebastian.com/home",
+            "pending" => "https://licoreriasansebastian.com/home"
         );
         $preference->auto_return = "approved";
 
@@ -153,7 +153,7 @@
                     cuotealo: true,
                 },
                 style: {
-                    logo: 'http://127.0.0.1:8000/images/logo/logo-512x512.png',
+                    logo: 'https://licoreriasansebastian.com/images/logo/logo-512x512.png', //url cliente
                     bannerColor: '#000000', // hexadecimal
                     buttonBackground: '#000000', // hexadecimal
                     menuColor: '#5EC8FF', // hexadecimal

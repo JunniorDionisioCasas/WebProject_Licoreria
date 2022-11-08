@@ -172,7 +172,7 @@
             array_data.forEach(element => {
                 let nombre = element.prd_nombre;
                 let id = element.id_producto;
-                let precio = (element.prd_precio).toFixed(2);
+                let precio = parseFloat(element.prd_precio).toFixed(2);
                 let img_path = element.prd_imagen_path;
 
                 container.insertAdjacentHTML('beforeend', `
@@ -228,7 +228,7 @@
             array_data.forEach(element => {
                 let nombre = element.prd_nombre;
                 let id = element.id_producto;
-                let precio = (element.prd_precio).toFixed(2);
+                let precio = parseFloat(element.prd_precio).toFixed(2);
                 let img_path = element.prd_imagen_path;
 
                 container.insertAdjacentHTML('beforeend', `

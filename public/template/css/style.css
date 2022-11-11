@@ -11542,7 +11542,7 @@ body.eimg-translatey .products-list>li.item .col-left .item-img.have-additional:
     .sns-shopping-cart #sns_content .shoppingcart ul.nav-bot li {
         display: block;
         margin: 0;
-        float: inherit!important
+        /* float: inherit!important */ /* edited in carrito.cs */
     }
     .sns-shopping-cart #sns_content .shoppingcart .form-right h3 .text3 {
         font-size: 18px;

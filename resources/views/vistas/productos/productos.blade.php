@@ -283,7 +283,7 @@
                                             <div class="price-box">
                                                 <span class="regular-price">
                                                     <span class="price">
-                                                        <span class="price1">S/ ${prd_precio.toFixed(2)}</span>
+                                                        <span class="price1">S/ ${parseFloat(prd_precio).toFixed(2)}</span>
                                                     </span>
                                                 </span>
                                             </div>

@@ -1,4 +1,4 @@
-const urlDominio = 'https://api.licoreriasansebastian.com/';
+const urlDominio = 'http://127.0.0.1:8080/'; //'https://api.licoreriasansebastian.com/';
 const lista_carrito = document.getElementById("cart-sidebar");
 let carrito = JSON.parse(localStorage.getItem("data_carrito")) || [];
 let descuentos = JSON.parse(localStorage.getItem("data_descuentos")) || [];

@@ -71,7 +71,11 @@ li.image {
     width: 120px !important;
 }
 .form-bd.cuadro_totales {
+    padding-top: 10px !important;
     padding-bottom: 30px !important;
+    border-radius: 10px;
+    border-width: thin !important;
+    margin: auto !important;
 }
 
 .message_empty {
@@ -93,10 +97,54 @@ li.image {
     margin-left: 10px;
 }
 
-#txt_igv {
-    font-size: x-small;
+.prcDesc {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 30px;
+}
+.prcReg {
+    font-size: 16px;
+    color: #333;
+    text-transform: uppercase;
+    text-align: left;
+}
+.prcTotalRow {
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    border-top: solid;
+    border-width: thin;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+.rowPrcRegular {
+    font-size: 16px;
+}
+.rowDesc {
+    font-weight: bold;
+    font-size: 16px;
+}
+.prcDescApl {
+    color: #0dcaf0d9 !important;
+    text-align: left;
+    text-transform: uppercase;
+}
+@media (min-width: 768px) and (max-width: 992px) {
+    .dscPerctng {
+        flex: auto;
+    }
+}
+.txt_igv {
+    font-size: x-small !important;
     font-weight: 500;
     margin-right: 5px;
+}
+.textTotal {
+    color: #333 !important;
+    font-size: 18px !important;
+}
+.prcMontoTotal {
+    color: #e34444;
 }
 
 li.number a {
@@ -142,5 +190,59 @@ li.number button i {
 }
 #btnInfPago {
     color: #fff;
+    background: #e34444;
+}
+
+/* new style */
+.tableContainer {
+    border-style: solid;
+    border-color: #e34444;
+    border-radius: 10px;
+    border-width: thin;
+    margin-bottom: 10px;
+}
+.headPrd {
+    text-align: left;
+}
+.firstTableItem {
+    /* border-top-style: hidden; */
+}
+.table {
+    vertical-align: middle;
+    margin: auto;
+    text-align: center;
+}
+.imgCartProd {
+    height: 120px;
+    width: 103px;
+    padding: 10px;;
+}
+.btnDltPrd {
+    background: none;
+    opacity: 50%;
+    border-radius: 100%;
+}
+.fa.fa-xmark {
+    top: 50%;
+}
+.prdItemName {
+    text-align: left;
+}
+.fa.fa-minus, .fa.fa-plus {
+    top: 50%;
+}
+.continue {
+    float: left;
+}
+.clear {
+    float: right;
+}
+.tltResumenFinal {
+    text-align: left;
+    font-size: large !important;
+}
+
+.btnIrAComprar {
+    color: #fff !important;
     background: #e34444;
 }

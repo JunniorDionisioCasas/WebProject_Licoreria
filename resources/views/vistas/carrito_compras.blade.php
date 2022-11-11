@@ -17,32 +17,60 @@
                     <h3 id="title_carr">CARRITO DE COMPRAS</h3>
                     <h4  id="btnSupPago" class="style btnProcPagar" onclick="redirect_pago()">PROCEDER A PAGAR</h4>
                 </div>
-                <div class="content col-md-12">
-                    <ul class="title clearfix">
-                        <li class="text1"><a href="#">NOMBRE DEL PRODUCTO</a></li>
-                        <li class="text2"><a href="#">PRECIO UNT.</a></li>
-                        <li class="text2"><a href="#">CNTD.</a></li>
-                        <li class="text2"><a href="#">SUB TOTAL</a></li>
-                    </ul>
 
-                    <div id="tabla_prod_carrito">
-                        <!-- Aquí se insertan los productos del carrito mediante javascript -->
+                <div class="content col-md-12">
+                    <div class="row">
+                        <div class="tableContainer col-md-8">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col" class="headPrd">Producto</th>
+                                        <th scope="col">Precio</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla_prod_carrito">
+                                    <!-- Aquí se insertan los productos -->
+                                </tbody>
+                            </table>
+        
+                            <ul class="nav-bot clearfix">
+                                <li class="continue"><a href="/productos" class="btnSeguirComprando">Seguir comprando</a></li>
+                                <li class="clear"><a href="#" onclick="confirm_vac_carrt();" class="btnLimpCarrito">Limpiar carrito</a></li>
+                                <!-- <li class="update"><a href="#">update shopping cart</a></li> -->
+                            </ul>
+                        </div>
+
+                        <form class="form-right col-md-4">
+                            <div class="form-bd cuadro_totales">
+                                <p class="tltResumenFinal">RESUMEN FINAL</p>
+                                <div class="container-4 prcDesc">
+                                    <div class="row rowPrcRegular">
+                                        <div class="col prcReg">Precio regular:</div>
+                                        <div class="col-3" id="txt_prc_regular">S/ 0.00</div>
+                                        <div class="col-2"></div>
+                                    </div>
+
+                                    <!-- Aquí se insertan los descuentos aplicados -->
+
+                                    <div class="row prcTotalRow" id="h3_prc_total">
+                                        <div class="col">
+                                            <span class="txt_igv">(incluye impuestos)</span>
+                                            <span class="textTotal">TOTAL:</span>
+                                        </div>
+                                        <div class="col-3 prcMontoTotal" id="txt_prc_total">S/ 0.00</div>
+                                        <div class="col-2"></div>
+                                    </div>
+                                </div>
+                                <span id="btnInfPago" class="style-bd" onclick="redirect_pago()">Proceder a pagar</span>
+                                <!-- <p class="checkout">Checkout with Multiple Addresses</p> -->
+                            </div>
+                        </form>
                     </div>
 
-                    <!-- <ul class="nav-mid clearfix">
-                        <li class="image"><a href="#"><img src="images/placehoder.jpg" alt=""></a></li>
-                        <li class="item-title"><a href="#">Modular Modern</a></li>
-                        <li class="icon1"><i class="btn-edit fa fa-edit"></i></li>
-                        <li class="price1">$659.00</li>
-                        <li class="number"><a href="#">1</a></li>
-                        <li class="price2">$659.00</li>
-                        <li class="icon2"><i class="btn-remove fa fa-xmark"></i></li>
-                    </ul> -->
-                    <ul class="nav-bot clearfix">
-                        <li class="continue"><a href="/productos" class="btnSeguirComprando">Seguir comprando</a></li>
-                        <li class="clear"><a href="#" onclick="confirm_vac_carrt();" class="btnLimpCarrito">Limpiar carrito</a></li>
-                        <!-- <li class="update"><a href="#">update shopping cart</a></li> -->
-                    </ul>
                     <div class="row">
                         <form class="col-md-4" style="visibility: hidden;">
                             <div class="form-bd">
@@ -76,21 +104,6 @@
                                 <span id="btnAplicarCupon" class="style-bd">Aplicar cupón</span>
                             </div>
                         </form>
-                        <form class="form-right col-md-4">
-                            <div class="form-bd cuadro_totales">
-                                <p class="subtotal">
-                                    <span class="text1">Precio regular:</span>
-                                    <span id="txt_prc_regular" class="text2">S/ 0.00</span>
-                                </p>
-                                <h3 id="h3_prc_total">
-                                    <span id="txt_igv">(incluye impuestos)</span>
-                                    <span class="text3">TOTAL:</span>
-                                    <span id="txt_prc_total" class="text4">S/ 0.00</span>
-                                </h3>
-                                <span id="btnInfPago" class="style-bd" onclick="redirect_pago()">Proceder a pagar</span>
-                                <!-- <p class="checkout">Checkout with Multiple Addresses</p> -->
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -101,7 +114,7 @@
                     <span class="message_empty">Su carrito está vacio</span>
                 </div>
                 <ul class="nav-bot clearfix">
-                    <li class="continue"><a href="/productos">Ir a comprar</a></li>
+                    <li class="continue"><a class="btnIrAComprar" href="/productos">Ir a comprar</a></li>
                 </ul>
             </div>
             @endif
@@ -117,32 +130,42 @@
         document.getElementById("carrito_dropdown_div").style.display = "none";
 
         let lst_crrt = document.getElementById('tabla_prod_carrito');
-        let btnRmv = document.getElementsByClassName("btn-remove");
+        // let btnRmv = document.getElementsByClassName("btn-remove"); no se usa
         
         let cargar_tbl_prod = () => {
             lst_crrt.innerHTML = carrito.map( (p) => {
                 return `
-                    <ul class="nav-mid clearfix">
-                        <li class="image"><a href="/detalle-producto?${p.id}"><img class="img_sml_crrt" src="${p.img}" alt="${p.nmbr}"></a></li>
-                        <li class="item-title nombre1linea"><a href="/detalle-producto?${p.id}">${p.nmbr}</a></li>
-                        <li id="unt_prc_${p.id}" class="price1">S/ ${p.precio.toFixed(2)}</li>
-                        <li class="number">
-                            <button id="btn_decrs_${p.id}" type="button" onclick="decr_cant(event, ${p.id}, ${p.precio.toFixed(2)})">
+                    <tr>
+                        <th scope="row">
+                            <button type="button" class="btnDltPrd btn-sm" onclick="quitarProd(${p.id})">
+                                <i class="fa fa-xmark fa-1x"></i>
+                            </button>
+                        </th>
+                        <td>
+                            <a href="/detalle-producto?${p.id}">
+                                <img class="imgCartProd" src="${p.img}" alt="${p.nmbr}">
+                            </a>
+                        </td>
+                        <td class="prdItemName">
+                            <a href="/detalle-producto?${p.id}">${p.nmbr}</a>
+                        </td>
+                        <td>S/ ${p.precio.toFixed(2)}</td>
+                        <td>
+                            <button id="btn_decrs_${p.id}" class="btn" type="button" onclick="decr_cant(event, ${p.id}, ${p.precio.toFixed(2)})">
                                 <i class="fa fa-minus fa-sm"></i>
                             </button>
                             <a id="txt_cntd_${p.id}">${p.cntd}</a>
-                            <button id="btn_incrs_${p.id}" type="button" onclick="incr_cant(event, ${p.id}, ${p.precio.toFixed(2)})">
+                            <button id="btn_incrs_${p.id}" class="btn" type="button" onclick="incr_cant(event, ${p.id}, ${p.precio.toFixed(2)})">
                                 <i class="fa fa-plus fa-sm"></i>
                             </button>
-                        </li>
-                        <li id="multiplied_prc_${p.id}" class="price2">S/ ${(p.precio*p.cntd).toFixed(2)}</li>
-                        <li class="icon2"><i class="btn-remove fa fa-xmark" onclick="quitarProd(${p.id})"></i></li>
-                    </ul>
+                        </td>
+                        <td id="multiplied_prc_${p.id}">S/ ${(p.precio*p.cntd).toFixed(2)}</td>
+                    </tr>
                 `;
             }).join("");
 
-            document.getElementById('txt_prc_regular').innerHTML = "S/ " + prc_regular;
-            document.getElementById('txt_prc_total').innerHTML = "S/ " + prc_total;
+            document.getElementById('txt_prc_regular').innerHTML = "S/" + prc_regular;
+            document.getElementById('txt_prc_total').innerHTML = "S/" + prc_total;
         }
 
         if ( carrito.length !== 0 ) {
@@ -182,13 +205,16 @@
         }
 
         // disscounts
-        if( prc_desc1 ){
+        if( prc_desc1 && prc_desc1 != 0 ){
+            console.log("prc_desc1: "+prc_desc1);
             document.getElementById("h3_prc_total").insertAdjacentHTML('beforebegin', 
-            `<p class="subtotal prc-descuentos">
-                <span class="text1">Precio online:</span>
-                <span id="txt_prc_desc1" class="text2">S/ ${prc_desc1}</span>
-                <span class="badge rounded-pill text-bg-info">-${(descuentos.find( d => d.id === 1 )).cantidad}%</span>
-            </p>`);
+            `<div class="row rowDesc">
+                <div class="col prcDescApl">Precio online:</div>
+                <div class="col-3" id="txt_prc_desc1">S/${prc_desc1}</div>
+                <div class="col-2 dscPerctng">
+                    <span class="badge rounded-pill text-bg-info">-${(descuentos.find( d => d.id === 1 )).cantidad}%</span>
+                </div>
+            </div>`);
 
             document.getElementById("txt_prc_regular").style.textDecorationLine  = "line-through";
         }
@@ -204,14 +230,14 @@
         }
 
         let update_total_price = () => {
-            document.getElementById('txt_prc_regular').innerHTML = "S/ " + prc_regular;
+            document.getElementById('txt_prc_regular').innerHTML = "S/" + prc_regular;
             if( prc_desc1 ){
-                document.getElementById('txt_prc_desc1').innerHTML = "S/ " + prc_desc1;
+                document.getElementById('txt_prc_desc1').innerHTML = "S/" + prc_desc1;
             }
             if( prc_desc2 ){
-                document.getElementById('txt_prc_desc2').innerHTML = "S/ " + prc_desc2;
+                document.getElementById('txt_prc_desc2').innerHTML = "S/" + prc_desc2;
             }
-            document.getElementById('txt_prc_total').innerHTML = "S/ " + prc_total;
+            document.getElementById('txt_prc_total').innerHTML = "S/" + prc_total;
         }
 
         // increase decrease product amount
@@ -261,7 +287,7 @@
         let aplicarDescuentoCupon = (data) => {
             prc_total = (prc_total - data.dsc_cantidad).toFixed(2);
             console.log("precio con cupon: "+prc_total);
-            document.getElementById('txt_prc_total').innerHTML = "S/ " + prc_total;
+            document.getElementById('txt_prc_total').innerHTML = "S/" + prc_total;
             set_total_order(prc_total);
         };
 
@@ -281,11 +307,17 @@
                 })
                 .catch(error => console.log(error));
         }
-        document.getElementById('formApplyCoupon').addEventListener("submit", (event) => {
-            event.preventDefault();
-            consultCoupon();
-        });
-        document.getElementById('btnAplicarCupon').addEventListener("click", consultCoupon);
+        const formCoupon = document.getElementById('formApplyCoupon');
+        if(formCoupon){
+            formCoupon.addEventListener("submit", (event) => {
+                event.preventDefault();
+                consultCoupon();
+            });
+        }
+        const btnCuponElmnt = document.getElementById('btnAplicarCupon');
+        if(btnCuponElmnt){
+            btnCuponElmnt.addEventListener("click", consultCoupon);
+        }
 
     </script>
 @stop

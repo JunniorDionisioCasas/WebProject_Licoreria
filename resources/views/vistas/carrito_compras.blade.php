@@ -251,7 +251,7 @@
                         <td class="prdItemName">
                             <a href="/detalle-producto?${p.id}">${p.nmbr}</a>
                         </td>
-                        <td>S/ ${(p.precio).toFixed(2)}</td>
+                        <td>S/ ${parseFloat(p.precio).toFixed(2)}</td>
                         <td>
                             <button id="btn_decrs_${p.id}" class="btn btnIncrAmnt" type="button" onclick="decr_cant(event, ${p.id}, ${parseFloat(p.precio).toFixed(2)})" ${disabledIfOne}>
                                 <i class="fa fa-minus fa-sm"></i>

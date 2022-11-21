@@ -12,7 +12,7 @@
         // SDK de Mercado Pago
         require base_path().'/vendor/autoload.php';
         // Agrega credenciales
-        MercadoPago\SDK::setAccessToken('TEST-1891283957667067-110420-29e7e88c9d0819f2008bf2f0631b5ac4-1187880485');
+        MercadoPago\SDK::setAccessToken(config('services.api_keys.mp_public_key'));
 
         // Crea un objeto de preferencia
         $preference = new MercadoPago\Preference();
@@ -77,6 +77,14 @@
                                 </div>
                                 <p class="mb-1">Acepta Tarjetas, Billeteras móviles(Yape, Plin, etc), PagoEfectivo y Cuotealo</p>
                             </a>
+                            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">YAPE</h5>
+                                    <button id="btnShowYapeQR" data-bs-toggle="modal" data-bs-target="#yapeQRModal">Mostrar</button>
+                                </div>
+                                <p class="mb-1">Código QR de Yape</p>
+                                <small>*Requiere verificación de pago por un administrador.</small>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -85,6 +93,26 @@
             </div>
         </div>
     </div>
+
+    <!-- Yape QR Modal -->
+    <div class="modal fade" id="yapeQRModal" tabindex="-1" aria-labelledby="yapeQRModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header modal-header-centered">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Yape - Código QR</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="yapeQRImage" src="" alt="yapeQR">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button id="btnYaPague" type="button" class="btn btn-primary" onclick="paid()">Ya pagué</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @php
         use Illuminate\Support\Facades\Auth;
         $user = Auth::user();
@@ -100,7 +128,7 @@
     <script src="https://checkout.culqi.com/js/v4"></script>
     <script>
         // Mercado Pago------------------------------------------------
-        const mp = new MercadoPago('TEST-b68ea8a8-5330-4715-8b14-8985c38d3089', {
+        const mp = new MercadoPago("{{config('services.api_keys.mp_secret_key')}}", {
             locale: 'es-PE'
         });
 
@@ -115,9 +143,9 @@
         });
 
         // Culqi------------------------------------------------
-        Culqi.publicKey = 'pk_test_mMuDt93W693kopfG';//'pk_test_4e2acd3f3f0f8ab2';
+        Culqi.publicKey = "{{config('services.api_keys.cq_public_key')}}";
         let order_id;
-        let prc_pagar = (Math.round(prc_total * 10))*10;
+        let prc_pagar = (Math.round(detalle_pedido.pdd_total * 10))*10;
         console.log("prc_pagar: "+prc_pagar);
         let generate_order_number = "{{Auth::user()->id}}" + "-" +Math.floor(Math.random() * 10) + "-" + Math.floor(Math.random() * 100);
         let create_order_data = {
@@ -172,7 +200,7 @@
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer sk_test_m769JguJzbnw0WTA", //llave privada culqi, test: sk_test_355c52048ca73d96
+                "Authorization": "Bearer {{config('services.api_keys.cq_secret_key')}}",
             },
             body: JSON.stringify(create_order_data),
         })
@@ -212,7 +240,7 @@
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": "Bearer sk_test_m769JguJzbnw0WTA", //llave privada culqi
+                        "Authorization": "Bearer {{config('services.api_keys.cq_secret_key')}}",
                     },
                     body: JSON.stringify(dataCargo),
                 })
@@ -249,7 +277,20 @@
         };
         
         document.getElementById("carrito_dropdown_div").style.pointerEvents = "none";
-        document.getElementById("psrl_total_pagar").innerHTML = "Total: S/ " + prc_total;
+        document.getElementById("psrl_total_pagar").innerHTML = "Total: S/ " + detalle_pedido.pdd_total;
+
+        function paid() {
+            Swal.fire(
+                'En proceso',
+                'Su pago será verificado por un administrador y se procederá al envío.',
+                'info'
+            ).then( (result) => {
+                window.location.href = "/home";
+            });
+
+            //register on db with status 'require verification'
+            //empty shopping cart
+        }
     </script>
 
 @stop

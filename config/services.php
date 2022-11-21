@@ -31,4 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'api_keys' => [
+        'mp_public_key' => env('MERCADOPAGO_PUBLIC_API_KEY'),
+        'mp_secret_key' => env('MERCADOPAGO_SECRET_API_KEY'),
+        'cq_public_key' => env('CULQI_PUBLIC_API_KEY'),
+        'cq_secret_key' => env('CULQI_SECRET_API_KEY'),
+        'gl_api_key' => env('GOOGLE_API_KEY'),
+    ],
 ];

@@ -31,7 +31,7 @@ Route::get('/detalle-producto', function () {
 
 Route::get('/carrito_compras', function () {
     return view('vistas/carrito_compras');
-});
+})->middleware('auth');
 
 Route::get('/pago', function () {
     return view('vistas/pasarela_pago');

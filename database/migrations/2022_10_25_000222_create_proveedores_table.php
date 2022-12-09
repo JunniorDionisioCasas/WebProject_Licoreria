@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('proveedores', function (Blueprint $table) {
             $table->id('id_proveedor');
             $table->string('prv_nombre', 100);
-            $table->boolean('prv_estado');
+            $table->text('prv_anotaciones')->nullable();
+            $table->boolean('prv_estado')->default(true);
         });
     }
 

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->dateTime('pdd_fecha_entrega')->nullable();
             $table->dateTime('pdd_fecha_recepcion')->nullable();
             $table->text('pdd_descripcion')->nullable();
+            $table->tinyInteger('pdd_estado')->default(0)->comment('0=no pagado, 1=pagado, 2=enviado, 3=recibido')	;
             $table->timestamps();
         });
     }

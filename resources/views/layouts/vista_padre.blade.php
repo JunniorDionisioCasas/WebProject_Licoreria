@@ -54,6 +54,19 @@
 
         <!-- custom js's -->
         <script src="js/carrito.js"></script>
+        <script>
+            window.watsonAssistantChatOptions = {
+                integrationID: "e58b6148-ecac-4fc6-83a4-1a1a8ed90a44", // The ID of this integration.
+                region: "us-south", // The region your integration is hosted in.
+                serviceInstanceID: "537f3d21-6131-4912-bb28-ec00c90baf38", // The ID of your service instance.
+                onLoad: function(instance) { instance.render(); }
+            };
+            setTimeout(function(){
+                const t=document.createElement('script');
+                t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+                document.head.appendChild(t);
+            });
+        </script>
 
         @yield('js')
 

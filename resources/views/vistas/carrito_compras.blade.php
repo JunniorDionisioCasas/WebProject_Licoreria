@@ -548,7 +548,7 @@
                 prc_desc3 = parseFloat(prc_desc3.toFixed(2));
                 prc_total = prc_desc3;
                 console.log("prc_total despues:"+prc_total);
-                cnt_dsc_ttl += data.dsc_cantidad;
+                cnt_dsc_ttl += parseFloat(data.dsc_cantidad);
                 
                 displayCouponDisccount(data.dsc_codigo, prc_desc3, data.dsc_cantidad);
             };

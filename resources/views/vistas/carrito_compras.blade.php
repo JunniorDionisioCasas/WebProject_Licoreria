@@ -304,19 +304,19 @@
 
         let calculo_precios_descuentos = () => {
             descuentos.forEach(d => {
-                if(d.id === 1) {
+                if(d.id == 1) {
                     prc_desc1 = prc_total * (1-(d.cantidad/100));
                     prc_desc1 = parseFloat(prc_desc1.toFixed(2));
                     prc_total = prc_desc1;
 
-                    cnt_dsc_ttl += d.cantidad;
+                    cnt_dsc_ttl += parseFloat(d.cantidad);
                 }
-                if(d.id === 2) {
+                if(d.id == 2) {
                     prc_desc2 = prc_total * (1-(d.cantidad/100));
                     prc_desc2 = parseFloat(prc_desc2.toFixed(2));
                     prc_total = prc_desc2;
 
-                    cnt_dsc_ttl += d.cantidad;
+                    cnt_dsc_ttl += parseFloat(d.cantidad);
                 }
             });
 

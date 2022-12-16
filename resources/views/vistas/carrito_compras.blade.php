@@ -137,19 +137,20 @@
             const inputText = document.createElement("input");
 
             inputText.type = "text";
-            inputText.placeholder = "Busque su dirección de envio";
+            inputText.placeholder = "Busque una dirección";
+            inputText.classList.add("inputTextMapSearch");
 
             const submitButton = document.createElement("input");
 
             submitButton.type = "button";
             submitButton.value = "Ubicar";
-            submitButton.classList.add("button", "button-primary");
+            submitButton.classList.add("button", "button-primary", "btnMapUbicar");
 
             const clearButton = document.createElement("input");
 
             clearButton.type = "button";
             clearButton.value = "Limpiar";
-            clearButton.classList.add("button", "button-secondary");
+            clearButton.classList.add("button", "button-secondary", "btnMapLimpiar");
 
             response = document.createElement("pre");
             response.id = "response";
@@ -158,6 +159,7 @@
             responseDiv = document.createElement("div");
             responseDiv.id = "response-container";
             responseDiv.appendChild(response);
+            responseDiv.style.display = "none";
 
             map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputText);
             map.controls[google.maps.ControlPosition.TOP_LEFT].push(submitButton);
@@ -196,7 +198,7 @@
                     map.setCenter(results[0].geometry.location);
                     marker.setPosition(results[0].geometry.location);
                     marker.setMap(map);
-                    responseDiv.style.display = "block";
+                    // responseDiv.style.display = "block"; //hidden
                     response.innerText = JSON.stringify(result, null, 2);
 
                     //ingresa el resultado al input ubicacion

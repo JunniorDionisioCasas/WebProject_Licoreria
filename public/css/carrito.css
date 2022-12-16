@@ -288,6 +288,15 @@ ul.btnsUnderTable {
     margin-top: 10px !important;
     padding: 20px !important;
 }
+.inputTextMapSearch {
+    width: auto !important;
+}
+.btnMapUbicar {
+    width: auto !important;
+}
+.btnMapLimpiar {
+    width: auto !important;
+}
 .btnGuardarUbc {
     color: #fff !important;
     background: #e34444;

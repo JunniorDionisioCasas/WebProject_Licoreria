@@ -251,7 +251,7 @@
                         console.log(response);
                         // pago exitoso
                         
-                        registro_venta({{isset($user) ? $user->id : '``'}}, "{{$current_time}}");
+                        registro_venta({{isset($user) ? $user->id : '``'}}, "{{$current_time}}", 3); //estado 3=pagado y entregado
 
                         limp_carrito();
                         

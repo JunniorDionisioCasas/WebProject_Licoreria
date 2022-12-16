@@ -146,7 +146,7 @@ let limp_carrito = () => {
     document.cookie = "total_descuento=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 };
 
-let registro_venta = (idUser, currentTime) => {
+let registro_venta = (idUser, currentTime, codigoEstado) => {
     let pedido = JSON.parse(localStorage.getItem("data_carrito"));
     console.log("pedido");
     console.log(pedido);
@@ -163,6 +163,7 @@ let registro_venta = (idUser, currentTime) => {
         total: detalle_pedido.pdd_total,
         pdd_fecha_entrega: currentTime,
         pdd_descripcion: detalle_pedido.pdd_descripcion,
+        pdd_estado: codigoEstado,
         productos: carrito,
         descuentos: descuentos
     };

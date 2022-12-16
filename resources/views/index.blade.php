@@ -130,7 +130,7 @@
             status = array[3];
 
         if ( array.includes("collection_status=approved") && array.includes("status=approved") ) {
-            registro_venta({{isset($user) ? $user->id : '``'}}, "{{$current_time}}");
+            registro_venta({{isset($user) ? $user->id : '``'}}, "{{$current_time}}", 3); //estado 3=pagado y entregado
 
             limp_carrito();
 

@@ -113,7 +113,7 @@
 @stop
 
 @section('js')
-    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key={{config('services.api_keys.gl_api_key')}}&callback=initMap"></script> -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{config('services.api_keys.gl_api_key')}}&callback=initMap"></script>
     <script>
         // API Google Maps
         let map;
@@ -137,7 +137,7 @@
             const inputText = document.createElement("input");
 
             inputText.type = "text";
-            inputText.placeholder = "Ingrese su dirección de envio";
+            inputText.placeholder = "Busque su dirección de envio";
 
             const submitButton = document.createElement("input");
 
@@ -201,6 +201,10 @@
 
                     //ingresa el resultado al input ubicacion
                     nombreUbi.value = results[0].formatted_address;
+                    /* results[0].address_components[1].short_name + ' ' +
+                                    results[0].address_components[0].short_name + ', ' +
+                                    results[0].address_components[2].short_name + ', ' +
+                                    results[0].address_components[3].short_name; */
                     coordUbi.value = results[0].place_id;
 
                     return results;
@@ -210,7 +214,7 @@
                 });
         }
 
-        /* window.initMap = initMap; */
+        window.initMap = initMap;
         // End API Google Maps -------------------------------------------------------
 
         document.getElementById('bd').classList.add('sns-shopping-cart');
@@ -608,6 +612,22 @@
         if(btnCuponElmnt){
             btnCuponElmnt.addEventListener("click", consultCoupon);
         }
+
+        $(document).on('click', '.btnGuardarUbc', function (){
+            detalle_pedido.pdd_direccion = nombreUbi.value;
+            detalle_pedido.place_id = coordUbi.value;
+            localStorage.setItem("detalle_pedido", JSON.stringify(detalle_pedido));
+            if( detalle_pedido.pdd_direccion ) {
+                Swal.fire(
+                    'Dirección de delivery actualizada',
+                    'Se actualizó la dirección de delivery a: '+location_text,
+                    'success'
+                );
+            } else {
+                console.log('else executed');
+            }
+
+        });
 
     </script>
 @stop

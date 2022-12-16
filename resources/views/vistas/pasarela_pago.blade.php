@@ -102,8 +102,8 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Yape - Código QR</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <img id="yapeQRImage" src="" alt="yapeQR">
+                <div id="divYapeQr" class="modal-body">
+                    <img id="yapeQRImage" src="/images/staticas/qr_code_example.PNG" alt="yapeQR">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

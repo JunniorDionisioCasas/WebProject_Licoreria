@@ -18,9 +18,9 @@
         $preference = new MercadoPago\Preference();
 
         $preference->back_urls = array(
-            "success" => "https://licoreriasansebastian.com/home", //url cliente
-            "failure" => "https://licoreriasansebastian.com/home",
-            "pending" => "https://licoreriasansebastian.com/home"
+            "success" => "http://127.0.0.1:8000/home", //"https://licoreriasansebastian.com/home"
+            "failure" => "http://127.0.0.1:8000/home",
+            "pending" => "http://127.0.0.1:8000/home"
         );
         $preference->auto_return = "approved";
 
@@ -251,7 +251,7 @@
                         console.log(response);
                         // pago exitoso
                         
-                        registro_venta({{isset($user) ? $user->id : '``'}}, "{{$current_time}}", 3); //estado 3=pagado y entregado
+                        registro_venta({{isset($user) ? $user->id : '``'}}, "{{$current_time}}", 3, Culqi.token.email); //estado 3=pagado y entregado
 
                         limp_carrito();
                         
@@ -289,7 +289,9 @@
             });
 
             //register on db with status 'require verification'
+            registro_venta({{isset($user) ? $user->id : '``'}}, "{{$current_time}}", 0, ); //estado 0=dalta confirmar pago
             //empty shopping cart
+            limp_carrito();
         }
     </script>
 

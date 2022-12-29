@@ -127,10 +127,28 @@
         let queryString = location.search.substring(1);
         let array = queryString.split("&");
         const collection_status = array[1],
-            status = array[3];
+            status = array[3],
+            payment_id = array[2];
+        let userMail = "{{isset($user) ? $user->email : ''}}";
+        let a = "Bearer {{config('services.api_keys.mp_secret_key')}}";
 
         if ( array.includes("collection_status=approved") && array.includes("status=approved") ) {
-            registro_venta({{isset($user) ? $user->id : '``'}}, "{{$current_time}}", 3); //estado 3=pagado y entregado
+            //api consultar pago, get
+            fetch('https://api.mercadopago.com/v1/payments/'+payment_id.split("=")[1], {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer {{config('services.api_keys.mp_public_key')}}",
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    userMail = data.payer.email;
+                })
+                .catch(error => console.log(error));
+
+            registro_venta({{isset($user) ? $user->id : '``'}}, "{{$current_time}}", 3, userMail); //estado 3=pagado y entregado
 
             limp_carrito();
 

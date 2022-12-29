@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('usr_apellidos', 50)->nullable();
             $table->foreignId('id_direccion')->index()->nullable();
             $table->date('usr_fecha_nacimiento')->nullable();
+            $table->string('usr_num_documento', 8)->nullable();
             $table->timestamps();
         });
     }

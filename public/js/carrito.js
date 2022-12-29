@@ -1,4 +1,4 @@
-const urlDominio = 'https://api.licoreriasansebastian.com/'; //'http://127.0.0.1:8080/';
+const urlDominio = 'http://127.0.0.1:8080/'; //'https://api.licoreriasansebastian.com/';
 const lista_carrito = document.getElementById("cart-sidebar");
 let carrito = JSON.parse(localStorage.getItem("data_carrito")) || [];
 let descuentos = JSON.parse(localStorage.getItem("data_descuentos")) || [];
@@ -146,7 +146,7 @@ let limp_carrito = () => {
     document.cookie = "total_descuento=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 };
 
-let registro_venta = (idUser, currentTime, codigoEstado) => {
+let registro_venta = (idUser, currentTime, codigoEstado, userMail) => {
     let pedido = JSON.parse(localStorage.getItem("data_carrito"));
     console.log("pedido");
     console.log(pedido);
@@ -165,7 +165,8 @@ let registro_venta = (idUser, currentTime, codigoEstado) => {
         pdd_descripcion: detalle_pedido.pdd_descripcion,
         pdd_estado: codigoEstado,
         productos: carrito,
-        descuentos: descuentos
+        descuentos: descuentos,
+        userMail: userMail
     };
     
     //api pedido, store

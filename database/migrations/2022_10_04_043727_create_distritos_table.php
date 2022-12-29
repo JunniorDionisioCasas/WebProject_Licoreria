@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id('id_distrito');
             $table->foreignId('id_provincia')->index();
             $table->string('dst_nombre', 30);
+            $table->string('dst_ubigueo', 6);
+            $table->double('dst_precio_delivery', 4, 2);
             $table->timestamps();
         });
     }

@@ -13,6 +13,10 @@
                 <x-jet-label for="name" value="{{ __('Name') }}" />
                 <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             </div>
+            <div>
+                <x-jet-label for="last_name" value="{{ __('Last Name') }}" />
+                <x-jet-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autofocus autocomplete="last_name" />
+            </div>
 
             <div class="mt-4">
                 <x-jet-label for="email" value="{{ __('Email') }}" />
@@ -28,6 +32,21 @@
                 <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                 <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
+
+            <div>
+                <x-jet-label for="numero_documento" value="{{ __('Número de documento') }}" />
+                <x-jet-input id="numero_documento" class="block mt-1 w-full" type="text" name="numero_documento" :value="old('numero_documento')" required autofocus pattern="[0-9]{8,11}" />
+            </div>
+
+            <div>
+                <x-jet-label for="fecha_nacimiento" value="{{ __('Fecha de Nacimiento') }}" />
+                <x-jet-input id="fecha_nacimiento" class="block mt-1 w-full" type="date" name="fecha_nacimiento" :value="old('fecha_nacimiento')" required autofocus max="{{Carbon\Carbon::now('-05:00')->subYears(18)->format('Y-m-d')}}" placeholder="Mes/Día/Año"/>
+            </div>
+
+            <!-- <div>
+                <x-jet-label for="direccion" value="{{ __('Dirección (opcional)') }}" />
+                <x-jet-input id="direccion" class="block mt-1 w-full" type="text" name="direccion" :value="old('direccion')" autofocus />
+            </div> -->
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">

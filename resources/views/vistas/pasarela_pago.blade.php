@@ -277,7 +277,7 @@
         };
         
         document.getElementById("carrito_dropdown_div").style.pointerEvents = "none";
-        document.getElementById("psrl_total_pagar").innerHTML = "Total: S/ " + detalle_pedido.pdd_total;
+        document.getElementById("psrl_total_pagar").innerHTML = "Total: S/ " + (detalle_pedido.pdd_total ?? prc_total);
 
         function paid() {
             Swal.fire(

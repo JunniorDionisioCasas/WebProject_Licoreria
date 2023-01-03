@@ -25,7 +25,7 @@
         $preference->auto_return = "approved";
 
         $ck_data_crrt = json_decode( $_COOKIE['data_carrito'] );
-        $ck_total_dsc = $_COOKIE['total_descuento'];
+        $ck_total_dsc = $_COOKIE['total_descuento'] ?? 0;
 
         // Crea un ítem en la preferencia
         $productos = [];

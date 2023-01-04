@@ -32,11 +32,11 @@
                         <h6>Atención al cliente</h6>
                         <ul>
                             <li>
-                                <a href="#">Horarios de atención</a>
+                                <span href="#">Horarios de atención en tienda presencial: 8:00am - 8:00pm</span>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="#">Preguntas frecuentes</a>
-                            </li>
+                            </li> -->
                             <!-- <li>
                                 <a href="#">Cambios y devoluciones</a>
                             </li> -->
@@ -46,7 +46,7 @@
                         <h6>Cuenta</h6>
                         <ul>
                             <li>
-                                <a href="/user/profile">Mi cuenta</a>
+                                <a href="/user/profile">Mi perfil</a>
                             </li>
                             <!-- <li>
                                 <a href="#">Historial de compras</a>
@@ -60,14 +60,14 @@
                         <h6>Políticas y condiciones</h6>
                         <ul>
                             <li>
-                                <a href="#">Políticas de datos personales</a>
+                                <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Políticas de datos personales</a>
                             </li>
                             <li>
-                                <a href="#">Términos y condiciones</a>
+                                <a href="/terms-of-service" target="_blank" rel="noopener noreferrer">Términos y condiciones</a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="#">Condiciones de promociones</a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                     <div class="col-phone-12 col-xs-6 col-sm-3 col-md-3 column column4" style="visibility: hidden;">

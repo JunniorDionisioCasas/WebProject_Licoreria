@@ -1,6 +1,6 @@
 
 body {
-    background-image: url('/images/backgrounds/background_liquor_croped.png');
+    background-image: url('/images/backgrounds/background_liquor_croped.jpg');
 }
 
 div.container-fluid {
@@ -62,11 +62,8 @@ span.confirmation_text2 {
 
 button {
     width: 125px !important;
-    background-color: white;
-    border: none;
     margin: auto !important;
-    border-radius: 3px !important;
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 .row.middle_element {

@@ -7151,7 +7151,7 @@ span:hover {
     height: 0;
     left: 0;
     bottom: 0;
-    background: #e34444;
+    /* background: #e34444; */
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
     z-index: 2
@@ -7173,7 +7173,7 @@ span:hover {
 }
 .policy .policy_custom:hover .policy-ct,
 .policy .policy_custom:hover .policy-titile {
-    color: #000
+    /* color: #000 */
 }
 .policy .policy_custom:hover .policy-icon:before {
     height: 100%;
@@ -7181,7 +7181,7 @@ span:hover {
     transition: all .3s ease
 }
 .policy .policy_custom:hover .policy-icon em {
-    color: #fff
+    /* color: #fff */
 }
 #sns_menu {
     min-height: 50px;

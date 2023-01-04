@@ -62,10 +62,10 @@
                             <div class="col-md-4 col-sm-4 col-phone-12">
                                 <div class="policy_custom">
                                     <div class="policy-icon">
-                                        <em class="fa fa-truck"> </em>
+                                        <em class="fa fa-percent"> </em>
                                     </div>
-                                    <p class="policy-titile">Delivery express</p>
-                                    <p class="policy-ct">En pedidos mayores a S/ 50</p>
+                                    <p class="policy-titile">Precios especiales en línea</p>
+                                    <p class="policy-ct">En todos tus pedidos</p>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-phone-12">
@@ -82,7 +82,7 @@
                                     <div class="policy-icon">
                                         <em class="fa fa-gift"> </em>
                                     </div>
-                                    <p class="policy-titile">2x1 en tu primera compra</p>
+                                    <p class="policy-titile">Descuento por tu primera compra</p>
                                     <p class="policy-ct">Para clientes nuevos</p>
                                 </div>
                             </div>
@@ -174,11 +174,11 @@
                                                 <span id="carrito_precio_total" class="price">S/ 0.00</span>
                                             </p>
                                             <div class="actions">
-                                                <a id="btnContinuarAPago" class="button" href="/pago" 
-                                                @if(!isset($_COOKIE['data_carrito']))
+                                                <a id="btnContinuarAPago" class="button" href="/pago" style="display: none;">Continuar</a>
+                                                <!-- @ if(!isset($_COOKIE['data_carrito']))
                                                 style="visibility: hidden;"
-                                                @endif
-                                                >Continuar</a>
+                                                @ endif
+                                                >Continuar</a> -->
                                                 <a class="button gfont go-to-cart" href="/carrito_compras">Ver carrito</a>
                                             </div>
                                         </div>

@@ -23,8 +23,8 @@
                     <span class="confirmation_text1">BIENVENIDO</span>
                     <span class="confirmation_text2">PARA CONTINUAR DEBES SER MAYOR DE 18 AÑOS</span>
                     <div class="row row-cols-2">
-                        <button id="btn_denegar" onclick="goBack()">SOY MENOR DE 18 AÑOS</button>
-                        <button id="btn_confirmar" onclick="proceed()">SOY MAYOR DE 18 AÑOS</button>
+                        <button id="btn_denegar" class="btn btn-danger" onclick="goBack()">SOY MENOR DE 18 AÑOS</button>
+                        <button id="btn_confirmar" class="btn btn-danger" onclick="proceed()">SOY MAYOR DE 18 AÑOS</button>
                     </div>
                 </div>
             </div>

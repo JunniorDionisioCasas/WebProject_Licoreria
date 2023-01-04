@@ -33,7 +33,6 @@ class CreateNewUser implements CreatesNewUsers
                         ->mixedCase()
                         ->numbers()
                         ->symbols()
-                        ->uncompromised()
             ],//$this->passwordRules(),
             'numero_documento' => ['required',  'between:8,11'],
             'fecha_nacimiento' => ['required', 'before_or_equal:'.$maxDate],

@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -56,6 +58,37 @@ class User extends Authenticatable
      * @var array
      */
     protected $appends = [
-        // 'profile_photo_url',
+        'profile_photo_url',
     ];
+
+    /**
+     * Overwrite HasProfilePhoto method to update the user's profile photo saving complete path to photo in database.
+     *
+     * @param  \Illuminate\Http\UploadedFile  $photo
+     * @return void
+     */
+    public function updateProfilePhoto(UploadedFile $photo)
+    {
+        tap($this->profile_photo_path, function ($previous) use ($photo) {
+            $this->forceFill([
+                'profile_photo_path' => env('APP_URL').'storage/'.$photo->storePublicly(
+                    'profile-photos', ['disk' => $this->profilePhotoDisk()]
+                ),
+            ])->save();
+
+            if ($previous) {
+                Storage::disk($this->profilePhotoDisk())->delete($previous);
+            }
+        });
+    }
+
+    /**
+     * Overwrite HasProfilePhoto method to get the URL to the user's profile photo from database.
+     *
+     * @return string
+     */
+    public function getProfilePhotoUrlAttribute()
+    {
+        return $this->profile_photo_path;
+    }
 }

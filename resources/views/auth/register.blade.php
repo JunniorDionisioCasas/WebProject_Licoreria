@@ -42,7 +42,7 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="fecha_nacimiento" value="{{ __('Fecha de Nacimiento') }}" />
+                <x-jet-label for="fecha_nacimiento" value="{{ __('Date Birth') }}" />
                 <x-jet-input id="fecha_nacimiento" class="block mt-1 w-full" type="date" name="fecha_nacimiento" :value="old('fecha_nacimiento')" required autofocus max="{{Carbon\Carbon::now('-05:00')->subYears(18)->format('Y-m-d')}}" placeholder="Mes/Día/Año"/>
             </div>
 

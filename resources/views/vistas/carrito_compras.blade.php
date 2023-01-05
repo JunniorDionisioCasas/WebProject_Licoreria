@@ -622,7 +622,7 @@
             if( detalle_pedido.pdd_direccion ) {
                 Swal.fire(
                     'Dirección de delivery actualizada',
-                    'Se actualizó la dirección de delivery a: '+location_text,
+                    'Se actualizó la dirección de delivery a: '+nombreUbi.value,
                     'success'
                 );
             } else {

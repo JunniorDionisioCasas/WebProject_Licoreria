@@ -289,7 +289,10 @@
             });
 
             //register on db with status 'require verification'
-            registro_venta({{isset($user) ? $user->id : '``'}}, "{{$current_time}}", 0, ); //estado 0=dalta confirmar pago
+            registro_venta({{isset($user) ? $user->id : '``'}},
+                            "{{$current_time}}",
+                            0,
+                            "{{isset($user) ? $user->email : '``'}}"); //estado 0=dalta confirmar pago
             //empty shopping cart
             limp_carrito();
         }

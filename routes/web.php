@@ -45,4 +45,8 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('index');
     })->name('dashboard');
+
+    Route::get('/historial_compras', function () {
+        return view('vistas/user/shopping_history');
+    })->name('mis_compras');
 });

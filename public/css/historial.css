@@ -1,0 +1,57 @@
+#wrapper {
+    margin: 20px auto;
+    width: fit-content;
+}
+
+.gridjs-table {
+    margin: auto;
+}
+
+.badge {
+    font-size: 12px;
+}
+
+.badgeInfo {
+    background-color: #17a2b8;
+}
+
+.badgeSuccess {
+    background-color: #28a745;
+}
+
+.badgePrimary {
+    background-color: #007bff;
+}
+
+.badgeSecondary {
+    background-color: #6c757d;
+}
+
+.btnStyle {
+    background-color: transparent;
+    padding: 5px;
+    width: 50px;
+    margin: 0px 5px;
+}
+
+.btnVer {
+    border-color: cornflowerblue;
+}
+
+.btnRecibido {
+    border-color: #e34444;
+}
+
+.fas.fa-eye {
+    vertical-align: 20%;
+    margin: -15px 0px;
+    padding: inherit;
+    color: cornflowerblue;
+}
+
+.fas.fa-clipboard-check {
+    vertical-align: 20%;
+    margin: -15px 0px;
+    padding: inherit;
+    color: #e34444;
+}

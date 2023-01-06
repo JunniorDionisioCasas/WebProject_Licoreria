@@ -141,7 +141,13 @@
                                     </div>
                                 </div> -->
                             </li>
-
+                            @auth
+                            <li class="level0 nav-1 no-group first drop-submenu parent">
+                                <a class="menu-title-lv0" href="/historial_compras">
+                                    <span class="title">Mis compras</span>
+                                </a>
+                            </li>
+                            @endauth
                         </ul>
                     </div>
                 </div>
@@ -235,9 +241,3 @@
     </div>
 </div>
 <!-- AND BREADCRUMBS -->
-
-@php
-                    use Illuminate\Support\Facades\Auth;
-                    $user = Auth::check();
-                    echo $user;
-                @endphp

@@ -136,3 +136,17 @@ input[type="range"]::-moz-range-thumb{
 #sns_content .block.block-layered-nav dl#narrow-by-list dd ol li .filter_selected_text {
     color: #e34444 !important;
 }
+
+/* title style */
+a.menu-title-lv0.pd-menu116 span.title {
+    color: #333;
+}
+a.menu-title-lv0.pd-menu116 {
+    text-decoration-line: unset;
+}
+li.nav-1 a.menu-title-lv0 {
+    color: #e34444 !important;
+}
+li.nav-1 a.menu-title-lv0 span.title {
+    color: #e34444;
+}

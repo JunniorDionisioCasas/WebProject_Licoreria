@@ -48,9 +48,11 @@
                             <li>
                                 <a href="/user/profile">Mi perfil</a>
                             </li>
-                            <!-- <li>
-                                <a href="#">Historial de compras</a>
-                            </li> -->
+                            @auth
+                            <li>
+                                <a href="/historial_compras">Mis compras</a>
+                            </li>
+                            @endauth
                             <li>
                                 <a href="/carrito_compras">Mi carrito</a>
                             </li>

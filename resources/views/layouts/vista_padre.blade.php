@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="template/js/owl-carousel/owl.theme.css">
         <link rel="shortcut icon" href="images/favicon.ico">
         <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="/css/footer.css">
 
         @yield('css')
 

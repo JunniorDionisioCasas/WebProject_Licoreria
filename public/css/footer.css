@@ -1,0 +1,13 @@
+/**
+* Modificando los estilos del footer
+**/
+
+.imgApp {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.centerDiv {
+    text-align: center;
+}

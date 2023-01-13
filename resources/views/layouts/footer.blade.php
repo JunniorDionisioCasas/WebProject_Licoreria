@@ -42,8 +42,8 @@
                             </li> -->
                         </ul>
                     </div>
-                    <div class="col-phone-12 col-xs-6 col-sm-3 col-md-2 column column2">
-                        <h6>Cuenta</h6>
+                    <div class="col-phone-12 col-xs-6 col-sm-3 col-md-2 column column2 cuentaColumn">
+                        <h6>Administración de cuenta</h6>
                         <ul>
                             <li>
                                 <a href="/user/profile">Mi perfil</a>
@@ -72,29 +72,18 @@
                             </li> -->
                         </ul>
                     </div>
-                    <div class="col-phone-12 col-xs-6 col-sm-3 col-md-3 column column4" style="visibility: hidden;">
+                    <div class="col-phone-12 col-xs-6 col-sm-3 col-md-3 column column4">
                         <div class="subcribe-footer">
                             <div class="block_border block-subscribe">
                                 <div class="block_head">
-                                    <h6>Boletín de noticias</h6>
-                                    <p>Suscríbete para recibir información de productos y promociones</p>
+                                    <h6>Llevanos donde estés</h6>
+                                    <p>Descarga nuestra aplicación para android</p>
                                 </div>
-                                <form id="newsletter-validate-detail">
-                                    <div class="block_content">
-                                        <div class="input-box">
-                                            <div class="input_warp">
-                                                <input id="newsletter" class="input-text required-entry validate-email" type="text" title="Suscríbete a nuestro boletín" placeholder="Ingresa tu correo" name="email">
-                                            </div>
-                                            <div class="button_warp">
-                                                <button class="button gfont" title="Subscribirse" type="submit">
-                                                    <span>
-                                                        <span>Suscribirse</span>
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                                <div class="centerDiv">
+                                    <a href="/apk/Licoreria_Bazar_San_Sebastian.apk" download>
+                                        <img src="/images/logo/logo-512x512.png" alt="Descargar app android" class="imgApp"/>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

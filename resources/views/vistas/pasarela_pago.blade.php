@@ -18,9 +18,9 @@
         $preference = new MercadoPago\Preference();
 
         $preference->back_urls = array(
-            "success" => "https://licoreriasansebastian.com/home", //"http://127.0.0.1:8000/home"
-            "failure" => "https://licoreriasansebastian.com/home",
-            "pending" => "https://licoreriasansebastian.com/home"
+            "success" => env("APP_URL")."home",
+            "failure" => env("APP_URL")."home",
+            "pending" => env("APP_URL")."home"
         );
         $preference->auto_return = "approved";
 

@@ -76,7 +76,7 @@
                     </div>
                     <div class="category-cms-block"></div>
                     <p class="category-image banner5">
-                        <img src="images/staticas/banner.png" alt="banner">
+                        <img src="images/staticas/banner.jpg" alt="banner">
                     </p>
 
                     <div class="category-products">
@@ -308,7 +308,6 @@
 
         let cargar_api = () => {
             //api productos, get
-            console.log("URL: "+url);
             fetch(url, {
                 method: 'GET'
             })

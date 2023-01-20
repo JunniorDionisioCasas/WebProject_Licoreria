@@ -3415,7 +3415,7 @@ body.homepage #sns_breadcrumbs {
     font-size: 12px
 }
 #sns_content .block.block-layered-nav dl#narrow-by-list .last.odd.color-img li img {
-    top: 9px!img;
+    top: 9px !important;
     border: 1px solid #ccc
 }
 #sns_content .block.block-layered-nav dl#narrow-by-list .last.odd.color-img li:before {
@@ -6679,8 +6679,12 @@ span:hover {
     border: 1px solid #e34444
 }
 #sns_content .sns-products-list .products-small .item .item-inner .prd .item-img .product-image .img-main img {
-    width: 100px;
-    height: 120px
+    /* width: 100px;
+    height: 120px; */
+    width: auto;
+    height: auto;
+    max-height: 120px;
+    min-width: 100px;
 }
 #sns_content .sns-products-list .products-small .item .item-inner .prd .item-info {
     float: left
@@ -8043,7 +8047,7 @@ span:hover {
     color: #fff;
     border-color: #e34444
 }
-.tabs-slidev2 .owl-controls .owl-nav>div:hover 1 {
+.tabs-slidev2 .owl-controls .owl-nav>div:hover {
     color: #fff
 }
 .tabs-slidev2 .owl-controls .owl-nav>div.owl-next {
@@ -11296,7 +11300,7 @@ body.eimg-translatey .products-list>li.item .col-left .item-img.have-additional:
     }
     #sns_content .sns_producttaps_wraps ul.nav li a {
         font-size: 18px;
-        padding: 0 22px
+        padding: 0 12px
     }
     #sns_content .sns_producttaps_wraps ul.nav li a:after,
     #sns_content .sns_producttaps_wraps ul.nav li a:before {
@@ -14067,7 +14071,8 @@ body .jqtransformdone {
     -webkit-transition: all .6s ease-in-out;
     transition: all .6s ease-in-out
 }
-.banner5:hover:before {
+/* no animation on banner view in products page */
+/* .banner5:hover:before {
     right: 50%;
     left: 50%;
     background: rgba(255, 255, 255, .2)
@@ -14086,7 +14091,7 @@ body .jqtransformdone {
     top: 50%;
     bottom: 50%;
     background: rgba(0, 0, 0, .1)
-}
+} */
 .sns-custom-tabs .custom-tab-head:after,
 .sns-custom-tabs .custom-tab-head:before {
     content: " ";

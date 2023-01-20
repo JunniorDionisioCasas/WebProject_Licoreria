@@ -43,7 +43,7 @@
                         </ul>
                     </div>
                     <div class="col-phone-12 col-xs-6 col-sm-3 col-md-2 column column2 cuentaColumn">
-                        <h6>Administración de cuenta</h6>
+                        <h6>Cuenta del usuario</h6>
                         <ul>
                             <li>
                                 <a href="/user/profile">Mi perfil</a>
@@ -77,7 +77,7 @@
                             <div class="block_border block-subscribe">
                                 <div class="block_head">
                                     <h6>Llevanos donde estés</h6>
-                                    <p>Descarga nuestra aplicación para android</p>
+                                    <p>Descarga nuestra aplicación para android:</p>
                                 </div>
                                 <div class="centerDiv">
                                     <a href="/apk/Licoreria_Bazar_San_Sebastian.apk" download>

@@ -36,7 +36,7 @@
                                                 </div>
                                             </div>
                                             <div class="availability">
-                                                <p class="style1">Disponibilidad: En stock</p>
+                                                <p id="prdStockText" class="style1">Disponibilidad: En stock</p>
                                             </div>
                                             <div class="desc std">
                                                 <h5>DESCRIPCIÓN</h5>
@@ -52,7 +52,7 @@
                                                         <i class="fa fa-minus fa-sm"></i>
                                                     </button>
                                                     <input id="qty" class="input-text qty" type="text" title="Qty" value="1" name="qty">
-                                                    <button class="qty-increase" onclick="var qty_el = document.getElementById('qty'); var qty = qty_el.value; if( !isNaN( qty )) qty_el.value++;return false;" type="button">
+                                                    <button class="qty-increase" onclick="var qty_el = document.getElementById('qty'); var qty = qty_el.value; if( !isNaN( qty ) && qty < productStock) qty_el.value++;return false;" type="button">
                                                         <i class="fa fa-plus fa-sm"></i>
                                                     </button>
                                                 </div>
@@ -87,6 +87,7 @@
         let array = queryString.split("|");
         const idProd = array[0];
         let cant = document.getElementById("qty");
+        let productStock = 0;
 
         const breadcrumb = document.getElementById('breadcrumb_1');
         breadcrumb.innerHTML = "Detalle producto";
@@ -99,24 +100,26 @@
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                data_prod = data;
+                productStock = data.prd_stock;
+                let precio = parseFloat(data.prd_precio);
+                if(data.precioConDescuento) precio = data.precioConDescuento;
+
+                $("#prdStockText").append(` (${data.prd_stock})`);
                 $("#imagen_principal").attr('src', data.prd_imagen_path);
                 $("#nombre_producto").text(data.prd_nombre);
-                $("#precio_producto").text('S/ '+data.prd_precio);
+                $("#precio_producto").text('S/ '+precio.toFixed(2));
                 if(data.prd_fecha_vencimiento){
                     $("#fecha_venc").text('Fecha de vencimiento: '+data.prd_fecha_vencimiento);
                 }else{
                     document.getElementById('div_fech_venc').style.display = "none";
                 }
                 $("#desc_producto").text(data.prd_descripcion);
+
+                document.getElementById('btnAddProd').onclick = () => {
+                    addProduct(data.id_producto, data.prd_nombre, precio, data.prd_imagen_path, parseInt(cant.value));
+                };
             })
             .catch(error => console.log(error));
-        
-        const btnAdd = document.getElementById('btnAddProd');
-        btnAdd.onclick = () => {
-            console.log(cant.value);
-            addProduct(data_prod.id_producto, data_prod.prd_nombre, data_prod.prd_precio, data_prod.prd_imagen_path, parseInt(cant.value));
-        };
 
         //api count_vistas, put
         let urlCount = urlDominio + 'api/producto_cont/' + idProd;
@@ -126,5 +129,10 @@
             .then(res => res.json())
             .then(data => { console.log(data); })
             .catch(error => console.log(error));
+        
+        /* const qty_el = document.getElementById('qty');
+        const qty = qty_el.value;
+        if( !isNaN( qty ) && qty > 1 ) qty_el.value--;
+        return false; */
     </script>
 @stop

@@ -161,7 +161,7 @@ $(document).ready(function(e) {
     // ----------AND----------------
 
     // ----------------sns_producttaps_wraps
-    $('#sns_slider1_page2 .precar').on('click', function(){
+    /* $('#sns_slider1_page2 .precar').on('click', function(){
         if($(this).hasClass('active')) {
             $(this).removeClass('active');
             $( "#sns_slider1_page2" ).removeClass( "active" );
@@ -474,6 +474,6 @@ $(document).ready(function(e) {
         slideSpeed: 300,
         paginationSpeed: 400,
         loop: true
-    });
+    }); */
     // ----------AND----------------
 });

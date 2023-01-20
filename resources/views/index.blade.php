@@ -4,29 +4,32 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 @stop
 
 @section('slideshow')
     <!-- SLIDESHOW -->
     <div class="slideshow">
-        <div id="sns_slideshows3">
-            <div id="slishow_wrap12" class="sns-slideshow my-slider">
-                <div class="item">
-                    <img class="img_slideshow" src="/images/staticas/slideshow/slideshow1.jpg" alt="">
+        <div id="sns_slideshows3" class="swiper">
+            <div id="slishow_wrap12" class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img class="img_slideshow" src="/images/slideshow/slideshow_hd_background_moments.jpg" alt="Slideshow 1 - para tus momentos">
                 </div>
-                <div class="item">
-                    <img class="img_slideshow" src="/images/staticas/slideshow/slideshow2.jpg" alt="">
+                <div class="swiper-slide">
+                    <img class="img_slideshow" src="/images/slideshow/slideshow_hd_background_variety.jpg" alt="Slideshow 2 - variedad">
                 </div>
-                <div class="item">
-                    <img class="img_slideshow" src="/images/staticas/slideshow/slideshow4.jpg" alt="">
+                <div class="swiper-slide">
+                    <img class="img_slideshow" src="/images/slideshow/slideshow_hd_background_prices.jpg" alt="Slideshow 3 - mejores precios">
                 </div>
             </div>
+            <!-- navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
-        <div id="slideshow_controls">
+        <!-- <div id="slideshow_controls">
             <button class="previous"><i class="fa fa-angle-left fa-3x"></i></button>
             <button class="next"><i class="fa fa-angle-right fa-3x"></i></button>
-        </div>
+        </div> -->
     </div>
     <!-- END SLIDESHOW -->
 @stop
@@ -39,19 +42,30 @@
                     <div id="sns_main" class="col-md-12 col-main">
                         <div id="sns_mainmidle">
                             <div id="sns_producttaps1" class="sns_producttaps_wraps">
-                                <h3 class="precar">PRODUCT TAPS</h3>
+                                <h3 class="precar">VER PRODUCTOS POR:</h3>
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="active"><a href="#" aria-controls="home" role="tab" data-toggle="tab">Nuevos</a></li>
-                                    <!-- <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Sale off</a></li>
-                                    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Best sale</a></li> -->
+                                    <li role="presentation" class="active"><a href="javascript:void(0)" aria-controls="nuevos" role="tab" data-toggle="tab">Nuevos</a></li>
+                                    <li role="presentation"><a href="javascript:void(0)" aria-controls="ofertas" role="tab" data-toggle="tab">En oferta</a></li>
+                                    <li role="presentation"><a href="javascript:void(0)" aria-controls="mas_vendidos" role="tab" data-toggle="tab">Más vendidos</a></li>
                                 </ul>
 
                                 <!-- Tab panes -->
                                 <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane active" id="home">
+                                    <div role="tabpanel" class="tab-pane active" id="nuevos">
                                         <div id="tabContainerNewPrd" class="products-grid row style_grid">
-                                            <!-- Aquí se insertan productos nuevos, más vendidos y con ofertas mediante api -->
+                                            <!-- Aquí se insertan productos nuevos mediante api -->
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="ofertas">
+                                        <div id="tabContainerOfferPrd" class="products-grid row style_grid">
+                                            <!-- Aquí se insertan productos con ofertas mediante api -->
+                                        </div>
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane" id="mas_vendidos">
+                                        <div id="tabContainerMostSoldPrd" class="products-grid row style_grid">
+                                            <!-- Aquí se insertan productos más vendidos mediante api -->
                                         </div>
                                     </div>
                                 </div>
@@ -122,7 +136,7 @@
 @endsection
 
 @section('js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script>
         let queryString = location.search.substring(1);
         let array = queryString.split("&");
@@ -160,17 +174,22 @@
             })
         }
 
-        // Slideshow Tiny-slider
-        var slider = tns({
-            container: '.my-slider',
-            items: 1,
-            slideBy: 'page',
-            autoplay: true,
-            controlsContainer: "#slideshow_controls",
-            prevButton: ".previous",
-            nextButton: ".next",
-            autoplayButtonOutput: false,
-            nav: false
+        const swiper = new Swiper('.swiper', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
+            effect: "fade",
+            spaceBetween: 30,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: true,
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
         });
 
         const displaying_marcas = (array_data) => {
@@ -178,11 +197,38 @@
             array_data.forEach(element => {
                 container.insertAdjacentHTML('beforeend', `
                     <div class="item">
-                        <a class="banner11" href="#" onclick="return false;" target="_blank">
+                        <a class="banner11" href="/productos?m=${element.id_marca}&min_price=0&max_price=1000&">
                             <img alt="" src="${element.mrc_image_path}">
                         </a>
                     </div>
                 `);
+            });
+
+            // parner
+            $("#partners_slider1").owlCarousel({
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    480:{
+                        items:1
+                    },
+                    600:{
+                        items:2
+                    },
+                    980:{
+                        items:3
+                    },
+                    1000:{
+                        items:4
+                    }
+                },
+                margin: 50,
+                navigation: true,
+                dots: false,
+                slideSpeed: 300,
+                paginationSpeed: 400,
+                loop: true
             });
         }
         const displaying_prd_mas_vistos = (array_data) => {
@@ -190,8 +236,11 @@
             array_data.forEach(element => {
                 let nombre = element.prd_nombre;
                 let id = element.id_producto;
-                let precio = parseFloat(element.prd_precio).toFixed(2);
                 let img_path = element.prd_imagen_path;
+                let precio = parseFloat(element.prd_precio).toFixed(2);
+                if(element.precioConDescuento){
+                    precio = parseFloat(element.precioConDescuento).toFixed(2);
+                }
 
                 container.insertAdjacentHTML('beforeend', `
                     <div class="item-row">
@@ -300,16 +349,116 @@
             });
         }
         const displaying_prd_en_oferta = (array_data) => {
-            const container = document.getElementById("partners_slider1");
+            const container = document.getElementById("tabContainerOfferPrd");
             array_data.forEach(element => {
+                let nombre = element.prd_nombre;
+                let id = element.id_producto;
+                let precioOriginal = parseFloat(element.prd_precio).toFixed(2);
+                let precioOferta = parseFloat(element.precioConDescuento).toFixed(2);
+                let img_path = element.prd_imagen_path;
+
                 container.insertAdjacentHTML('beforeend', `
+                    <div class="item col-lg-2d4 col-md-3 col-sm-4 col-xs-6 col-phone-12">
+                        <div class="item-inner">
+                            <div class="prd">
+                                <div class="item-img clearfix">
+                                    <div class="ico-label">
+                                        <span class="ico-product ico-sale">Oferta</span>
+                                    </div>
+
+                                    <a class="product-image have-additional"
+                                        title="${nombre}"
+                                        href="detalle-producto?${id}">
+                                                <span class="img-main">
+                                                <img src="${img_path}" alt="">
+                                                </span>
+                                    </a>
+                                </div>
+                                <div class="item-info">
+                                    <div class="info-inner">
+                                        <div class="item-title">
+                                            <a title="${nombre}"
+                                                href="detalle-producto?${id}">
+                                                ${nombre} </a>
+                                        </div>
+                                        <div class="item-price">
+                                            <div class="price-box">
+                                                <span class="regular-price">
+                                                    <span class="price">
+                                                        <span class="price1">S/ ${precioOriginal}</span>
+                                                        <span class="price2">S/ ${precioOferta}</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="action-bot">
+                                    <div class="wrap-addtocart">
+                                        <button class="btn-cart" title="Añadir al carrito"
+                                            onclick="addProduct(${id}, '${nombre}', ${precioOferta}, '${img_path}', 1)">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span>Añadir al carrito</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 `);
             });
         }
         const displaying_prd_mas_vendidos = (array_data) => {
-            const container = document.getElementById("partners_slider1");
+            const container = document.getElementById("tabContainerMostSoldPrd");
             array_data.forEach(element => {
+                let nombre = element.prd_nombre;
+                let id = element.id_producto;
+                let precio = parseFloat(element.prd_precio).toFixed(2);
+                let img_path = element.prd_imagen_path;
+
                 container.insertAdjacentHTML('beforeend', `
+                    <div class="item col-lg-2d4 col-md-3 col-sm-4 col-xs-6 col-phone-12">
+                        <div class="item-inner">
+                            <div class="prd">
+                                <div class="item-img clearfix">
+                                    <a class="product-image have-additional"
+                                        title="${nombre}"
+                                        href="detalle-producto?${id}">
+                                                <span class="img-main">
+                                                <img src="${img_path}" alt="">
+                                                </span>
+                                    </a>
+                                </div>
+                                <div class="item-info">
+                                    <div class="info-inner">
+                                        <div class="item-title">
+                                            <a title="${nombre}"
+                                                href="detalle-producto?${id}">
+                                                ${nombre} </a>
+                                        </div>
+                                        <div class="item-price">
+                                            <div class="price-box">
+                                                <span class="regular-price">
+                                                    <span class="price">
+                                                        <span class="price1">S/ ${precio}</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="action-bot">
+                                    <div class="wrap-addtocart">
+                                        <button class="btn-cart" title="Añadir al carrito"
+                                            onclick="addProduct(${id}, '${nombre}', ${precio}, '${img_path}', 1)">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span>Añadir al carrito</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 `);
             });
         }
@@ -333,9 +482,9 @@
         } )
             .then( success => success.json() )
             .then( response => {
-                displaying_prd_mas_vendidos(response.data_prd_mas_vendidos);
                 displaying_prd_nuevos(response.prd_nuevos);
-                /* displaying_prd_en_oferta(response.prd_en_oferta); */
+                displaying_prd_en_oferta(response.prd_en_oferta);
+                displaying_prd_mas_vendidos(response.data_prd_mas_vendidos);
                 displaying_prd_mas_vistos(response.prd_mas_vistos);
                 displaying_prd_mas_nuevo(response.prd_nuevos[0]);
                 displaying_marcas(response.marcas);
@@ -349,5 +498,30 @@
         }) ); */
 
         document.getElementById("btnVerTodosProd").addEventListener("click", () => {window.location.href = "/productos"});
+
+        //tabs configuration
+        $('#sns_producttaps1 .nav.nav-tabs li').on('click', function(){
+            if(!$(this).hasClass('active')) {
+                $('#sns_producttaps1 .nav.nav-tabs li.active').removeClass( "active" );
+                $(this).addClass('active');
+                switch ($('#sns_producttaps1 .nav.nav-tabs li.active a').attr('aria-controls')) {
+                    case 'nuevos':
+                        $('#ofertas').hide();
+                        $('#mas_vendidos').hide();
+                        $('#nuevos').show();
+                        break;
+                    case 'ofertas':
+                        $('#nuevos').hide();
+                        $('#mas_vendidos').hide();
+                        $('#ofertas').show();
+                        break;
+                    case 'mas_vendidos':
+                        $('#nuevos').hide();
+                        $('#ofertas').hide();
+                        $('#mas_vendidos').show();
+                        break;
+                }
+            }
+        });
     </script>
 @stop

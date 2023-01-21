@@ -129,3 +129,7 @@ div.item-inner div.prd div.action-bot {
     cursor: default;
     text-decoration: none;
 }
+
+.textAlignCenter{
+    text-align: center;
+}

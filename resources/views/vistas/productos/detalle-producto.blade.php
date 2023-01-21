@@ -102,7 +102,7 @@
                 console.log(data);
                 productStock = data.prd_stock;
                 let precio = parseFloat(data.prd_precio);
-                if(data.precioConDescuento) precio = data.precioConDescuento;
+                if(data.precioConDescuento) precio = parseFloat(data.precioConDescuento);
 
                 $("#prdStockText").append(` (${data.prd_stock})`);
                 $("#imagen_principal").attr('src', data.prd_imagen_path);

@@ -23,8 +23,8 @@
                 </div>
             </div>
             <!-- navigation buttons -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div id="swpBtnPrevSlideshow" class="swiper-button-prev"></div>
+            <div id="swpBtnNextSlideshow" class="swiper-button-next"></div>
         </div>
         <!-- <div id="slideshow_controls">
             <button class="previous"><i class="fa fa-angle-left fa-3x"></i></button>
@@ -109,12 +109,12 @@
     <!-- PARTNERS -->
     <div id="sns_partners" class="wrap">
         <div class="container">
-            <div class="slider-wrap">
-                <div class="partners_slider_in">
-                    <div id="partners_slider1" class="our_partners owl-carousel owl-theme owl-loaded" style="display: inline-block">
-                        <!-- Aquí de insertan logos de marcas mediante api -->
-                    </div>
+            <div id="swiperBrands" class="swiper">
+                <div id="partners_slider1" class="swiper-wrapper">
+                    <!-- Aquí de insertan logos de marcas mediante api -->
                 </div>
+                <div id="swpBtnPrevBrands" class="swiper-button-prev" style="display: none;"></div>
+                <div id="swpBtnNextBrands" class="swiper-button-next" style="display: none;"></div>
             </div>
         </div>
     </div>
@@ -174,7 +174,7 @@
             })
         }
 
-        const swiper = new Swiper('.swiper', {
+        const swiper = new Swiper('#sns_slideshows3', {
             // Optional parameters
             direction: 'horizontal',
             loop: true,
@@ -187,8 +187,8 @@
 
             // Navigation arrows
             navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
+                nextEl: '#swpBtnNextSlideshow',
+                prevEl: '#swpBtnPrevSlideshow',
             },
         });
 
@@ -196,7 +196,7 @@
             const container = document.getElementById("partners_slider1");
             array_data.forEach(element => {
                 container.insertAdjacentHTML('beforeend', `
-                    <div class="item">
+                    <div class="swiper-slide textAlignCenter">
                         <a class="banner11" href="/productos?m=${element.id_marca}&min_price=0&max_price=1000&">
                             <img alt="" src="${element.mrc_image_path}">
                         </a>
@@ -204,31 +204,14 @@
                 `);
             });
 
-            // parner
-            $("#partners_slider1").owlCarousel({
-                responsive:{
-                    0:{
-                        items:1
-                    },
-                    480:{
-                        items:1
-                    },
-                    600:{
-                        items:2
-                    },
-                    980:{
-                        items:3
-                    },
-                    1000:{
-                        items:4
-                    }
+            const swiper = new Swiper('#swiperBrands', {
+                direction: 'horizontal',
+                loop: true,
+                slidesPerView: 4,
+                navigation: {
+                    nextEl: '#swpBtnNextBrands',
+                    prevEl: '#swpBtnPrevBrands',
                 },
-                margin: 50,
-                navigation: true,
-                dots: false,
-                slideSpeed: 300,
-                paginationSpeed: 400,
-                loop: true
             });
         }
         const displaying_prd_mas_vistos = (array_data) => {
@@ -522,6 +505,16 @@
                         break;
                 }
             }
+        });
+
+        //toggle brands arrows visibility
+        $("#swiperBrands").mouseover( function() {
+            $("#swpBtnPrevBrands").show();
+            $("#swpBtnNextBrands").show();
+        });
+        $("#swiperBrands").mouseout( function() {
+            $("#swpBtnPrevBrands").hide();
+            $("#swpBtnNextBrands").hide();
         });
     </script>
 @stop

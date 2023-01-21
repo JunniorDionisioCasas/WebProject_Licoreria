@@ -208,7 +208,7 @@
     </div>
 </div>
 
-<div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3">
+<div id="toastContainer" class="toast-container position-fixed top-0 end-0 p-3">
     <!-- Se insertan alertas de productos agregados mediante la funcion alerta_producto_agregado() -->
 </div>
 
@@ -259,7 +259,7 @@
 
         let mostrar_productos = (data) => {
             data.forEach( producto => {
-                let {id_producto, prd_nombre, prd_precio, prd_imagen_path} = producto;
+                let {id_producto, prd_nombre, prd_precio, prd_imagen_path, prd_stock} = producto;
 
                 contenedor_prod.insertAdjacentHTML("beforeend", `
                     <div class="item col-lg-3 col-md-4 col-sm-4 col-xs-6 col-phone-12">
@@ -292,7 +292,7 @@
                                 </div>
                                 <div class="action-bot action123 btnAnadirCarrito">
                                     <div class="wrap-addtocart">
-                                        <button class="btn-cart" onclick="addProduct(${id_producto}, '${prd_nombre}', ${prd_precio}, '${prd_imagen_path}', 1)"
+                                        <button class="btn-cart" onclick="addProduct(${id_producto}, '${prd_nombre}', ${prd_precio}, '${prd_imagen_path}', 1, ${prd_stock})"
                                                 title="Añadir al carrito">
                                             <i class="fa fa-shopping-cart"></i>
                                             <span>Añadir al carrito</span>

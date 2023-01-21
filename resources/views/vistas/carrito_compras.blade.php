@@ -239,9 +239,13 @@
         let cargar_tbl_prod = () => {
             lst_crrt.innerHTML = carrito.map( (p) => {
                 let disabledIfOne = '';
+                let disabledIfMaxStock = '';
                 if(p.cntd == 1){
-                    disabledIfOne = 'disabled'
-                };
+                    disabledIfOne = 'disabled';
+                }
+                if(p.cntd >= p.maxStock){
+                    disabledIfMaxStock = 'disabled';
+                }
                 return `
                     <tr>
                         <th scope="row">
@@ -259,11 +263,11 @@
                         </td>
                         <td>S/ ${parseFloat(p.precio).toFixed(2)}</td>
                         <td>
-                            <button id="btn_decrs_${p.id}" class="btn btnIncrAmnt" type="button" onclick="decr_cant(event, ${p.id}, ${parseFloat(p.precio).toFixed(2)})" ${disabledIfOne}>
+                            <button id="btn_decrs_${p.id}" class="btn btnIncrAmnt" type="button" onclick="decr_cant(event, ${p.id}, ${parseFloat(p.precio).toFixed(2)}, ${p.maxStock})" ${disabledIfOne}>
                                 <i class="fa fa-minus fa-sm"></i>
                             </button>
                             <a id="txt_cntd_${p.id}">${p.cntd}</a>
-                            <button id="btn_incrs_${p.id}" class="btn btnDcrsAmnt" type="button" onclick="incr_cant(event, ${p.id}, ${parseFloat(p.precio).toFixed(2)})">
+                            <button id="btn_incrs_${p.id}" class="btn btnDcrsAmnt" type="button" onclick="incr_cant(event, ${p.id}, ${parseFloat(p.precio).toFixed(2)}, ${p.maxStock})" ${disabledIfMaxStock}>
                                 <i class="fa fa-plus fa-sm"></i>
                             </button>
                         </td>
@@ -468,7 +472,7 @@
             document.getElementById("multiplied_prc_"+id).innerHTML = "S/ " + (prc * cntd).toFixed(2);
         };
 
-        let incr_cant = (e, id, prc) => {
+        let incr_cant = (e, id, prc, mStock) => {
             e = e || window.event;
             let target = e.target || e.srcElement;
             let elmt_cntd = document.getElementById("txt_cntd_"+id);
@@ -481,13 +485,17 @@
             cntd = cntd + 1;
             elmt_cntd.innerHTML = cntd;
 
+            if(cntd == mStock){
+                document.getElementById("btn_incrs_"+id).disabled = true;
+            }
+
             calcular_precio_x_prd(id, prc, cntd);
             increment(id);
             calculo_precios_descuentos();
             update_total_prices();
         }
 
-        let decr_cant = (e, id, prc) => {
+        let decr_cant = (e, id, prc, mStock) => {
             e = e || window.event;
             let target = e.target || e.srcElement;
             let elmt_cntd = document.getElementById("txt_cntd_"+id);
@@ -497,9 +505,11 @@
                 cntd = cntd - 1;
                 elmt_cntd.innerHTML = cntd;
             }
-
             if(cntd == 1){
                 document.getElementById("btn_decrs_"+id).disabled = true;
+            }
+            if(cntd == mStock-1){
+                document.getElementById("btn_incrs_"+id).disabled = false;
             }
 
             calcular_precio_x_prd(id, prc, cntd);

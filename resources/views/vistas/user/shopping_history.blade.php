@@ -8,7 +8,11 @@
 @stop
 
 @section('contenido_principal')
-    <div id="wrapper"></div>
+    <div id="sns_content" class="wrap layout-m">
+        <div class="container">
+            <div id="wrapper"></div>
+        </div>
+    </div>
 @stop
 
 @section('js')

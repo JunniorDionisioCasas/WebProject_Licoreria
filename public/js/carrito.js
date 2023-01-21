@@ -13,13 +13,34 @@ let alerta_producto_agregado = (idProd, nombreProd, cantidad) => {
         <div id="liveToast_${idProd}" class="toast align-items-center text-bg-success border-0 bg-opacity-75" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body">
-                    Se agregó: ${nombreProd}, x${cantidad} al carrito
+                    Se agregó ${cantidad}: 
+                    <a href="/detalle-producto?${idProd}" class="text-white fw-bold">${nombreProd}</a>
+                    , al carrito
                 </div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
     `);
     let toastLiveExample = document.getElementById('liveToast_'+idProd);
+    let toast = new bootstrap.Toast(toastLiveExample);
+    toast.show();
+};
+
+let alerta_max_stock = (idProd, nombreProd) => {
+    const toastContainer = document.getElementById('toastContainer');
+    toastContainer.insertAdjacentHTML('beforeend', `
+        <div id="liveToast_danger_${idProd}" class="toast align-items-center text-bg-danger border-0 bg-opacity-75" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    No se puede agregar más: 
+                    <a href="/detalle-producto?${idProd}" class="text-white fw-bold">${nombreProd}</a>
+                    , stock máximo.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    `);
+    let toastLiveExample = document.getElementById('liveToast_danger_'+idProd);
     let toast = new bootstrap.Toast(toastLiveExample);
     toast.show();
 };
@@ -85,7 +106,7 @@ let calculation = () => {
 
 calculation();
 
-let addProduct = (id, prd_nombre, prd_precio, prd_imagen_path, cntd) => {
+let addProduct = (id, prd_nombre, prd_precio, prd_imagen_path, cntd, maxStock) => {
     let search = carrito.find( (x) => x.id === id );
     let cantidad_prod;
     if(search === undefined){
@@ -94,11 +115,17 @@ let addProduct = (id, prd_nombre, prd_precio, prd_imagen_path, cntd) => {
             cntd: cntd,
             nmbr: prd_nombre,
             precio: prd_precio,
-            img: prd_imagen_path
+            img: prd_imagen_path,
+            maxStock: maxStock
         })
         cantidad_prod = 1;
     }else{
-        search.cntd += parseInt(cntd);
+        const newCntd = search.cntd + parseInt(cntd)
+        if( newCntd > search.maxStock){
+            alerta_max_stock(id, prd_nombre);
+            return;
+        }
+        search.cntd = newCntd;
         cantidad_prod = search.cntd;
     }
 

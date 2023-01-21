@@ -13,6 +13,11 @@
     float: right;
 }
 
+/* table font */
+#tabla_prod_carrito {
+    font-weight: bold;
+}
+
 @media (min-width: 320px) and (max-width: 430px) {
     #title_carr {
         display: block;
@@ -241,6 +246,9 @@ ul.btnsUnderTable {
 }
 .btnIncrAmnt, .btnDcrsAmnt {
     padding: 0px 5px;
+    border: var(--bs-btn-color);
+    border-style: solid;
+    border-width: thin;
 }
 .continue {
     float: left;

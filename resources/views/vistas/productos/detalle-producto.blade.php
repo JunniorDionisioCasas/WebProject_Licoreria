@@ -75,7 +75,7 @@
     </div>
 </div>
 
-<div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3">
+<div id="toastContainer" class="toast-container position-fixed top-0 end-0 p-3">
     <!-- Se insertan alertas de productos agregados mediante la funcion alerta_producto_agregado() -->
 </div>
 
@@ -116,7 +116,7 @@
                 $("#desc_producto").text(data.prd_descripcion);
 
                 document.getElementById('btnAddProd').onclick = () => {
-                    addProduct(data.id_producto, data.prd_nombre, precio, data.prd_imagen_path, parseInt(cant.value));
+                    addProduct(data.id_producto, data.prd_nombre, precio, data.prd_imagen_path, parseInt(cant.value), data.prd_stock);
                 };
             })
             .catch(error => console.log(error));

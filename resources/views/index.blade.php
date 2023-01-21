@@ -120,7 +120,7 @@
     </div>
     <!-- AND PARTNERS -->
 
-    <div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="toastContainer" class="toast-container position-fixed top-0 end-0 p-3">
         <!-- Se insertan alertas de productos agregados mediante la funcion alerta_producto_agregado() -->
     </div>
 
@@ -221,6 +221,7 @@
                 let id = element.id_producto;
                 let img_path = element.prd_imagen_path;
                 let precio = parseFloat(element.prd_precio).toFixed(2);
+                let maxStock = parseInt(element.prd_stock);
                 if(element.precioConDescuento){
                     precio = parseFloat(element.precioConDescuento).toFixed(2);
                 }
@@ -259,7 +260,7 @@
                                         <div class="action-bot">
                                             <div class="wrap-addtocart">
                                                 <button class="btn-cart" title="Añadir al carrito"
-                                                        onclick="addProduct(${id}, '${nombre}', ${precio}, '${img_path}', 1)">
+                                                        onclick="addProduct(${id}, '${nombre}', ${precio}, '${img_path}', 1, ${maxStock})">
                                                     <i class="fa fa-shopping-cart"></i>
                                                     <span>Añadir al carrito</span>
                                                 </button>
@@ -280,6 +281,7 @@
                 let id = element.id_producto;
                 let precio = parseFloat(element.prd_precio).toFixed(2);
                 let img_path = element.prd_imagen_path;
+                let maxStock = parseInt(element.prd_stock);
 
                 container.insertAdjacentHTML('beforeend', `
                     <div class="item col-lg-2d4 col-md-3 col-sm-4 col-xs-6 col-phone-12">
@@ -319,7 +321,7 @@
                                 <div class="action-bot">
                                     <div class="wrap-addtocart">
                                         <button class="btn-cart" title="Añadir al carrito"
-                                            onclick="addProduct(${id}, '${nombre}', ${precio}, '${img_path}', 1)">
+                                            onclick="addProduct(${id}, '${nombre}', ${precio}, '${img_path}', 1, ${maxStock})">
                                             <i class="fa fa-shopping-cart"></i>
                                             <span>Añadir al carrito</span>
                                         </button>
@@ -339,6 +341,7 @@
                 let precioOriginal = parseFloat(element.prd_precio).toFixed(2);
                 let precioOferta = parseFloat(element.precioConDescuento).toFixed(2);
                 let img_path = element.prd_imagen_path;
+                let maxStock = parseInt(element.prd_stock);
 
                 container.insertAdjacentHTML('beforeend', `
                     <div class="item col-lg-2d4 col-md-3 col-sm-4 col-xs-6 col-phone-12">
@@ -379,7 +382,7 @@
                                 <div class="action-bot">
                                     <div class="wrap-addtocart">
                                         <button class="btn-cart" title="Añadir al carrito"
-                                            onclick="addProduct(${id}, '${nombre}', ${precioOferta}, '${img_path}', 1)">
+                                            onclick="addProduct(${id}, '${nombre}', ${precioOferta}, '${img_path}', 1, ${maxStock})">
                                             <i class="fa fa-shopping-cart"></i>
                                             <span>Añadir al carrito</span>
                                         </button>
@@ -398,6 +401,7 @@
                 let id = element.id_producto;
                 let precio = parseFloat(element.prd_precio).toFixed(2);
                 let img_path = element.prd_imagen_path;
+                let maxStock = parseInt(element.prd_stock);
 
                 container.insertAdjacentHTML('beforeend', `
                     <div class="item col-lg-2d4 col-md-3 col-sm-4 col-xs-6 col-phone-12">
@@ -433,7 +437,7 @@
                                 <div class="action-bot">
                                     <div class="wrap-addtocart">
                                         <button class="btn-cart" title="Añadir al carrito"
-                                            onclick="addProduct(${id}, '${nombre}', ${precio}, '${img_path}', 1)">
+                                            onclick="addProduct(${id}, '${nombre}', ${precio}, '${img_path}', 1, ${maxStock})">
                                             <i class="fa fa-shopping-cart"></i>
                                             <span>Añadir al carrito</span>
                                         </button>
@@ -451,7 +455,7 @@
             nombre_prd.title = data.prd_nombre;
             document.getElementById("txt_newest_prd_desc").innerHTML = data.prd_descripcion;
             document.getElementById("linkNewestPrd").setAttribute("href", "/detalle-producto?"+data.id_producto);
-            document.getElementById("btnNewestPrd").addEventListener("click", () => {addProduct(data.id_producto, data.prd_nombre, data.prd_precio, data.prd_imagen_path, 1)});
+            document.getElementById("btnNewestPrd").addEventListener("click", () => {addProduct(data.id_producto, data.prd_nombre, data.prd_precio, data.prd_imagen_path, 1, data.prd_stock)});
             document.getElementById("newestPrdImg").src = data.prd_imagen_path;
         }
 

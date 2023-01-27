@@ -162,7 +162,7 @@
                 })
                 .catch(error => console.log(error));
 
-            registro_venta({{isset($user) ? $user->id : '``'}}, "{{$current_time}}", 3, userMail); //estado 3=pagado y entregado
+            registro_venta({{isset($user) ? $user->id : '``'}}, "{{$current_time}}", 2, userMail); //estado 3=pagado y entregado
 
             limp_carrito();
 

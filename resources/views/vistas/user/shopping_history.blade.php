@@ -127,9 +127,9 @@
             pagination: {
                 enabled: true,
                 limit: 10,
-                server: {
+                /* server: {
                     url: (prev, page, limit) => `${prev}?limit=${limit}&offset=${page * limit}`
-                }
+                } */
             },
             sort: true,
             fixedHeader: true,

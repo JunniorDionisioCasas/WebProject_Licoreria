@@ -1,6 +1,10 @@
 #wrapper {
     margin: 20px auto;
-    width: fit-content;
+    width: auto;
+}
+
+.body {
+    width: fit-content !important;
 }
 
 .gridjs-table {

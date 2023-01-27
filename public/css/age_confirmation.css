@@ -26,12 +26,22 @@ div.col.main {
 .first_row_element {
     width: auto !important;
     margin: auto;
+    overflow: auto;
 }
 .first_row_element.grid_text {
     display: inline-grid;
     text-align: left;
 }
-
+@media (max-width: 647px) {
+    .nombre_empresa {
+        font-size: 50px !important;
+    }
+}
+@media (max-width: 420px) {
+    .styleForPhone {
+        margin-top: 160px !important;
+    }
+}
 .nombre_empresa {
     line-height: normal;
     font-size: 100px;

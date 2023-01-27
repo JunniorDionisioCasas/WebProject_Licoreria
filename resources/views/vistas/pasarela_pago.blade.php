@@ -236,6 +236,16 @@
                                 };
                 console.log('body:'+JSON.stringify(dataCargo));
 
+                Culqi.close();
+                
+                let loadingSwal = Swal.fire({
+                    title: 'Registrando compra',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading()
+                    },
+                });
+
                 fetch(url, {
                     method: 'POST',
                     headers: {
@@ -250,13 +260,12 @@
                     .then(response => {
                         console.log(response);
                         // pago exitoso
-                        
-                        registro_venta({{isset($user) ? $user->id : '``'}}, "{{$current_time}}", 3, Culqi.token.email); //estado 3=pagado y entregado
+                        registro_venta({{isset($user) ? $user->id : '``'}}, "{{$current_time}}", 2, Culqi.token.email); //estado 3=pagado y entregado
 
                         limp_carrito();
-                        
-                        Culqi.close();
 
+                        loadingSwal.close();
+                        
                         Swal.fire(
                             'Compra exitosa',
                             '',

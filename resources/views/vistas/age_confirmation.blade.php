@@ -15,7 +15,7 @@
     <div class="container-fluid text-center">
         <div class="col main">
             <div class="row row-cols-2">
-                <div class="col first_row_element">
+                <div class="col first_row_element styleForPhone">
                     <span class="nombre_empresa">San Sebastian</span>
                     <span class="tipo_empresa">Licorería y bazar</span>
                 </div>

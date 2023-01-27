@@ -55,6 +55,7 @@ div.item-inner div.prd div.action-bot {
 
 #products_small{
     display: flex !important;
+    overflow: hidden;
 }
 /* #products_small div.item-row {
     margin: auto;

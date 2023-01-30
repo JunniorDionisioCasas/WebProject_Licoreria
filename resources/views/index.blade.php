@@ -167,11 +167,23 @@
             limp_carrito();
 
             Swal.fire({
-                title: 'Compra exitosa',
-                icon: 'success',
-            }).then( (result) => {
-                window.location.href = "/home";
-            })
+                title: 'Registrando compra',
+                allowOutsideClick: false,
+                timer: 3000,
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+            }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    Swal.fire({
+                        title: 'Compra exitosa',
+                        icon: 'success',
+                    }).then( (result) => {
+                        window.location.href = "/home";
+                    });
+                }
+            });
         }
 
         const swiper = new Swiper('#sns_slideshows3', {
@@ -371,8 +383,8 @@
                                             <div class="price-box">
                                                 <span class="regular-price">
                                                     <span class="price">
-                                                        <span class="price1">S/ ${precioOriginal}</span>
-                                                        <span class="price2">S/ ${precioOferta}</span>
+                                                        <span class="price1">S/ ${precioOferta}</span>
+                                                        <span class="price2">S/ ${precioOriginal}</span>
                                                     </span>
                                                 </span>
                                             </div>
